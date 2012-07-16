@@ -46,7 +46,7 @@ int calculate_plan_cost(const vector<const Operator *> &plan) {
 	//       and the SearchEngine classes and hence should maybe
 	//       be moved into the SearchEngine (along with save_plan).
 	int plan_cost = 0;
-	if (g_agents_search && !g_marginal_search) {
+	if (g_agents_search && !g_marginal_search && !g_multiple_goal) {
 		cout << "Plan costs for all agents:" << endl;
 		for (int agent = 0; agent < g_num_of_agents; agent++) {
 			plan_cost = 0;
@@ -88,6 +88,14 @@ void save_plan(const vector<const Operator *> &plan, int iter) {
 	statusfile.close();
 	cout << "Plan length: " << plan.size() << " step(s)." << endl;
 	cout << "Plan cost: " << plan_cost << endl;
+}
+
+bool did_agent_participate(const vector<const Operator *> &plan, int agent){
+	for (int i = 0; i < plan.size(); i++) {
+			if(plan[i]->agent == agent)
+				return true;
+		}
+	return false;
 }
 
 bool peek_magic(istream &in, string magic) {
@@ -349,6 +357,8 @@ vector<int> g_variable_agent;
 bool g_marginal_search = false;
 int g_marginal_agent = -1;
 int g_num_of_agents = -1;
+bool g_multiple_goal = false;
+vector<int> g_marginal_solution_for_agent;
 /*
  * Agent search helper functions
  */
@@ -383,7 +393,10 @@ void partition_by_agent_names(const char* configFileName) {
 			agent_names[i] = line;
 			cout << "agent " << i << ": " << agent_names[i] << endl;
 			agent_ids[i] = i;
+			g_marginal_solution_for_agent.push_back(-1);	//-1 means that we haven't found a marginal solution for the agent.
 		}
+		g_marginal_solution_for_agent.push_back(-1); 	//another value for the optimal plan
+
 		myfile.close();
 		cout << "Closed agent names configuration file" << endl;
 

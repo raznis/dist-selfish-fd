@@ -61,4 +61,7 @@ void partition_by_agent_names(const char* configFileName);
 extern bool g_marginal_search;
 extern int g_marginal_agent;
 extern int g_num_of_agents;
+extern bool g_multiple_goal;
+extern std::vector<int> g_marginal_solution_for_agent;
+extern bool did_agent_participate(const std::vector<const Operator *> &plan, int agent);
 #endif

@@ -193,7 +193,10 @@ SearchEngine *OptionParser::parse_cmd_line(
         	g_marginal_agent = atoi(argv[i + 1]);
         	i++;
             cout << "running marginal search without agent " << g_marginal_agent << endl;
-        }else if ((arg.compare("--help") == 0) && dry_run) {
+        } else if (arg.compare("--multiple_goal") == 0) {
+        	g_multiple_goal = true;
+            cout << "running search for multiple goals " << endl;
+        } else if ((arg.compare("--help") == 0) && dry_run) {
             cout << "Help:" << endl;
             if (i + 1 < argc) {
                 string helpiand = string(argv[i + 1]);

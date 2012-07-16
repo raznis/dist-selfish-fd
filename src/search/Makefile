@@ -182,6 +182,7 @@ CCOPT += -Wall -W -Wno-sign-compare -Wno-deprecated -ansi -pedantic -Werror -DST
 
 HAVE_GCC_4_4 := $(shell expr "$$(gcc -dumpversion)" : \\\(4\.4\.\\\))
 HAVE_GCC_4_5 := $(shell expr "$$(gcc -dumpversion)" : \\\(4\.5\.\\\))
+HAVE_GCC_4_6 := $(shell expr "$$(gcc -dumpversion)" : \\\(4\.6\.\\\))
 
 ifdef HAVE_GCC_4_4
     CCOPT += -I/usr/include/c++/4.4/i686-linux-gnu
@@ -199,7 +200,7 @@ LINKOPT  = -g
 LINKOPT += -m32
 LINKOPT +=
 
-POSTLINKOPT =
+POSTLINKOPT = -lrt
 
 ## Additional specialized options for the various targets follow.
 ## In release mode, we link statically since this makes it more likely
