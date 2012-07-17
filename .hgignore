@@ -24,3 +24,5 @@
 ^new-scripts/
 ^ref-results/
 ^scripts/
+^src/plan_numbers_and_cost$
+^src/elapsed.time$

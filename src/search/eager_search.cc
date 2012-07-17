@@ -101,7 +101,6 @@ int EagerSearch::step() {
 		return SOLVED;
 
 	//pruning states that are no longer relevant in the search for marginal problems
-	//TODO - this makes the search incomplete -- example is rovers 07.
 	if(g_multiple_goal && !node.is_relevant_for_mariginal_search()){
 		return IN_PROGRESS;
 	}
