@@ -75,8 +75,10 @@ void SearchNode::open_initial(int h) {
 	info.h = h;
 	info.parent_state = 0;
 	info.creating_operator = 0;
-	for (int i = 0; i < g_num_of_agents; i++)
-		info.participated_agents.push_back(false);
+	if (g_multiple_goal) {
+		for (int i = 0; i < g_num_of_agents; i++)
+			info.participated_agents.push_back(false);
+	}
 }
 
 void SearchNode::open(int h, const SearchNode &parent_node,
@@ -89,9 +91,12 @@ void SearchNode::open(int h, const SearchNode &parent_node,
 	info.h = h;
 	info.parent_state = parent_node.state_buffer;
 	info.creating_operator = parent_op;
-	for (int i = 0; i < g_num_of_agents; i++)
-		info.participated_agents.push_back(parent_node.info.participated_agents[i]);
-	info.participated_agents[parent_op->agent] = true;
+	if (g_multiple_goal) {
+		for (int i = 0; i < g_num_of_agents; i++)
+			info.participated_agents.push_back(
+					parent_node.info.participated_agents[i]);
+		info.participated_agents[parent_op->agent] = true;
+	}
 }
 
 void SearchNode::reopen(const SearchNode &parent_node,
@@ -144,11 +149,17 @@ void SearchNode::dump() {
 			<< info.parent_state << endl;
 }
 
-bool SearchNode::is_relevant_for_mariginal_search(){
-	for(int i = 0 ; i < g_num_of_agents ; i++){
-		if(!info.participated_agents[i] && g_marginal_solution_for_agent[i] == -1)
-			return true;
+bool SearchNode::is_relevant_for_mariginal_search() {
+	bool found_non_participating_agent = false;
+	for (int i = 0; i < g_num_of_agents; i++) {
+		if (!info.participated_agents[i]){
+			found_non_participating_agent = true;
+			if(g_marginal_solution_for_agent[i] == -1)
+				return true;
+		}
 	}
+	if(!found_non_participating_agent && g_marginal_solution_for_agent[g_num_of_agents] == -1)
+		return true;
 	return false;
 }
 
