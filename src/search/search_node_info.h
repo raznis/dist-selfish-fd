@@ -16,6 +16,7 @@ class SearchNodeInfo {
     const state_var_t *parent_state;
     const Operator *creating_operator;
     int real_g;
+    vector<bool> participated_agents;	//TODO - Didn't take care of reopening states!!! (in search_space.cc)
 
     SearchNodeInfo()
         : status(NEW), g(-1), h(-1), h_is_dirty(false),

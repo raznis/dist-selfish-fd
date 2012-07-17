@@ -54,6 +54,8 @@ public:
     void mark_as_dead_end();
 
     void dump();
+
+    bool is_relevant_for_mariginal_search();
 };
 
 

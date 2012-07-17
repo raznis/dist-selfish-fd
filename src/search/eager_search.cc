@@ -100,6 +100,11 @@ int EagerSearch::step() {
 	if (check_goal_and_set_plan(s))
 		return SOLVED;
 
+	//pruning states that are no longer relevant in the search for marginal problems
+	if(g_multiple_goal && !node.is_relevant_for_mariginal_search()){
+		return IN_PROGRESS;
+	}
+
 	const Operator * creating_op = node.get_creating_op();
 	bool apply_ma_pruning = g_agents_search && creating_op
 			&& !creating_op->is_public;
