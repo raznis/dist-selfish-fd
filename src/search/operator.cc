@@ -111,7 +111,7 @@ bool Operator::uses_public_variable() const {
 bool Operator::affect_goal_variable() const {
 	for (int i = 0; i < pre_post.size(); i++) {
 		for (int j = 0; j < g_goal.size(); j++) {
-			if (pre_post[i].var == g_goal[j].first)
+			if (pre_post[i].var == g_goal[j].first && pre_post[i].post == g_goal[j].second)
 				return true;
 		}
 	}

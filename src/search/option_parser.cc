@@ -196,6 +196,9 @@ SearchEngine *OptionParser::parse_cmd_line(
         } else if (arg.compare("--multiple_goal") == 0) {
         	g_multiple_goal = true;
             cout << "running search for multiple goals " << endl;
+        } else if (arg.compare("--symmetry") == 0) {
+        	g_symmetry_pruning = true;
+            cout << "running partition of action graph and symmetry pruning " << endl;
         } else if ((arg.compare("--help") == 0) && dry_run) {
             cout << "Help:" << endl;
             if (i + 1 < argc) {

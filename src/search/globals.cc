@@ -51,7 +51,7 @@ int calculate_plan_cost(const vector<const Operator *> &plan) {
 		for (int agent = 0; agent < g_num_of_agents; agent++) {
 			plan_cost = 0;
 			for (int i = 0; i < plan.size(); i++) {
-				if(plan[i]->agent != agent)
+				if (plan[i]->agent != agent)
 					plan_cost += plan[i]->get_cost();
 			}
 			cout << "Without Agent " << agent << ": " << plan_cost << endl;
@@ -90,11 +90,11 @@ void save_plan(const vector<const Operator *> &plan, int iter) {
 	cout << "Plan cost: " << plan_cost << endl;
 }
 
-bool did_agent_participate(const vector<const Operator *> &plan, int agent){
+bool did_agent_participate(const vector<const Operator *> &plan, int agent) {
 	for (int i = 0; i < plan.size(); i++) {
-			if(plan[i]->agent == agent)
-				return true;
-		}
+		if (plan[i]->agent == agent)
+			return true;
+	}
 	return false;
 }
 
@@ -352,6 +352,10 @@ Timer g_timer;
 string g_plan_filename = "sas_plan";
 RandomNumberGenerator g_rng(2011); // Use an arbitrary default seed.
 
+bool g_symmetry_pruning = false;
+char **g_operator_switchability = NULL;
+int g_num_of_public_actions = 0;
+
 bool g_agents_search = false;
 vector<int> g_variable_agent;
 bool g_marginal_search = false;
@@ -359,6 +363,31 @@ int g_marginal_agent = -1;
 int g_num_of_agents = -1;
 bool g_multiple_goal = false;
 vector<int> g_marginal_solution_for_agent;
+
+void update_private_public_actions() {
+	//	for (int var = 0; var < g_variable_domain.size(); var++) {
+	//		cout << g_variable_name[var] << ", agent: " << g_variable_agent[var] << endl;
+	//	}
+	//Updating operators as private/public
+	//TODO (Raz) As is implemented now, operators that affect a goal variable are public.
+	int public_actions = 0;
+	int private_actions = 0;
+	for (int op_idx = 0; op_idx < g_operators.size(); op_idx++) {
+		if (g_operators[op_idx].uses_public_variable()
+				|| g_operators[op_idx].affect_goal_variable()) {
+			g_operators[op_idx].is_public = true;
+			public_actions++;
+		} else {
+			g_operators[op_idx].is_public = false;
+			private_actions++;
+		}
+		//		cout << op_idx << ", "<< g_operators[op_idx].get_name() << ", "
+		//				<< g_operators[op_idx].is_public << endl;
+	}
+	cout << "public: " << public_actions << ", private: " << private_actions
+			<< endl;
+}
+
 /*
  * Agent search helper functions
  */
@@ -393,9 +422,9 @@ void partition_by_agent_names(const char* configFileName) {
 			agent_names[i] = line;
 			cout << "agent " << i << ": " << agent_names[i] << endl;
 			agent_ids[i] = i;
-			g_marginal_solution_for_agent.push_back(-1);	//-1 means that we haven't found a marginal solution for the agent.
+			g_marginal_solution_for_agent.push_back(-1);//-1 means that we haven't found a marginal solution for the agent.
 		}
-		g_marginal_solution_for_agent.push_back(-1); 	//another value for the optimal plan
+		g_marginal_solution_for_agent.push_back(-1); //another value for the optimal plan
 
 		myfile.close();
 		cout << "Closed agent names configuration file" << endl;
@@ -435,29 +464,297 @@ void partition_by_agent_names(const char* configFileName) {
 			if (used_by_agent == -1)
 				cout << "Variable not associated to any agent!!!" << endl;
 		}
-		//	for (int var = 0; var < g_variable_domain.size(); var++) {
-		//		cout << g_variable_name[var] << ", agent: " << g_variable_agent[var] << endl;
-		//	}
 
 		//Updating operators as private/public
 		//TODO (Raz) As is implemented now, operators that affect a goal variable are public.
-		int public_actions = 0;
-		int private_actions = 0;
-		for (int op_idx = 0; op_idx < g_operators.size(); op_idx++) {
-			if (g_operators[op_idx].uses_public_variable()
-					|| g_operators[op_idx].affect_goal_variable()) {
-				g_operators[op_idx].is_public = true;
-				public_actions++;
-			} else {
-				g_operators[op_idx].is_public = false;
-				private_actions++;
-			}
-			//		cout << op_idx << ", "<< g_operators[op_idx].get_name() << ", "
-			//				<< g_operators[op_idx].is_public << endl;
-		}
-		cout << "public: " << public_actions << ", private: " << private_actions
-				<< endl;
+		update_private_public_actions();
 	} else
 		cout << "Unable to open file" << endl;
 
+}
+
+
+
+bool should_be_connected_in_action_graph(int op1_idx, int op2_idx) {
+	int min = op1_idx > op2_idx ? op2_idx : op1_idx;
+	int max = op1_idx < op2_idx ? op2_idx : op1_idx;
+
+	if (g_operator_switchability && g_operator_switchability[min][max] != 0) {
+		return g_operator_switchability[min][max] == 1;
+	}
+
+	const Operator op1 = g_operators[op1_idx];
+	const Operator op2 = g_operators[op2_idx];
+	const vector<PrePost> op1_prepost = op1.get_pre_post();
+	const vector<Prevail> op1_prevail = op1.get_prevail();
+	const vector<PrePost> op2_prepost = op2.get_pre_post();
+	const vector<Prevail> op2_prevail = op2.get_prevail();
+
+	for (int i = 0; i < op1_prepost.size(); i++) {
+		int var = op1_prepost[i].var;
+		int pre = op1_prepost[i].pre;
+		int post = op1_prepost[i].post;
+		for (int j = 0; j < op2_prepost.size(); j++) {
+			if (op2_prepost[j].var == var) {
+				int other_pre = op2_prepost[j].pre;
+				int other_post = op2_prepost[j].post;
+				if (pre == other_pre || post == other_pre || pre == other_post
+						|| post == other_post) //TODO - check last condition (have the same effect)
+								{
+					if (g_operator_switchability)
+						g_operator_switchability[min][max] = 1;
+					return true;
+				}
+			}
+		}
+		for (int j = 0; j < op2_prevail.size(); j++) {
+			if (op2_prevail[j].var == var) {
+				int other_prevail = op2_prevail[j].prev;
+				if (pre == other_prevail || post == other_prevail) {
+					if (g_operator_switchability)
+						g_operator_switchability[min][max] = 1;
+					return true;
+				}
+			}
+		}
+	}
+	for (int i = 0; i < op2_prepost.size(); i++) {
+		int var = op2_prepost[i].var;
+		int pre = op2_prepost[i].pre;
+		int post = op2_prepost[i].post;
+		for (int j = 0; j < op1_prevail.size(); j++) {
+			if (op1_prevail[j].var == var) {
+				int other_prevail = op1_prevail[j].prev;
+				if (pre == other_prevail || post == other_prevail) {
+					if (g_operator_switchability)
+						g_operator_switchability[min][max] = 1;
+					return true;
+				}
+			}
+		}
+	}
+	if (g_operator_switchability)
+		g_operator_switchability[min][max] = 2;
+	return false;
+}
+
+void create_action_graph() {
+	cout << "creating action graph, number of nodes: " << g_operators.size()
+			<< endl;
+	int num_of_edges = 0;
+	ofstream action_graph_file;
+	action_graph_file.open("temp_action_graph");
+	//action_graph_file << g_operators.size() << " "
+	//	<< "number of edges goes here...\n";
+	for (int i = 0; i < g_operators.size(); i++) {
+		for (int j = 0; j < g_operators.size(); j++) {
+			if (i != j && should_be_connected_in_action_graph(i, j)) {
+				action_graph_file << j + 1 << " ";
+				if (i < j)
+					num_of_edges++;
+			}
+		}
+		action_graph_file << "\n";
+	}
+
+	action_graph_file.close();
+	string inbuf;
+	fstream input_file("temp_action_graph", ios::in);
+	ofstream output_file("action_graph");
+
+	output_file << g_operators.size() << " " << num_of_edges << "\n";
+	while (!input_file.eof()) {
+		getline(input_file, inbuf);
+		output_file << inbuf << endl;
+	}
+
+	input_file.close();
+	output_file.close();
+
+	if (remove("temp_action_graph") != 0)
+		perror("Error deleting file");
+	else
+		puts("Action graph file created, temp action graph file deleted");
+
+}
+
+double update_private_and_public(vector<int> num_of_private_actions,
+		vector<int> num_of_actions) {
+	//	cout << "done." << endl;
+	for (int i = 0; i < g_operators.size(); i++) {
+		if (!g_operators[i].is_public
+				&& g_operators[i].affect_goal_variable()) {
+			//this sets all goal achieving actions as public.
+			g_operators[i].is_public = true;
+			num_of_private_actions[g_operators[i].agent]--;
+			g_num_of_public_actions++;
+		}
+		for (int j = i + 1; j < g_operators.size(); j++) {
+			if (g_operators[i].agent != g_operators[j].agent
+					&& should_be_connected_in_action_graph(i, j)) {
+				if (!g_operators[i].is_public) {
+					g_operators[i].is_public = true;
+					num_of_private_actions[g_operators[i].agent]--;
+					g_num_of_public_actions++;
+				}
+				if (!g_operators[j].is_public) {
+					g_operators[j].is_public = true;
+					num_of_private_actions[g_operators[j].agent]--;
+					g_num_of_public_actions++;
+				}
+			}
+
+		}
+
+		//g_operators[i].dump();
+	}
+
+	double symmetry_factor = 0;
+	for (int i = 0; i < num_of_actions.size(); i++) {
+		//		cout << "Agent " << i << ": " << num_of_private_actions[i] << "/"
+		//				<< num_of_actions[i] << " private actions" << endl;
+		symmetry_factor += (num_of_private_actions[i]
+				/ (double) g_operators.size())
+				* ((g_operators.size() - num_of_actions[i])
+						/ (double) g_operators.size());
+	}
+	cout << "Symmetry factor is: " << symmetry_factor << endl;
+	return symmetry_factor;
+}
+
+double update_ops_with_agents(const char* num_of_partitions) {
+	string inbuf;
+	string filename = "action_graph.part.";
+	filename.append(num_of_partitions);
+	//cout << filename << endl;
+	//cout << filename.length() << endl;
+	fstream partition_file(filename.c_str(), ios::in);
+	//	cout<<"opened partition file"<<endl;
+	g_num_of_agents = atoi(num_of_partitions);
+	vector<int> num_of_actions(g_num_of_agents, 0);
+	vector<int> num_of_private_actions(g_num_of_agents, 0);
+
+	for (int i = 0; i < g_operators.size(); i++) {
+		getline(partition_file, inbuf);
+		int agent = atoi(inbuf.c_str());
+		g_operators[i].agent = agent;
+		num_of_actions[agent]++;
+		num_of_private_actions[agent]++;
+	}
+	//	cout << "removing partition file...";
+	partition_file.close();
+	remove(filename.c_str());
+	double symmetry_factor = update_private_and_public(num_of_private_actions,
+			num_of_actions);
+
+	return symmetry_factor;
+	//computing the results of our formula:
+
+}
+void reset_op_agents() {
+	//cout << "resetting operators.." << endl;
+	for (int i = 0; i < g_operators.size(); i++) {
+		g_operators[i].agent = -1;
+		g_operators[i].is_public = false;
+	}
+
+}
+
+void perform_optimal_partition() {
+
+	FILE* file = NULL;
+//	if (correlation_index == -1)
+	file = fopen("PartSymmetry.csv", "w");
+
+	//---------------------------
+
+	create_action_graph();
+	//cout << "Verifying correctness of action graph file...";
+	int res_graphchk = system("graphchk action_graph");
+	cout << res_graphchk << endl;
+
+	string ufactor_values[] = { "-ufactor=100", "-ufactor=300", "-ufactor=500",
+			"-ufactor=700", "-ufactor=900", "-ufactor=1100", "-ufactor=1300",
+			"-ufactor=1500", "-ufactor=1700", "-ufactor=1900" };
+	string objtype_values[] = { "-objtype=cut", "-objtype=vol" };
+	string num_of_agents_values[] = { "2", "3", "4", "5", "6" };
+	string ptype_values[] = { "-ptype=rb", "-ptype=kway" };
+	string ctype_values[] = { "-ctype=rm", "-ctype=shem" };
+	string buffer;	// [10000];
+	string best_config_found;
+	double best_symmetry_score_found = 0.0;
+	int res_gpmetis = 0;
+
+//	int cnt = 0;
+	for (int ufactor = 0; ufactor < 10; ufactor += 2) {
+		for (int ptype = 0; ptype < 2; ptype++) {
+			for (int ctype = 1; ctype < 2; ctype++) { //only shem for now..
+				for (int objtype = 0; objtype < 2; objtype++) {
+					for (int agents = 0; agents < 4; agents++) {
+						//cout << ufactor_values[ufactor] << ", "<< objtype_values[objtype] << ", "<< num_of_agents_values[agents] <<endl;
+//						if (correlation_index > -1 && cnt++
+//								!= correlation_index)
+//							continue;
+
+						buffer.clear();
+						buffer = "gpmetis ";
+						buffer += ufactor_values[ufactor];
+						buffer += " ";
+						buffer += ptype_values[ptype];
+						buffer += " ";
+						buffer += ctype_values[ctype];
+						buffer += " ";
+						if (ptype == 1)
+							buffer += objtype_values[objtype];
+						buffer += " action_graph ";
+						buffer += num_of_agents_values[agents];
+
+						//sprintf (buffer, "gpmetis %s %s action_graph %s", (char*)ufactor_values[ufactor],(char*)objtype_values[objtype],(char*)num_of_agents_values[agents]);
+						//cout << buffer << endl;
+						res_gpmetis = system(buffer.c_str());
+						cout << "ignore: " << res_gpmetis << endl;
+						double res = update_ops_with_agents(
+								num_of_agents_values[agents].c_str());
+
+						//-------------------
+						if (file)
+							fprintf(file, "%s,%f\n", buffer.data(), res);
+						//-------------------
+						//cout<<"finished updating operator agents, symmetry score is: " << res << endl;
+						if (res > best_symmetry_score_found) {
+							best_symmetry_score_found = res;
+							best_config_found.clear();
+							best_config_found = buffer.c_str();
+							//					cout << "best symmetry score until now is: "
+							//							<< best_symmetry_score_found << endl;
+						}
+
+						reset_op_agents();
+					}
+				}
+			}
+		}
+	}
+
+	if (best_symmetry_score_found > 0) {
+		cout << "best score: " << best_symmetry_score_found << ", with config "
+				<< best_config_found << endl;
+		res_gpmetis = system(best_config_found.c_str());
+		//cout << best_config_found[best_config_found.length()- 1] << endl;
+		const char* partitions = best_config_found.substr(
+				best_config_found.length() - 1, 1).c_str();
+
+		double best_score = update_ops_with_agents(partitions);
+		cout << "Best score is: " << best_score << endl;
+	} else {
+		cout << "no partition with score > 0 found.." << endl;
+	}
+	//	int res_gpmetis =
+	//			system("gpmetis -ufactor=800 -objtype=vol action_graph 4");
+	//	cout << "Return values of graphchk and gpmetis: " << res_graphchk << ", "
+	//			<< res_gpmetis << endl;
+
+	//----------------------
+	if (file)
+		fclose(file);
 }

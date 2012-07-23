@@ -106,7 +106,7 @@ int EagerSearch::step() {
 	}
 
 	const Operator * creating_op = node.get_creating_op();
-	bool apply_ma_pruning = g_agents_search && creating_op
+	bool apply_ma_pruning = (g_agents_search || g_symmetry_pruning) && creating_op
 			&& !creating_op->is_public;
 	int creating_op_agent = -1;
 	if (creating_op) {

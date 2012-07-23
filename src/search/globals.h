@@ -55,6 +55,11 @@ extern Timer g_timer;
 extern std::string g_plan_filename;
 extern RandomNumberGenerator g_rng;
 
+extern bool g_symmetry_pruning;
+extern char **g_operator_switchability;
+extern int g_num_of_public_actions;
+extern void perform_optimal_partition();
+
 extern bool g_agents_search;
 extern std::vector<int> g_variable_agent;	//(Raz) to which agent the variable belongs to if it's private, or -1 if public.
 void partition_by_agent_names(const char* configFileName);

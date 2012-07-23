@@ -38,6 +38,8 @@ int main(int argc, const char **argv) {
 
     if(g_agents_search)
     	partition_by_agent_names("agents");
+    else if(g_symmetry_pruning)
+    	perform_optimal_partition();
 
     Timer search_timer;
     engine->search();
