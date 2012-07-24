@@ -75,6 +75,7 @@ void SearchNode::open_initial(int h) {
 	info.h = h;
 	info.parent_state = 0;
 	info.creating_operator = 0;
+	info.network_parent = false;
 	if (g_multiple_goal) {
 		for (int i = 0; i < g_num_of_agents; i++)
 			info.participated_agents.push_back(false);
@@ -91,11 +92,31 @@ void SearchNode::open(int h, const SearchNode &parent_node,
 	info.h = h;
 	info.parent_state = parent_node.state_buffer;
 	info.creating_operator = parent_op;
+	info.network_parent = false;
 	if (g_multiple_goal) {
 		for (int i = 0; i < g_num_of_agents; i++)
 			info.participated_agents.push_back(
 					parent_node.info.participated_agents[i]);
 		info.participated_agents[parent_op->agent] = true;
+	}
+}
+//opening a state from a message
+void SearchNode::open(int h, int g, const Operator *parent_op,
+		State succ_state) {
+	assert(info.status == SearchNodeInfo::NEW);
+	info.status = SearchNodeInfo::OPEN;
+	info.g = g;
+	info.real_g = g;
+	info.h = h;
+	info.parent_state = succ_state.get_buffer(); //This is set to be the actual state, used for traceback stage
+	info.creating_operator = parent_op;
+	info.network_parent = true;
+	if (g_multiple_goal) {
+		cout << "MULTIPLE GOAL SEARCH NOT YET IMPLEMENTED!" << endl;
+//		for (int i = 0; i < g_num_of_agents; i++)
+//			info.participated_agents.push_back(
+//					parent_node.info.participated_agents[i]);
+//		info.participated_agents[parent_op->agent] = true;
 	}
 }
 
@@ -112,6 +133,15 @@ void SearchNode::reopen(const SearchNode &parent_node,
 	info.real_g = parent_node.info.real_g + parent_op->get_cost();
 	info.parent_state = parent_node.state_buffer;
 	info.creating_operator = parent_op;
+}
+//reopening a search node from a message
+void SearchNode::reopen(int g, const Operator *parent_op, State state) {
+	info.status = SearchNodeInfo::OPEN;
+	info.g = g;
+	info.real_g = g; //TODO(Raz) - find out the difference, maybe needs to be added to message.
+	info.parent_state = state.get_buffer();//This is set to be the actual state, used for traceback stage
+	info.creating_operator = parent_op;
+	info.network_parent = true;
 }
 
 // like reopen, except doesn't change status
@@ -152,13 +182,14 @@ void SearchNode::dump() {
 bool SearchNode::is_relevant_for_mariginal_search() {
 	bool found_non_participating_agent = false;
 	for (int i = 0; i < g_num_of_agents; i++) {
-		if (!info.participated_agents[i]){
+		if (!info.participated_agents[i]) {
 			found_non_participating_agent = true;
-			if(g_marginal_solution_for_agent[i] == -1)
+			if (g_marginal_solution_for_agent[i] == -1)
 				return true;
 		}
 	}
-	if(!found_non_participating_agent && g_marginal_solution_for_agent[g_num_of_agents] == -1)
+	if (!found_non_participating_agent
+			&& g_marginal_solution_for_agent[g_num_of_agents] == -1)
 		return true;
 	return false;
 }

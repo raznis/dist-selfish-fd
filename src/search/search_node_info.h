@@ -17,10 +17,10 @@ class SearchNodeInfo {
     const Operator *creating_operator;
     int real_g;
     vector<bool> participated_agents;	//TODO - Didn't take care of reopening states!!! (in search_space.cc)
-
+    bool network_parent;
     SearchNodeInfo()
         : status(NEW), g(-1), h(-1), h_is_dirty(false),
-          parent_state(0), creating_operator(0), real_g(-1) {
+          parent_state(0), creating_operator(0), real_g(-1), network_parent(false) {
     }
 };
 

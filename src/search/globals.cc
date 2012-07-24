@@ -363,6 +363,15 @@ int g_marginal_agent = -1;
 int g_num_of_agents = -1;
 bool g_multiple_goal = false;
 vector<int> g_marginal_solution_for_agent;
+bool g_parallel_search = false;
+
+int g_agent_id = -1;
+MAComm* g_ma_comm;
+MAConfiguration g_comm_config;
+State* g_current_solution;
+int g_g_of_current_solution = -1;
+int g_num_of_agents_confirming_current_solution = 0;
+vector<bool> g_agents_confirming_current_solution;
 
 void update_private_public_actions() {
 	//	for (int var = 0; var < g_variable_domain.size(); var++) {
@@ -370,6 +379,7 @@ void update_private_public_actions() {
 	//	}
 	//Updating operators as private/public
 	//TODO (Raz) As is implemented now, operators that affect a goal variable are public.
+	cout << "Updating public and private actions... " << endl;
 	int public_actions = 0;
 	int private_actions = 0;
 	for (int op_idx = 0; op_idx < g_operators.size(); op_idx++) {
@@ -435,6 +445,9 @@ void partition_by_agent_names(const char* configFileName) {
 			for (int agent_idx = 0; agent_idx < nAgents; agent_idx++) {
 				if (op_name.find(agent_names[agent_idx]) != string::npos) {
 					g_operators[op_idx].agent = agent_ids[agent_idx];
+					//assigning 0-cost to actions not belonging to the agent
+					if(!g_parallel_search && g_operators[op_idx].agent != g_agent_id)
+						g_operators[op_idx].set_cost(0);
 					num_of_associated_ops++;
 					break;
 				}
@@ -757,4 +770,33 @@ void perform_optimal_partition() {
 	//----------------------
 	if (file)
 		fclose(file);
+}
+
+/*
+ * MA-A* stuff
+ */
+void initialize_communication(const char* configFileName) {
+	// Load Multi-Agent Communication module
+	// with the configuration file, specified by the first command line argument
+	//MAComm ma(comm_argv[1]);
+	g_ma_comm = new MAComm(configFileName, g_agent_id);
+	// Connect to all agents
+	g_ma_comm->connect();
+	// Get a copy of the module's configuration
+	g_comm_config = g_ma_comm->getConfigCopy();
+	g_agent_id = g_ma_comm->getConfigCopy().thisId;
+
+	//These are used for maintaining the current solution and who confirmed it.
+	g_g_of_current_solution = -1;
+	g_num_of_agents_confirming_current_solution = 0;
+	for (int i = 0; i < g_comm_config.nAgents(); i++) {
+		g_agents_confirming_current_solution.push_back(false);
+	}
+//	for (int i = 0; i < g_comm_config.nAgents(); i++) {
+//		cout << g_agents_confirming_current_solution[i] << ",";
+//	}
+//	cout << endl;
+}
+void close_connection() {
+	g_ma_comm->disconnect();
 }

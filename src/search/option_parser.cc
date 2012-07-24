@@ -187,7 +187,9 @@ SearchEngine *OptionParser::parse_cmd_line(
             cout << "random seed " << argv[i] << endl;
         } else if (arg.compare("--agents") == 0) {
         	g_agents_search = true;
-            cout << "running search for selfish agents " << endl;
+        	g_agent_id = atoi(argv[i + 1]);
+        	i++;
+            cout << "running search for selfish agents, agent id is " << g_agent_id << endl;
         } else if (arg.compare("--marginal") == 0) {
         	g_marginal_search = true;
         	g_marginal_agent = atoi(argv[i + 1]);
@@ -199,6 +201,9 @@ SearchEngine *OptionParser::parse_cmd_line(
         } else if (arg.compare("--symmetry") == 0) {
         	g_symmetry_pruning = true;
             cout << "running partition of action graph and symmetry pruning " << endl;
+        } else if (arg.compare("--parallel") == 0) {
+        	g_parallel_search = true;
+            cout << "running parallel search " << endl;
         } else if ((arg.compare("--help") == 0) && dry_run) {
             cout << "Help:" << endl;
             if (i + 1 < argc) {

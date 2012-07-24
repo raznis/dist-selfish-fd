@@ -68,6 +68,13 @@ State::State(const State &predecessor, const Operator &op) {
     g_axiom_evaluator->evaluate(*this);
 }
 
+State::State(Message* message) {
+    _allocate();
+    for (int i = 0; i < g_variable_domain.size(); i++)
+    	vars[i] = message->vars[i];
+
+}
+
 State::~State() {
     _deallocate();
 }

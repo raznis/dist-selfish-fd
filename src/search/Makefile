@@ -4,7 +4,7 @@ USE_LP=0
 ## Set LINK_RELEASE_STATICALLY to 0 or 1 (default) to disable/enable
 ## static linking of the executable in release mode.
 ## On OS X, this is unsupported and will be silently disabled.
-LINK_RELEASE_STATICALLY=1
+LINK_RELEASE_STATICALLY=0
 
 ## Set STATE_VAR_BYTES to 1, 2 or 4 to control how large a state
 ## variable is. There should be no need to tweak this manually.
@@ -118,6 +118,10 @@ HEADERS += pdbs/canonical_pdbs_heuristic.h \
            pdbs/util.h \
            pdbs/zero_one_pdbs_heuristic.h \
 
+HEADERS += message.h \
+		   ma_comm.h \
+		   practical_socket.h
+
 SHELL = /bin/bash
 
 SOURCES = planner.cc $(HEADERS:%.h=%.cc)
@@ -200,7 +204,7 @@ LINKOPT  = -g
 LINKOPT += -m32
 LINKOPT +=
 
-POSTLINKOPT = -lrt
+POSTLINKOPT = -lpthread -lrt 
 
 ## Additional specialized options for the various targets follow.
 ## In release mode, we link statically since this makes it more likely
@@ -214,9 +218,9 @@ CCOPT_RELEASE  = -O3 -DNDEBUG -fomit-frame-pointer
 CCOPT_DEBUG    = -O3
 CCOPT_PROFILE  = -O3 -pg
 
-LINKOPT_RELEASE =
-LINKOPT_DEBUG    =
-LINKOPT_PROFILE  = -pg
+LINKOPT_RELEASE = -lpthread -lrt 
+LINKOPT_DEBUG    = -lpthread -lrt 
+LINKOPT_PROFILE  = -pg -lrt
 
 POSTLINKOPT_RELEASE =
 POSTLINKOPT_DEBUG   =

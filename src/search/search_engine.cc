@@ -73,8 +73,9 @@ bool SearchEngine::check_goal_and_set_plan(const State &state) {
 			return false;
 		}
 		cout << "Solution found!" << endl;
-		search_space.trace_path(state, plan);
-		set_plan(plan);
+		cout << "Path trace is not yet implemented..." << endl;
+//		search_space.trace_path(state, plan);
+//		set_plan(plan);
 		return true;
 	}
 	return false;

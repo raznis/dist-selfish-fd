@@ -8,7 +8,7 @@ using namespace std;
 class Operator;
 
 #include "state_var_t.h"
-
+#include "message.h"
 class State {
     state_var_t *vars; // values for vars
     bool borrowed_buffer;
@@ -20,6 +20,7 @@ public:
     explicit State(istream &in);
     State(const State &state);
     State(const State &predecessor, const Operator &op);
+    State(Message* message);
     ~State();
     State &operator=(const State &other);
     state_var_t &operator[](int index) {

@@ -2,7 +2,7 @@
 #define GLOBALS_H
 
 #include "operator_cost.h"
-
+#include "ma_comm.h"
 #include <iosfwd>
 #include <string>
 #include <vector>
@@ -69,4 +69,18 @@ extern int g_num_of_agents;
 extern bool g_multiple_goal;
 extern std::vector<int> g_marginal_solution_for_agent;
 extern bool did_agent_participate(const std::vector<const Operator *> &plan, int agent);
+
+/*
+ * MA-A* stuff
+ */
+extern bool g_parallel_search;
+extern int g_agent_id;
+extern MAConfiguration g_comm_config;
+extern MAComm* g_ma_comm;
+extern State* g_current_solution;
+extern int g_g_of_current_solution;
+extern int g_num_of_agents_confirming_current_solution;
+extern std::vector<bool> g_agents_confirming_current_solution;
+void initialize_communication(const char* configFileName);
+void close_connection();
 #endif

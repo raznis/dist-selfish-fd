@@ -36,8 +36,10 @@ int main(int argc, const char **argv) {
         exit(1);
     }
 
-    if(g_agents_search)
+    if(g_agents_search){
     	partition_by_agent_names("agents");
+    	initialize_communication("comm");
+    }
     else if(g_symmetry_pruning)
     	perform_optimal_partition();
 
@@ -46,7 +48,8 @@ int main(int argc, const char **argv) {
     search_timer.stop();
     g_timer.stop();
 
-    engine->save_plan_if_necessary();
+    cout << "Not saving plan yet, since traceback is not yet implemented." << endl;
+    //engine->save_plan_if_necessary();
     engine->statistics();
     engine->heuristic_statistics();
     cout << "Search time: " << search_timer << endl;

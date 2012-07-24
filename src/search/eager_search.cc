@@ -7,6 +7,7 @@
 #include "g_evaluator.h"
 #include "sum_evaluator.h"
 #include "plugin.h"
+#include "message.h"
 
 #include <cassert>
 #include <cstdlib>
@@ -27,7 +28,7 @@ EagerSearch::EagerSearch(const Options &opts) :
 
 void EagerSearch::initialize() {
 	//TODO children classes should output which kind of search
-	cout << "Conducting best first search"
+	cout << "Agent " << g_agent_id << " conducting best first search"
 			<< (reopen_closed_nodes ? " with" : " without")
 			<< " reopening closed nodes, (real) bound = " << bound << endl;
 	if (do_pathmax)
@@ -90,6 +91,7 @@ void EagerSearch::statistics() const {
 }
 
 int EagerSearch::step() {
+	receive_messages();
 	pair<SearchNode, bool> n = fetch_next_node();
 	if (!n.second) {
 		return FAILED;
@@ -101,17 +103,22 @@ int EagerSearch::step() {
 		return SOLVED;
 
 	//pruning states that are no longer relevant in the search for marginal problems
-	if(g_multiple_goal && !node.is_relevant_for_mariginal_search()){
+	if (g_multiple_goal && !node.is_relevant_for_mariginal_search()) {
+		cout << "MULTIPLE GOAL SEARCH NOT IMPLEMENTED YET!!!" << endl;
 		return IN_PROGRESS;
 	}
 
-	const Operator * creating_op = node.get_creating_op();
-	bool apply_ma_pruning = (g_agents_search || g_symmetry_pruning) && creating_op
-			&& !creating_op->is_public;
-	int creating_op_agent = -1;
-	if (creating_op) {
-		creating_op_agent = creating_op->agent;
-	}
+//	const Operator * creating_op = node.get_creating_op();
+//	bool apply_ma_pruning = (g_agents_search || g_symmetry_pruning)
+//			&& creating_op && !creating_op->is_public;
+//	int creating_op_agent = -1;
+//	if (creating_op) {
+//		creating_op_agent = creating_op->agent;
+//	}
+
+	//Sending states created by public actions to relevant agents.
+	if(node.get_creating_op() && node.get_creating_op()->is_public)
+		send_state_to_relevant_agents(node.get_creating_op(), s, node.get_g(), node.get_h());
 
 	vector<const Operator *> applicable_ops;
 	set<const Operator *> preferred_ops;
@@ -137,112 +144,247 @@ int EagerSearch::step() {
 		if ((node.get_real_g() + op->get_cost()) >= bound)
 			continue;
 
-		//ma_pruning
-		if (apply_ma_pruning && creating_op_agent != op->agent){
-			//cout <<"here!" << endl;
+		//pruning actions not belonging to this agent
+		if (op->agent != g_agent_id) {
 			continue;
 		}
 
 		//pruning action of marginal agents
 		//TODO - a smarter way to do this is to alter the problem so that it doesn't contain the marginal agent to begin with.
 		//This will make the heuristic estimate much better.
-		if(g_marginal_search && g_marginal_agent == op->agent)
-			continue;
+//		if (g_marginal_search && g_marginal_agent == op->agent)
+//			continue;
 
 		State succ_state(s, *op);
-		search_progress.inc_generated();
-		bool is_preferred = (preferred_ops.find(op) != preferred_ops.end());
-
-		SearchNode succ_node = search_space.get_node(succ_state);
-
-		// Previously encountered dead end. Don't re-evaluate.
-		if (succ_node.is_dead_end())
-			continue;
-
-		// update new path
-		if (use_multi_path_dependence || succ_node.is_new()) {
-			bool h_is_dirty = false;
-			for (size_t i = 0; i < heuristics.size(); i++)
-				h_is_dirty = h_is_dirty
-						|| heuristics[i]->reach_state(s, *op,
-								succ_node.get_state());
-			if (h_is_dirty && use_multi_path_dependence)
-				succ_node.set_h_dirty();
-		}
-
-		if (succ_node.is_new()) {
-			// We have not seen this state before.
-			// Evaluate and create a new node.
-			for (size_t i = 0; i < heuristics.size(); i++)
-				heuristics[i]->evaluate(succ_state);
-			succ_node.clear_h_dirty();
-			search_progress.inc_evaluated_states();
-			search_progress.inc_evaluations(heuristics.size());
-
-			// Note that we cannot use succ_node.get_g() here as the
-			// node is not yet open. Furthermore, we cannot open it
-			// before having checked that we're not in a dead end. The
-			// division of responsibilities is a bit tricky here -- we
-			// may want to refactor this later.
-			open_list->evaluate(node.get_g() + get_adjusted_cost(*op),
-					is_preferred);
-			bool dead_end = open_list->is_dead_end();
-			if (dead_end) {
-				succ_node.mark_as_dead_end();
-				search_progress.inc_dead_ends();
-				continue;
-			}
-
-			//TODO:CR - add an ID to each state, and then we can use a vector to save per-state information
-			int succ_h = heuristics[0]->get_heuristic();
-			if (do_pathmax) {
-				if ((node.get_h() - get_adjusted_cost(*op)) > succ_h) {
-					//cout << "Pathmax correction: " << succ_h << " -> " << node.get_h() - get_adjusted_cost(*op) << endl;
-					succ_h = node.get_h() - get_adjusted_cost(*op);
-					heuristics[0]->set_evaluator_value(succ_h);
-					open_list->evaluate(node.get_g() + get_adjusted_cost(*op),
-							is_preferred);
-					search_progress.inc_pathmax_corrections();
-				}
-			}
-			succ_node.open(succ_h, node, op);
-
-			open_list->insert(succ_node.get_state_buffer());
-			if (search_progress.check_h_progress(succ_node.get_g())) {
-				reward_progress();
-			}
-		} else if (succ_node.get_g() > node.get_g() + get_adjusted_cost(*op)) {
-			// We found a new cheapest path to an open or closed state.
-			if (reopen_closed_nodes) {
-				//TODO:CR - test if we should add a reevaluate flag and if it helps
-				// if we reopen closed nodes, do that
-				if (succ_node.is_closed()) {
-					/* TODO: Verify that the heuristic is inconsistent.
-					 * Otherwise, this is a bug. This is a serious
-					 * assertion because it can show that a heuristic that
-					 * was thought to be consistent isn't. Therefore, it
-					 * should be present also in release builds, so don't
-					 * use a plain assert. */
-					//TODO:CR - add a consistent flag to heuristics, and add an assert here based on it
-					search_progress.inc_reopened();
-				}
-				succ_node.reopen(node, op);
-				heuristics[0]->set_evaluator_value(succ_node.get_h());
-				// TODO: this appears fishy to me. Why is here only heuristic[0]
-				// involved? Is this still feasible in the current version?
-				open_list->evaluate(succ_node.get_g(), is_preferred);
-
-				open_list->insert(succ_node.get_state_buffer());
-			} else {
-				// if we do not reopen closed nodes, we just update the parent pointers
-				// Note that this could cause an incompatibility between
-				// the g-value and the actual path that is traced back
-				succ_node.update_parent(node, op);
-			}
-		}
+		handle_state(succ_state, op, preferred_ops, node, s);
 	}
 
 	return IN_PROGRESS;
+}
+
+void EagerSearch::send_state_to_relevant_agents(const Operator* op,
+		State new_state, int g, int h) {
+	bool* sent_message_to_agent = new bool[g_comm_config.nAgents()];
+	for (int i = 0; i < g_comm_config.nAgents(); i++)
+		sent_message_to_agent[i] = false;
+	for (int op_idx = 0; op_idx < g_operators.size(); op_idx++) {
+		Operator curr_op = g_operators[op_idx];
+		if (sent_message_to_agent[curr_op.agent] || !curr_op.is_public
+				|| curr_op.agent == g_agent_id)
+			continue;
+		//curr_op is public, owned by a different agent, which we did not mark as one to send a message to.
+		if (curr_op.is_applicable_public(new_state)) {
+			Message* m = new Message(&new_state, op, g, h, (int) curr_op.agent, SEARCH_NODE);
+			g_ma_comm->sendMessage(m);
+			sent_message_to_agent[curr_op.agent] = true;
+		}
+	}
+
+	delete[] sent_message_to_agent;
+}
+
+
+void EagerSearch::handle_state(State succ_state, const Operator *op,
+		set<const Operator *> preferred_ops, SearchNode node, State s) {
+	search_progress.inc_generated();
+	bool is_preferred = (preferred_ops.find(op) != preferred_ops.end());
+
+	SearchNode succ_node = search_space.get_node(succ_state);
+
+	// Previously encountered dead end. Don't re-evaluate.
+	if (succ_node.is_dead_end())
+		return;
+
+	// update new path
+	if (use_multi_path_dependence || succ_node.is_new()) {
+		bool h_is_dirty = false;
+		for (size_t i = 0; i < heuristics.size(); i++)
+			h_is_dirty = h_is_dirty
+					|| heuristics[i]->reach_state(s, *op,
+							succ_node.get_state());
+		if (h_is_dirty && use_multi_path_dependence)
+			succ_node.set_h_dirty();
+	}
+
+	if (succ_node.is_new()) {
+		// We have not seen this state before.
+		// Evaluate and create a new node.
+		for (size_t i = 0; i < heuristics.size(); i++)
+			heuristics[i]->evaluate(succ_state);
+		succ_node.clear_h_dirty();
+		search_progress.inc_evaluated_states();
+		search_progress.inc_evaluations(heuristics.size());
+
+		// Note that we cannot use succ_node.get_g() here as the
+		// node is not yet open. Furthermore, we cannot open it
+		// before having checked that we're not in a dead end. The
+		// division of responsibilities is a bit tricky here -- we
+		// may want to refactor this later.
+		open_list->evaluate(node.get_g() + get_adjusted_cost(*op),
+				is_preferred);
+		bool dead_end = open_list->is_dead_end();
+		if (dead_end) {
+			succ_node.mark_as_dead_end();
+			search_progress.inc_dead_ends();
+			return;
+		}
+
+		//TODO:CR - add an ID to each state, and then we can use a vector to save per-state information
+		int succ_h = heuristics[0]->get_heuristic();
+		if (do_pathmax) {
+			if ((node.get_h() - get_adjusted_cost(*op)) > succ_h) {
+				//cout << "Pathmax correction: " << succ_h << " -> " << node.get_h() - get_adjusted_cost(*op) << endl;
+				succ_h = node.get_h() - get_adjusted_cost(*op);
+				heuristics[0]->set_evaluator_value(succ_h);
+				open_list->evaluate(node.get_g() + get_adjusted_cost(*op),
+						is_preferred);
+				search_progress.inc_pathmax_corrections();
+			}
+		}
+		succ_node.open(succ_h, node, op);
+
+		open_list->insert(succ_node.get_state_buffer());
+		if (search_progress.check_h_progress(succ_node.get_g())) {
+			reward_progress();
+		}
+	} else if (succ_node.get_g() > node.get_g() + get_adjusted_cost(*op)) {
+		// We found a new cheapest path to an open or closed state.
+		if (reopen_closed_nodes) {
+			//TODO:CR - test if we should add a reevaluate flag and if it helps
+			// if we reopen closed nodes, do that
+			if (succ_node.is_closed()) {
+				/* TODO: Verify that the heuristic is inconsistent.
+				 * Otherwise, this is a bug. This is a serious
+				 * assertion because it can show that a heuristic that
+				 * was thought to be consistent isn't. Therefore, it
+				 * should be present also in release builds, so don't
+				 * use a plain assert. */
+				//TODO:CR - add a consistent flag to heuristics, and add an assert here based on it
+				search_progress.inc_reopened();
+			}
+			succ_node.reopen(node, op);
+			heuristics[0]->set_evaluator_value(succ_node.get_h());
+			// TODO: this appears fishy to me. Why is here only heuristic[0]
+			// involved? Is this still feasible in the current version?
+			open_list->evaluate(succ_node.get_g(), is_preferred);
+
+			open_list->insert(succ_node.get_state_buffer());
+		} else {
+			// if we do not reopen closed nodes, we just update the parent pointers
+			// Note that this could cause an incompatibility between
+			// the g-value and the actual path that is traced back
+			succ_node.update_parent(node, op);
+		}
+	}
+}
+
+void EagerSearch::handle_state_from_message(State succ_state,
+		const Operator *op, int g_from_message, int h_from_message) {
+	search_progress.inc_generated();
+	bool is_preferred = true;
+
+	SearchNode succ_node = search_space.get_node(succ_state);
+
+	// Previously encountered dead end. Don't re-evaluate.
+	if (succ_node.is_dead_end())
+		return;
+
+	// update new path
+//	if (use_multi_path_dependence || succ_node.is_new()) {
+//		bool h_is_dirty = false;
+//		for (size_t i = 0; i < heuristics.size(); i++)
+//			h_is_dirty = h_is_dirty
+//					|| heuristics[i]->reach_state(s, *op,
+//							succ_node.get_state());
+//		if (h_is_dirty && use_multi_path_dependence)
+//			succ_node.set_h_dirty();
+//	}
+
+	if (succ_node.is_new()) {
+		// We have not seen this state before.
+		// Evaluate and create a new node.
+		for (size_t i = 0; i < heuristics.size(); i++)
+			heuristics[i]->evaluate(succ_state);
+		succ_node.clear_h_dirty();
+		search_progress.inc_evaluated_states();
+		search_progress.inc_evaluations(heuristics.size());
+
+		// Note that we cannot use succ_node.get_g() here as the
+		// node is not yet open. Furthermore, we cannot open it
+		// before having checked that we're not in a dead end. The
+		// division of responsibilities is a bit tricky here -- we
+		// may want to refactor this later.
+		open_list->evaluate(g_from_message,
+				is_preferred);
+		bool dead_end = open_list->is_dead_end();
+		if (dead_end) {
+			succ_node.mark_as_dead_end();
+			search_progress.inc_dead_ends();
+			return;
+		}
+
+		//TODO:CR - add an ID to each state, and then we can use a vector to save per-state information
+		int succ_h = max(heuristics[0]->get_heuristic(), h_from_message); //Updating the h value to be the maximal of this agent's h value and the sending agent's h value.
+		if (do_pathmax) {
+			cout
+					<< "SHOULD NOT BE HERE IN MA_FD - do_pathmax not implemented yet..."
+					<< endl;
+//			if ((node.get_h() - get_adjusted_cost(*op)) > succ_h) {
+//				//cout << "Pathmax correction: " << succ_h << " -> " << node.get_h() - get_adjusted_cost(*op) << endl;
+//				succ_h = node.get_h() - get_adjusted_cost(*op);
+//				heuristics[0]->set_evaluator_value(succ_h);
+//				open_list->evaluate(node.get_g() + get_adjusted_cost(*op),
+//						is_preferred);
+//				search_progress.inc_pathmax_corrections();
+//			}
+		}
+		succ_node.open(succ_h, g_from_message, op, succ_state);
+
+		open_list->insert(succ_node.get_state_buffer());
+		if (search_progress.check_h_progress(succ_node.get_g())) {
+			reward_progress();
+		}
+	} else if (succ_node.get_g() > g_from_message) {
+		// We found a new cheapest path to an open or closed state.
+		if (reopen_closed_nodes) {
+			//TODO:CR - test if we should add a reevaluate flag and if it helps
+			// if we reopen closed nodes, do that
+			if (succ_node.is_closed()) {
+				/* TODO: Verify that the heuristic is inconsistent.
+				 * Otherwise, this is a bug. This is a serious
+				 * assertion because it can show that a heuristic that
+				 * was thought to be consistent isn't. Therefore, it
+				 * should be present also in release builds, so don't
+				 * use a plain assert. */
+				//TODO:CR - add a consistent flag to heuristics, and add an assert here based on it
+				search_progress.inc_reopened();
+			}
+			succ_node.reopen(g_from_message, op, succ_state);
+			heuristics[0]->set_evaluator_value(succ_node.get_h());
+			// TODO: this appears fishy to me. Why is here only heuristic[0]
+			// involved? Is this still feasible in the current version?
+			open_list->evaluate(succ_node.get_g(), is_preferred);
+
+			open_list->insert(succ_node.get_state_buffer());
+		} else {
+			// if we do not reopen closed nodes, we just update the parent pointers
+			// Note that this could cause an incompatibility between
+			// the g-value and the actual path that is traced back
+			cout << "SHOULD ALWAYS REOPEN CLOSED NODES IN MA-A*!" << endl;
+//			succ_node.update_parent(node, op);
+		}
+	}
+}
+
+void EagerSearch::receive_messages() {
+	while (!g_ma_comm->noIncomingMessage()) {
+		Message* m = g_ma_comm->receiveMessage();
+		if (m->msgType == SEARCH_NODE) {
+			State new_state = State(m);
+			handle_state_from_message(new_state, ((const Operator*) &g_operators[m->creating_op_index]),(int) m->g, (int) m->h );
+		}
+
+	}
 }
 
 pair<SearchNode, bool> EagerSearch::fetch_next_node() {

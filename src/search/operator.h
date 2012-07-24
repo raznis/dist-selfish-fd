@@ -68,7 +68,6 @@ class Operator {
 	std::string name;
 	int cost;
 
-
 	mutable bool marked; // Used for short-term marking of preferred operators
 public:
 	Operator(std::istream &in, bool is_axiom);
@@ -98,6 +97,19 @@ public:
 		return true;
 	}
 
+	//Are all public preconditions satisfied
+	bool is_applicable_public(const State &state) const {
+		for (int i = 0; i < prevail.size(); i++)
+			if (g_variable_agent[prevail[i].var] == 0
+					&& !prevail[i].is_applicable(state))
+				return false;
+		for (int i = 0; i < pre_post.size(); i++)
+			if (g_variable_agent[pre_post[i].var] == 0
+					&& !pre_post[i].is_applicable(state))
+				return false;
+		return true;
+	}
+
 	bool is_marked() const {
 		return marked;
 	}
@@ -112,6 +124,9 @@ public:
 
 	int get_cost() const {
 		return cost;
+	}
+	void set_cost(int new_cost) {
+		cost = new_cost;
 	}
 
 	bool uses_variable(int var) const;

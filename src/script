@@ -1,0 +1,1 @@
+./search/downward --search "astar(lmcut())" --agents 0 --parallel < output
