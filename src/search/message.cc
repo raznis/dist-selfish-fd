@@ -21,8 +21,9 @@ Message::Message() {
 	memset(this, 0, sizeof(Message));
 }
 
-Message::Message(State* new_state, const Operator *creating_op, int g_value, int h_value,
-		unsigned char destination_id, unsigned char mes_type) {
+Message::Message(State* new_state, const Operator *creating_op, int g_value,
+		int h_value, unsigned char destination_id, unsigned char mes_type,
+		vector<bool> participating) {
 	dest_id = destination_id;
 	creating_op_index = get_op_index(creating_op);
 	g = g_value;
@@ -40,10 +41,16 @@ Message::Message(State* new_state, const Operator *creating_op, int g_value, int
 	// ToDo Raz: initialize num_of_actions_in_plan and operator_indices_of_plan
 	num_of_actions_in_plan = 0;
 	operator_indices_of_plan = 0;
+
+	participating_agents = new bool[g_num_of_agents];
+	if (g_multiple_goal) {
+		for (int i = 0; i < g_num_of_agents; i++)
+			participating_agents[i] = participating[i];
+	}
 }
 //TRACE BACK MESSAGE
-Message::Message(StateProxy &current_state,
-		vector<const Operator *> &path, int target_agent) {
+Message::Message(StateProxy &current_state, vector<const Operator *> &path,
+		int target_agent) {
 	//cout<<"starting to build the trace back message..." <<endl;
 	dest_id = target_agent;
 	//cout<<"sending to agent " << (int)dest_id << endl;
@@ -54,11 +61,11 @@ Message::Message(StateProxy &current_state,
 	num_of_vars = g_variable_domain.size();
 	//cout<<"num_of_vars is " << num_of_vars<< endl;
 	vars = new state_var_t[num_of_vars];
-	for (int i = 0; i < num_of_vars; i++){
+	for (int i = 0; i < num_of_vars; i++) {
 		//cout<<(int)current_state.state_data[i]<<",";
 		vars[i] = current_state.state_data[i];
 	}
-	cout<< endl;
+	cout << endl;
 	//cout<<"done updating vars..." <<endl;
 	num_of_actions_in_plan = path.size();
 	operator_indices_of_plan = new int[num_of_actions_in_plan];
@@ -73,6 +80,8 @@ Message::~Message() {
 		delete[] vars;
 	if (operator_indices_of_plan)
 		delete[] operator_indices_of_plan;
+	if (participating_agents)
+		delete[] participating_agents;
 }
 //SHOULD BE USED ONLY WHEN RECEIVING MESSAGES
 void Message::dump() const {
@@ -101,6 +110,11 @@ int Message::serialize(char* buffer) const {
 	memcpy(p, operator_indices_of_plan, fieldSize);
 	p += fieldSize;
 
+	if (g_multiple_goal && msgType == SEARCH_NODE) {
+		fieldSize = g_num_of_agents * sizeof(bool);
+		memcpy(p, participating_agents, fieldSize);
+		p += fieldSize;
+	}
 	return p - buffer;
 }
 
@@ -122,6 +136,13 @@ Message* Message::deserialize(char* buffer) {
 		fieldSize = m->num_of_actions_in_plan * sizeof(int);
 		m->operator_indices_of_plan = new int[m->num_of_actions_in_plan];
 		memcpy(m->operator_indices_of_plan, p, fieldSize);
+		p += fieldSize;
+	}
+
+	if (g_multiple_goal && m->msgType == SEARCH_NODE) {
+		fieldSize = g_num_of_agents * sizeof(bool);
+		m->participating_agents = new bool[g_num_of_agents];
+		memcpy(m->participating_agents, p, fieldSize);
 		p += fieldSize;
 	}
 

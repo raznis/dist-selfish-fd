@@ -56,8 +56,9 @@ public:
 
 	bool is_relevant_for_mariginal_search();
 
-	void open(int h, int g, const Operator *parent_op, State succ_state);
-	void reopen(int g, const Operator *parent_op, State state);
+	void open(int h, int g, const Operator *parent_op, State succ_state, vector<bool> participating);
+	void reopen(int g, const Operator *parent_op, State state, vector<bool> participating);
+	std::vector<bool> get_participating_agents() const;
 };
 
 class SearchSpace {

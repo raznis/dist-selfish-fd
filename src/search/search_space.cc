@@ -63,6 +63,10 @@ const state_var_t *SearchNode::get_parent_buffer() const {
 	return info.parent_state;
 }
 
+vector<bool> SearchNode::get_participating_agents() const {
+	return info.participated_agents;
+}
+
 const Operator* SearchNode::get_creating_op() const {
 	return info.creating_operator;
 }
@@ -102,7 +106,7 @@ void SearchNode::open(int h, const SearchNode &parent_node,
 }
 //opening a state from a message
 void SearchNode::open(int h, int g, const Operator *parent_op,
-		State succ_state) {
+		State succ_state, vector<bool> participating) {
 	assert(info.status == SearchNodeInfo::NEW);
 	info.status = SearchNodeInfo::OPEN;
 	info.g = g;
@@ -111,12 +115,11 @@ void SearchNode::open(int h, int g, const Operator *parent_op,
 	info.parent_state = succ_state.get_buffer(); //This is set to be the actual state, used for traceback stage
 	info.creating_operator = parent_op;
 	info.network_parent = true;
+	//TODO - handle the participating agents!
 	if (g_multiple_goal) {
-		cout << "MULTIPLE GOAL SEARCH NOT YET IMPLEMENTED!" << endl;
-//		for (int i = 0; i < g_num_of_agents; i++)
-//			info.participated_agents.push_back(
-//					parent_node.info.participated_agents[i]);
-//		info.participated_agents[parent_op->agent] = true;
+//		cout << "MULTIPLE GOAL SEARCH NOT YET IMPLEMENTED!" << endl;
+		for (int i = 0; i < g_num_of_agents; i++)
+			info.participated_agents[i] = participating[i];
 	}
 }
 
@@ -133,15 +136,28 @@ void SearchNode::reopen(const SearchNode &parent_node,
 	info.real_g = parent_node.info.real_g + parent_op->get_cost();
 	info.parent_state = parent_node.state_buffer;
 	info.creating_operator = parent_op;
+	if (g_multiple_goal) {
+		info.participated_agents.clear();
+		for (int i = 0; i < g_num_of_agents; i++)
+			info.participated_agents.push_back(
+					parent_node.info.participated_agents[i]);
+		info.participated_agents[parent_op->agent] = true;
+	}
 }
 //reopening a search node from a message
-void SearchNode::reopen(int g, const Operator *parent_op, State state) {
+void SearchNode::reopen(int g, const Operator *parent_op, State state, vector<bool> participating) {
 	info.status = SearchNodeInfo::OPEN;
 	info.g = g;
 	info.real_g = g; //TODO(Raz) - find out the difference, maybe needs to be added to message.
-	info.parent_state = state.get_buffer();//This is set to be the actual state, used for traceback stage
+	info.parent_state = state.get_buffer(); //This is set to be the actual state, used for traceback stage
 	info.creating_operator = parent_op;
 	info.network_parent = true;
+
+	if (g_multiple_goal) {
+		info.participated_agents.clear();
+		for (int i = 0; i < g_num_of_agents; i++)
+			info.participated_agents[i] = participating[i];
+	}
 }
 
 // like reopen, except doesn't change status

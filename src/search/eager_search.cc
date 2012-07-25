@@ -99,11 +99,15 @@ int EagerSearch::step() {
 	SearchNode node = n.first;
 
 	State s = node.get_state();
-	if (check_goal_and_set_plan(s))
+	if (check_goal_and_set_plan(s)){
+		cout << "Found solution with g=" << node.get_g() << ", Participating agents: ";
+		for(int i =0 ; i < g_num_of_agents ; i++)
+			cout << node.get_participating_agents()[i] << ", " ;
+		cout << endl;
 		return SOLVED;
-
+	}
 	//pruning states that are no longer relevant in the search for marginal problems
-	if (g_multiple_goal && !node.is_relevant_for_mariginal_search()) {
+	if (g_multiple_goal && !node.is_relevant_for_mariginal_search() && false) {	//TODO- multigoal is not actually implemented yet
 		cout << "MULTIPLE GOAL SEARCH NOT IMPLEMENTED YET!!!" << endl;
 		return IN_PROGRESS;
 	}
@@ -118,7 +122,7 @@ int EagerSearch::step() {
 
 	//Sending states created by public actions to relevant agents.
 	if(node.get_creating_op() && node.get_creating_op()->is_public)
-		send_state_to_relevant_agents(node.get_creating_op(), s, node.get_g(), node.get_h());
+		send_state_to_relevant_agents(node.get_creating_op(), s, node.get_g(), node.get_h(), node.get_participating_agents());
 
 	vector<const Operator *> applicable_ops;
 	set<const Operator *> preferred_ops;
@@ -163,7 +167,7 @@ int EagerSearch::step() {
 }
 
 void EagerSearch::send_state_to_relevant_agents(const Operator* op,
-		State new_state, int g, int h) {
+		State new_state, int g, int h, vector<bool>  participating) {
 	bool* sent_message_to_agent = new bool[g_comm_config.nAgents()];
 	for (int i = 0; i < g_comm_config.nAgents(); i++)
 		sent_message_to_agent[i] = false;
@@ -174,7 +178,7 @@ void EagerSearch::send_state_to_relevant_agents(const Operator* op,
 			continue;
 		//curr_op is public, owned by a different agent, which we did not mark as one to send a message to.
 		if (curr_op.is_applicable_public(new_state)) {
-			Message* m = new Message(&new_state, op, g, h, (int) curr_op.agent, SEARCH_NODE);
+			Message* m = new Message(&new_state, op, g, h, (int) curr_op.agent, SEARCH_NODE, participating);
 			g_ma_comm->sendMessage(m);
 			sent_message_to_agent[curr_op.agent] = true;
 		}
@@ -279,9 +283,13 @@ void EagerSearch::handle_state(State succ_state, const Operator *op,
 }
 
 void EagerSearch::handle_state_from_message(State succ_state,
-		const Operator *op, int g_from_message, int h_from_message) {
+		const Operator *op, int g_from_message, int h_from_message, bool* participating) {
 	search_progress.inc_generated();
 	bool is_preferred = true;
+
+	vector<bool> participating_agents;
+	for(int i = 0 ; i < g_num_of_agents ; i++)
+		participating_agents.push_back(participating[i]);
 
 	SearchNode succ_node = search_space.get_node(succ_state);
 
@@ -338,7 +346,7 @@ void EagerSearch::handle_state_from_message(State succ_state,
 //				search_progress.inc_pathmax_corrections();
 //			}
 		}
-		succ_node.open(succ_h, g_from_message, op, succ_state);
+		succ_node.open(succ_h, g_from_message, op, succ_state, participating_agents);
 
 		open_list->insert(succ_node.get_state_buffer());
 		if (search_progress.check_h_progress(succ_node.get_g())) {
@@ -359,7 +367,7 @@ void EagerSearch::handle_state_from_message(State succ_state,
 				//TODO:CR - add a consistent flag to heuristics, and add an assert here based on it
 				search_progress.inc_reopened();
 			}
-			succ_node.reopen(g_from_message, op, succ_state);
+			succ_node.reopen(g_from_message, op, succ_state, participating_agents);
 			heuristics[0]->set_evaluator_value(succ_node.get_h());
 			// TODO: this appears fishy to me. Why is here only heuristic[0]
 			// involved? Is this still feasible in the current version?
@@ -381,7 +389,7 @@ void EagerSearch::receive_messages() {
 		Message* m = g_ma_comm->receiveMessage();
 		if (m->msgType == SEARCH_NODE) {
 			State new_state = State(m);
-			handle_state_from_message(new_state, ((const Operator*) &g_operators[m->creating_op_index]),(int) m->g, (int) m->h );
+			handle_state_from_message(new_state, ((const Operator*) &g_operators[m->creating_op_index]),(int) m->g, (int) m->h, (bool*) m->participating_agents);
 		}
 
 	}

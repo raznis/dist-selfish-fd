@@ -50,7 +50,7 @@ void SearchEngine::search() {
 bool SearchEngine::check_goal_and_set_plan(const State &state) {
 	if (test_goal(state)) {
 		Plan plan;
-		if (g_multiple_goal) {
+		if (g_multiple_goal && false) {	//TODO - this is for testing the participating agents is passed in the messages. Not yet implemented the actual multigoal
 
 			search_space.trace_path(state, plan);
 

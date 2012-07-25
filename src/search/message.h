@@ -35,6 +35,7 @@ struct Message {
 
 	state_var_t* vars; // values for vars
 	int* operator_indices_of_plan;	//this holds the plan (indices of operators in the plan)
+	bool* participating_agents;
 
 private:
 	int varsOffset() const {
@@ -44,7 +45,7 @@ private:
 public:
 	Message();
 	Message(State* new_state, const Operator *creating_op, int g_value, int h_value,
-			unsigned char destination_id, unsigned char mes_type);
+			unsigned char destination_id, unsigned char mes_type, vector<bool> participating);
 	Message(StateProxy &current_state, vector<const Operator *> &path, int target_agent);
 	~Message();
 	void dump() const;
