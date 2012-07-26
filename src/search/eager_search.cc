@@ -92,6 +92,11 @@ void EagerSearch::statistics() const {
 
 int EagerSearch::step() {
 	receive_messages();
+	if (g_num_of_agents_confirming_current_solution == g_num_of_agents - 1) {//current solution confirmed by all other agents
+		cout << "SOLVED!!!" << endl;
+		//TODO - send out termination message so that agents will get ready for the trace back
+		return SOLVED;
+	}
 	pair<SearchNode, bool> n = fetch_next_node();
 	if (!n.second) {
 		return FAILED;
@@ -99,12 +104,45 @@ int EagerSearch::step() {
 	SearchNode node = n.first;
 
 	State s = node.get_state();
-	if (check_goal_and_set_plan(s)){
-		cout << "Found solution with g=" << node.get_g() << ", Participating agents: ";
-		for(int i =0 ; i < g_num_of_agents ; i++)
-			cout << node.get_participating_agents()[i] << ", " ;
-		cout << endl;
-		return SOLVED;
+	if (check_goal_and_set_plan(s)) {
+
+		if (node.get_creating_op()->agent == g_agent_id) {//I own this goal state
+
+			//broadcast solution
+			if (g_g_of_current_solution == -1
+					|| g_g_of_current_solution > node.get_g()) {// this is the first solution I found or this is a better solution than the best one found so far.
+				cout << "Found solution with g=" << node.get_g()
+						<< ", Participating agents: ";
+				for (int i = 0; i < g_num_of_agents; i++)
+					cout << node.get_participating_agents()[i] << ", ";
+				cout << endl;
+				delete (g_current_solution);
+				g_current_solution = new State(s);
+				g_g_of_current_solution = node.get_g();
+				g_num_of_agents_confirming_current_solution = 0;
+				for (int i = 0; i < g_num_of_agents; i++) {
+					Message* m = new Message(&s, node.get_creating_op(),
+							node.get_g(), 0, i, SEARCH_NODE,
+							node.get_participating_agents());
+					g_ma_comm->sendMessage(m);
+				}
+			}
+		} else {	//This goal state was sent to me
+			if (g_g_of_current_solution == -1
+					|| g_g_of_current_solution >= node.get_g()) {// this is the first solution I found or this is a better solution than the best one found so far.
+							//send confirmation message
+				cout << "Sending confirmation of solution to agent "
+						<< node.get_creating_op()->agent << endl;
+				g_g_of_current_solution = node.get_g();
+				Message* m = new Message(&s, node.get_creating_op(),
+						node.get_g(), 0, node.get_creating_op()->agent,
+						SOLUTION_CONFIRMATION, node.get_participating_agents());
+				g_ma_comm->sendMessage(m);
+
+			}
+		}
+		//return SOLVED;
+		return IN_PROGRESS;
 	}
 	//pruning states that are no longer relevant in the search for marginal problems
 	if (g_multiple_goal && !node.is_relevant_for_mariginal_search() && false) {	//TODO- multigoal is not actually implemented yet
@@ -121,8 +159,9 @@ int EagerSearch::step() {
 //	}
 
 	//Sending states created by public actions to relevant agents.
-	if(node.get_creating_op() && node.get_creating_op()->is_public)
-		send_state_to_relevant_agents(node.get_creating_op(), s, node.get_g(), node.get_h(), node.get_participating_agents());
+	if (node.get_creating_op() && node.get_creating_op()->is_public)
+		send_state_to_relevant_agents(node.get_creating_op(), s, node.get_g(),
+				node.get_h(), node.get_participating_agents());
 
 	vector<const Operator *> applicable_ops;
 	set<const Operator *> preferred_ops;
@@ -167,7 +206,7 @@ int EagerSearch::step() {
 }
 
 void EagerSearch::send_state_to_relevant_agents(const Operator* op,
-		State new_state, int g, int h, vector<bool>  participating) {
+		State new_state, int g, int h, vector<bool> participating) {
 	bool* sent_message_to_agent = new bool[g_comm_config.nAgents()];
 	for (int i = 0; i < g_comm_config.nAgents(); i++)
 		sent_message_to_agent[i] = false;
@@ -178,7 +217,8 @@ void EagerSearch::send_state_to_relevant_agents(const Operator* op,
 			continue;
 		//curr_op is public, owned by a different agent, which we did not mark as one to send a message to.
 		if (curr_op.is_applicable_public(new_state)) {
-			Message* m = new Message(&new_state, op, g, h, (int) curr_op.agent, SEARCH_NODE, participating);
+			Message* m = new Message(&new_state, op, g, h, (int) curr_op.agent,
+					SEARCH_NODE, participating);
 			g_ma_comm->sendMessage(m);
 			sent_message_to_agent[curr_op.agent] = true;
 		}
@@ -186,7 +226,6 @@ void EagerSearch::send_state_to_relevant_agents(const Operator* op,
 
 	delete[] sent_message_to_agent;
 }
-
 
 void EagerSearch::handle_state(State succ_state, const Operator *op,
 		set<const Operator *> preferred_ops, SearchNode node, State s) {
@@ -283,12 +322,13 @@ void EagerSearch::handle_state(State succ_state, const Operator *op,
 }
 
 void EagerSearch::handle_state_from_message(State succ_state,
-		const Operator *op, int g_from_message, int h_from_message, bool* participating) {
+		const Operator *op, int g_from_message, int h_from_message,
+		bool* participating) {
 	search_progress.inc_generated();
 	bool is_preferred = true;
 
 	vector<bool> participating_agents;
-	for(int i = 0 ; i < g_num_of_agents ; i++)
+	for (int i = 0; i < g_num_of_agents; i++)
 		participating_agents.push_back(participating[i]);
 
 	SearchNode succ_node = search_space.get_node(succ_state);
@@ -322,8 +362,7 @@ void EagerSearch::handle_state_from_message(State succ_state,
 		// before having checked that we're not in a dead end. The
 		// division of responsibilities is a bit tricky here -- we
 		// may want to refactor this later.
-		open_list->evaluate(g_from_message,
-				is_preferred);
+		open_list->evaluate(g_from_message, is_preferred);
 		bool dead_end = open_list->is_dead_end();
 		if (dead_end) {
 			succ_node.mark_as_dead_end();
@@ -346,7 +385,8 @@ void EagerSearch::handle_state_from_message(State succ_state,
 //				search_progress.inc_pathmax_corrections();
 //			}
 		}
-		succ_node.open(succ_h, g_from_message, op, succ_state, participating_agents);
+		succ_node.open(succ_h, g_from_message, op, succ_state,
+				participating_agents);
 
 		open_list->insert(succ_node.get_state_buffer());
 		if (search_progress.check_h_progress(succ_node.get_g())) {
@@ -367,7 +407,8 @@ void EagerSearch::handle_state_from_message(State succ_state,
 				//TODO:CR - add a consistent flag to heuristics, and add an assert here based on it
 				search_progress.inc_reopened();
 			}
-			succ_node.reopen(g_from_message, op, succ_state, participating_agents);
+			succ_node.reopen(g_from_message, op, succ_state,
+					participating_agents);
 			heuristics[0]->set_evaluator_value(succ_node.get_h());
 			// TODO: this appears fishy to me. Why is here only heuristic[0]
 			// involved? Is this still feasible in the current version?
@@ -387,9 +428,29 @@ void EagerSearch::handle_state_from_message(State succ_state,
 void EagerSearch::receive_messages() {
 	while (!g_ma_comm->noIncomingMessage()) {
 		Message* m = g_ma_comm->receiveMessage();
+		State new_state = State(m);
 		if (m->msgType == SEARCH_NODE) {
-			State new_state = State(m);
-			handle_state_from_message(new_state, ((const Operator*) &g_operators[m->creating_op_index]),(int) m->g, (int) m->h, (bool*) m->participating_agents);
+			handle_state_from_message(new_state,
+					((const Operator*) &g_operators[m->creating_op_index]),
+					(int) m->g, (int) m->h, (bool*) m->participating_agents);
+		} else if (m->msgType == SOLUTION_CONFIRMATION) {
+			if (!g_current_solution) {
+				cout
+						<< "received solution confirmation without having a solution!!!"
+						<< endl;
+			} else {
+				cout
+						<< "received solution confirmation, checking equality with current solution..."
+						<< endl;
+				if (g_current_solution->operator ==(new_state)) {
+					g_num_of_agents_confirming_current_solution++;
+					cout << "received confirmation from agent "
+							<< (int) m->sender_id
+							<< ", number of confirming agents is "
+							<< g_num_of_agents_confirming_current_solution
+							<< endl;
+				}
+			}
 		}
 
 	}
