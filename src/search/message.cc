@@ -43,9 +43,12 @@ Message::Message(State* new_state, const Operator *creating_op, int g_value,
 	operator_indices_of_plan = 0;
 
 	participating_agents = new bool[g_num_of_agents];
-	if (g_multiple_goal) {
-		for (int i = 0; i < g_num_of_agents; i++)
+
+	for (int i = 0; i < g_num_of_agents; i++) {
+		if (g_multiple_goal)
 			participating_agents[i] = participating[i];
+		else
+			participating_agents[i] = true;
 	}
 }
 //TRACE BACK MESSAGE

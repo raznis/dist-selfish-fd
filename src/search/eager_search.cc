@@ -217,10 +217,12 @@ void EagerSearch::send_state_to_relevant_agents(const Operator* op,
 			continue;
 		//curr_op is public, owned by a different agent, which we did not mark as one to send a message to.
 		if (curr_op.is_applicable_public(new_state)) {
+			//cout << "sending message.... ";
 			Message* m = new Message(&new_state, op, g, h, (int) curr_op.agent,
 					SEARCH_NODE, participating);
 			g_ma_comm->sendMessage(m);
 			sent_message_to_agent[curr_op.agent] = true;
+			//cout << "done" << endl;
 		}
 	}
 
@@ -328,9 +330,12 @@ void EagerSearch::handle_state_from_message(State succ_state,
 	bool is_preferred = true;
 
 	vector<bool> participating_agents;
-	for (int i = 0; i < g_num_of_agents; i++)
-		participating_agents.push_back(participating[i]);
-
+	for (int i = 0; i < g_num_of_agents; i++) {
+		if (g_multiple_goal)
+			participating_agents.push_back(participating[i]);
+		else
+			participating_agents.push_back(true);
+	}
 	SearchNode succ_node = search_space.get_node(succ_state);
 
 	// Previously encountered dead end. Don't re-evaluate.
@@ -426,6 +431,7 @@ void EagerSearch::handle_state_from_message(State succ_state,
 }
 
 void EagerSearch::receive_messages() {
+	//cout << "receiving messages...";
 	while (!g_ma_comm->noIncomingMessage()) {
 		Message* m = g_ma_comm->receiveMessage();
 		State new_state = State(m);
@@ -454,6 +460,7 @@ void EagerSearch::receive_messages() {
 		}
 
 	}
+	//cout << "done" << endl;
 }
 
 pair<SearchNode, bool> EagerSearch::fetch_next_node() {

@@ -97,16 +97,21 @@ void SearchNode::open(int h, const SearchNode &parent_node,
 	info.parent_state = parent_node.state_buffer;
 	info.creating_operator = parent_op;
 	info.network_parent = false;
-	if (g_multiple_goal) {
-		for (int i = 0; i < g_num_of_agents; i++)
-			info.participated_agents.push_back(
-					parent_node.info.participated_agents[i]);
+
+	for (int i = 0; i < g_num_of_agents; i++) {
+		if (g_multiple_goal){
+		info.participated_agents.push_back(
+				parent_node.info.participated_agents[i]);
 		info.participated_agents[parent_op->agent] = true;
+		}
+		else
+			info.participated_agents.push_back(true);
 	}
+
 }
 //opening a state from a message
-void SearchNode::open(int h, int g, const Operator *parent_op,
-		State succ_state, vector<bool> participating) {
+void SearchNode::open(int h, int g, const Operator *parent_op, State succ_state,
+		vector<bool> participating) {
 	assert(info.status == SearchNodeInfo::NEW);
 	info.status = SearchNodeInfo::OPEN;
 	info.g = g;
@@ -117,7 +122,7 @@ void SearchNode::open(int h, int g, const Operator *parent_op,
 	info.network_parent = true;
 	//TODO - handle the participating agents!
 	if (g_multiple_goal) {
-//		cout << "MULTIPLE GOAL SEARCH NOT YET IMPLEMENTED!" << endl;
+		//cout << "Here..." << endl;
 		for (int i = 0; i < g_num_of_agents; i++)
 			info.participated_agents[i] = participating[i];
 	}
@@ -145,7 +150,8 @@ void SearchNode::reopen(const SearchNode &parent_node,
 	}
 }
 //reopening a search node from a message
-void SearchNode::reopen(int g, const Operator *parent_op, State state, vector<bool> participating) {
+void SearchNode::reopen(int g, const Operator *parent_op, State state,
+		vector<bool> participating) {
 	info.status = SearchNodeInfo::OPEN;
 	info.g = g;
 	info.real_g = g; //TODO(Raz) - find out the difference, maybe needs to be added to message.
