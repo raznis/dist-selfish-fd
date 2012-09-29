@@ -92,14 +92,26 @@ void EagerSearch::statistics() const {
 
 int EagerSearch::step() {
 	receive_messages();
-	if (g_num_of_agents_confirming_current_solution == g_num_of_agents - 1) {//current solution confirmed by all other agents
+	if(g_received_termination){
+		cout << "Received Termination message!" << endl;
+		return SOLVED;
+	}
+	if (g_num_of_agents_confirming_current_solution == g_num_of_agents - 1 || (g_marginal_search && g_num_of_agents_confirming_current_solution == g_num_of_agents - 2)) {//current solution confirmed by all other agents
 		cout << "SOLVED!!!" << endl;
 		//TODO - send out termination message so that agents will get ready for the trace back
+		for (int i = 0; i < g_num_of_agents; i++) {
+			Message* m = new Message(g_current_solution, 0, g_g_of_current_solution,
+					0, i, TERMINATION, vector<bool>());
+			g_ma_comm->sendMessage(m);
+		}
 		return SOLVED;
 	}
 	pair<SearchNode, bool> n = fetch_next_node();
 	if (!n.second) {
-		return FAILED;
+		//TODO - this is a hack to prevent agents from exiting before messages arrive.
+		//return FAILED;
+		sleep(1);
+		return IN_PROGRESS;
 	}
 	SearchNode node = n.first;
 
@@ -213,7 +225,7 @@ void EagerSearch::send_state_to_relevant_agents(const Operator* op,
 	for (int op_idx = 0; op_idx < g_operators.size(); op_idx++) {
 		Operator curr_op = g_operators[op_idx];
 		if (sent_message_to_agent[curr_op.agent] || !curr_op.is_public
-				|| curr_op.agent == g_agent_id)
+				|| curr_op.agent == g_agent_id || (g_marginal_search && g_marginal_agent == curr_op.agent))
 			continue;
 		//curr_op is public, owned by a different agent, which we did not mark as one to send a message to.
 		if (curr_op.is_applicable_public(new_state)) {
@@ -435,6 +447,8 @@ void EagerSearch::receive_messages() {
 	while (!g_ma_comm->noIncomingMessage()) {
 		Message* m = g_ma_comm->receiveMessage();
 		State new_state = State(m);
+		if(g_marginal_search && m->sender_id == g_marginal_agent)
+			continue;
 		if (m->msgType == SEARCH_NODE) {
 			handle_state_from_message(new_state,
 					((const Operator*) &g_operators[m->creating_op_index]),
@@ -457,6 +471,9 @@ void EagerSearch::receive_messages() {
 							<< endl;
 				}
 			}
+		} else if(m->msgType == TERMINATION){
+			g_received_termination = true;
+			return;
 		}
 
 	}

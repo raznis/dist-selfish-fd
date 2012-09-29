@@ -81,6 +81,7 @@ extern State* g_current_solution;
 extern int g_g_of_current_solution;
 extern int g_num_of_agents_confirming_current_solution;
 extern std::vector<bool> g_agents_confirming_current_solution;
+extern bool g_received_termination;
 void initialize_communication(const char* configFileName);
 void close_connection();
 #endif

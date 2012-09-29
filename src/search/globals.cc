@@ -372,6 +372,7 @@ State* g_current_solution;
 int g_g_of_current_solution = -1;
 int g_num_of_agents_confirming_current_solution = 0;
 vector<bool> g_agents_confirming_current_solution;
+bool g_received_termination = false;
 
 void update_private_public_actions() {
 	//	for (int var = 0; var < g_variable_domain.size(); var++) {
