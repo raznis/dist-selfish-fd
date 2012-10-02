@@ -390,6 +390,9 @@ void update_private_public_actions() {
 			public_actions++;
 		} else {
 			g_operators[op_idx].is_public = false;
+			//assigning 0-cost to private actions not belonging to the agent
+			if (!g_parallel_search && g_operators[op_idx].agent != g_agent_id)
+				g_operators[op_idx].set_cost(0);
 			private_actions++;
 		}
 		//		cout << op_idx << ", "<< g_operators[op_idx].get_name() << ", "
@@ -446,9 +449,6 @@ void partition_by_agent_names(const char* configFileName) {
 			for (int agent_idx = 0; agent_idx < nAgents; agent_idx++) {
 				if (op_name.find(agent_names[agent_idx]) != string::npos) {
 					g_operators[op_idx].agent = agent_ids[agent_idx];
-					//assigning 0-cost to actions not belonging to the agent
-					if(!g_parallel_search && g_operators[op_idx].agent != g_agent_id)
-						g_operators[op_idx].set_cost(0);
 					num_of_associated_ops++;
 					break;
 				}
@@ -486,8 +486,6 @@ void partition_by_agent_names(const char* configFileName) {
 		cout << "Unable to open file" << endl;
 
 }
-
-
 
 bool should_be_connected_in_action_graph(int op1_idx, int op2_idx) {
 	int min = op1_idx > op2_idx ? op2_idx : op1_idx;

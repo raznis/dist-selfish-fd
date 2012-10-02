@@ -110,7 +110,7 @@ int EagerSearch::step() {
 	if (!n.second) {
 		//TODO - this is a hack to prevent agents from exiting before messages arrive.
 		//return FAILED;
-		sleep(1);
+		//sleep(1);
 		return IN_PROGRESS;
 	}
 	SearchNode node = n.first;
@@ -491,7 +491,7 @@ pair<SearchNode, bool> EagerSearch::fetch_next_node() {
 
 	while (true) {
 		if (open_list->empty()) {
-			cout << "Completely explored state space -- no solution!" << endl;
+			//cout << "Completely explored state space -- no solution!" << endl;
 			return make_pair(search_space.get_node(*g_initial_state), false);
 		}
 		vector<int> last_key_removed;
