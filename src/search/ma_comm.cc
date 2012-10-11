@@ -89,8 +89,12 @@ void *senderThreadEntry(void *data) {
 		if (m->msgType == MSG_FIN)
 			fin = true;
 		else {
-			if (comm->m_Sockets[m->dest_id])
+			if (comm->m_Sockets[m->dest_id]){
+				if(g_message_delay && !m->msgType == SOLUTION_CONFIRMATION){
+					usleep((rand() % 10000) * 10);
+				}
 				MAProtocol::sendMsg(comm->m_Sockets[m->dest_id], m);
+			}
 		}
 
 		if (m)
@@ -108,6 +112,7 @@ void MAProtocol::sendMsg(TCPSocket* sock, Message* m) {
 
 	//int size = *((int*)buff) = m->serialize(buff + sizeof(int));
 	sock->send(buff, size + sizeof(int));
+	g_num_of_messages_sent++;
 }
 
 Message* MAProtocol::receiveMsg(TCPSocket *sock) {
@@ -135,7 +140,7 @@ Message* MAProtocol::receiveMsg(TCPSocket *sock) {
 		leftToRead -= rcv;
 		p += rcv;
 	}
-
+	g_num_of_messages_received++;
 	return Message::deserialize(buff);
 }
 
@@ -234,9 +239,8 @@ void MAComm::initiateConnections() {
 		try {
 			string host = m_Config.servers[agent].host;
 			unsigned short port = m_Config.servers[agent].port;
-			cout << "Connecting to agent " << agent << " " << host << ":"
-					<< port << "... " << endl;
-			cout.flush();
+			//cout << "Connecting to agent " << agent << " " << host << ":"	<< port << "... " << endl;
+			//cout.flush();
 			// Establish connection with the remote agent server
 			m_Sockets[agent] = new TCPSocket(host, port);
 

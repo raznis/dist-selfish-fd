@@ -204,6 +204,9 @@ SearchEngine *OptionParser::parse_cmd_line(
         } else if (arg.compare("--parallel") == 0) {
         	g_parallel_search = true;
             cout << "running parallel search " << endl;
+        } else if (arg.compare("--delay") == 0) {
+        	g_message_delay = true;
+            cout << "Delaying messages! " << endl;
         } else if ((arg.compare("--help") == 0) && dry_run) {
             cout << "Help:" << endl;
             if (i + 1 < argc) {

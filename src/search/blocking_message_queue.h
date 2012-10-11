@@ -24,7 +24,7 @@ private:
 	int m_MaxMessages;
 	const char* m_Name;
 public:
-	BlockingMessageQueue(const char* queueName, int maxMessages=1000);
+	BlockingMessageQueue(const char* queueName, int maxMessages=10000);//TODO- changed from 1000
 	void push(MESSAGE m); 	// blocking
 	MESSAGE pop();			// blocking
 	bool empty();

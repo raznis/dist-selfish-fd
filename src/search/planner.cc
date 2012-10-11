@@ -54,6 +54,8 @@ int main(int argc, const char **argv) {
     engine->heuristic_statistics();
     cout << "Search time: " << search_timer << endl;
     cout << "Total time: " << g_timer << endl;
+    cout << "Messages sent: " << g_num_of_messages_sent << endl;
+    cout << "Messages received: " << g_num_of_messages_received << endl;
 
     return engine->found_solution() ? 0 : 1;
 }
