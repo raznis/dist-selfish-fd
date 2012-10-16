@@ -264,7 +264,7 @@ void MAComm::initiateConnections() {
 				delete m_Sockets[agent];
 				m_Sockets[agent] = NULL;
 			}
-			cerr << e.what() << endl;
+			//cerr << e.what() << endl;
 			//exit(1);
 			continue;
 		}
