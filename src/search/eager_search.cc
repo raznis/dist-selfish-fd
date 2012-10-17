@@ -141,7 +141,7 @@ int EagerSearch::step() {
 			}
 		} else {	//This goal state was sent to me
 			if (g_g_of_current_solution == -1
-					|| g_g_of_current_solution >= node.get_g()) {// this is the first solution I found or this is a better solution than the best one found so far.
+					|| g_g_of_current_solution >= node.get_g()) {// this is the first solution I found or this is a better or equal solution than the best one found so far.
 							//send confirmation message
 				cout << "Sending confirmation of solution to agent "
 						<< node.get_creating_op()->agent << endl;
@@ -436,8 +436,9 @@ void EagerSearch::handle_state_from_message(State succ_state,
 			// if we do not reopen closed nodes, we just update the parent pointers
 			// Note that this could cause an incompatibility between
 			// the g-value and the actual path that is traced back
-			cout << "SHOULD ALWAYS REOPEN CLOSED NODES IN MA-A*!" << endl;
-//			succ_node.update_parent(node, op);
+			//cout << "SHOULD ALWAYS REOPEN CLOSED NODES IN MA-A*!" << endl;
+			//succ_node.update_parent(node, op);
+			//TODO - For non-optimal implementation, should call update_parent in order to have trace_back work correctly.
 		}
 	}
 }
