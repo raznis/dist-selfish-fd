@@ -229,7 +229,7 @@ void MAComm::waitForConnections() {
 			}
 		}
 	} catch (SocketException &e) {
-		//cerr << e.what() << endl;
+		cerr << e.what() << endl;
 		exit(1);
 	}
 }
