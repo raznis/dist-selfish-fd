@@ -37,10 +37,11 @@ int main(int argc, const char **argv) {
     }
 
     if(g_agents_search){
-    	partition_by_agent_names("agents");
+    //	partition_by_agent_names("agents");
     	initialize_communication("comm");
     }
-    else if(g_symmetry_pruning)
+    else
+    if(g_symmetry_pruning)
     	perform_optimal_partition();
 
     Timer search_timer;

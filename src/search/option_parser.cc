@@ -190,6 +190,9 @@ SearchEngine *OptionParser::parse_cmd_line(
         	g_agent_id = atoi(argv[i + 1]);
         	i++;
             cout << "running search for selfish agents, agent id is " << g_agent_id << endl;
+            //TODO - moved these two here from planner.cc because M&S calculates during parsing
+            partition_by_agent_names("agents");
+//            initialize_communication("comm");
         } else if (arg.compare("--marginal") == 0) {
         	g_marginal_search = true;
         	g_marginal_agent = atoi(argv[i + 1]);

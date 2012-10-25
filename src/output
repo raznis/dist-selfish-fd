@@ -4,343 +4,156 @@ end_version
 begin_metric
 0
 end_metric
-38
-begin_variable
-var3
--1
-10
-Atom at(rover3, waypoint0)
-Atom at(rover3, waypoint1)
-Atom at(rover3, waypoint2)
-Atom at(rover3, waypoint3)
-Atom at(rover3, waypoint4)
-Atom at(rover3, waypoint5)
-Atom at(rover3, waypoint6)
-Atom at(rover3, waypoint7)
-Atom at(rover3, waypoint8)
-Atom at(rover3, waypoint9)
-end_variable
-begin_variable
-var13
--1
-2
-Atom calibrated(camera0, rover3)
-<none of those>
-end_variable
-begin_variable
-var62
--1
-2
-Atom have_image(rover3, objective2, low_res)
-<none of those>
-end_variable
-begin_variable
-var58
--1
-2
-Atom have_image(rover3, objective0, low_res)
-<none of those>
-end_variable
-begin_variable
-var57
--1
-2
-Atom have_image(rover3, objective0, colour)
-<none of those>
-end_variable
-begin_variable
-var2
--1
-9
-Atom at(rover2, waypoint0)
-Atom at(rover2, waypoint1)
-Atom at(rover2, waypoint2)
-Atom at(rover2, waypoint3)
-Atom at(rover2, waypoint4)
-Atom at(rover2, waypoint5)
-Atom at(rover2, waypoint6)
-Atom at(rover2, waypoint8)
-Atom at(rover2, waypoint9)
-end_variable
-begin_variable
-var14
--1
-2
-Atom calibrated(camera1, rover2)
-<none of those>
-end_variable
-begin_variable
-var53
--1
-2
-Atom have_image(rover2, objective0, colour)
-<none of those>
-end_variable
-begin_variable
-var1
--1
-10
-Atom at(rover1, waypoint0)
-Atom at(rover1, waypoint1)
-Atom at(rover1, waypoint2)
-Atom at(rover1, waypoint3)
-Atom at(rover1, waypoint4)
-Atom at(rover1, waypoint5)
-Atom at(rover1, waypoint6)
-Atom at(rover1, waypoint7)
-Atom at(rover1, waypoint8)
-Atom at(rover1, waypoint9)
-end_variable
-begin_variable
-var16
--1
-2
-Atom calibrated(camera3, rover1)
-<none of those>
-end_variable
-begin_variable
-var45
--1
-2
-Atom have_image(rover1, objective0, colour)
-<none of those>
-end_variable
-begin_variable
-var15
--1
-2
-Atom calibrated(camera2, rover1)
-<none of those>
-end_variable
-begin_variable
-var50
--1
-2
-Atom have_image(rover1, objective2, low_res)
-<none of those>
-end_variable
-begin_variable
-var46
--1
-2
-Atom have_image(rover1, objective0, low_res)
-<none of those>
-end_variable
-begin_variable
-var0
--1
-10
-Atom at(rover0, waypoint0)
-Atom at(rover0, waypoint1)
-Atom at(rover0, waypoint2)
-Atom at(rover0, waypoint3)
-Atom at(rover0, waypoint4)
-Atom at(rover0, waypoint5)
-Atom at(rover0, waypoint6)
-Atom at(rover0, waypoint7)
-Atom at(rover0, waypoint8)
-Atom at(rover0, waypoint9)
-end_variable
-begin_variable
-var17
--1
-2
-Atom calibrated(camera4, rover0)
-<none of those>
-end_variable
-begin_variable
-var42
--1
-2
-Atom have_image(rover0, objective2, low_res)
-<none of those>
-end_variable
-begin_variable
-var23
--1
-2
-Atom communicated_image_data(objective2, low_res)
-<none of those>
-end_variable
+17
 begin_variable
 var38
 -1
 2
-Atom have_image(rover0, objective0, low_res)
+Atom power_on(instrument1)
 <none of those>
 end_variable
 begin_variable
-var19
+var39
 -1
 2
-Atom communicated_image_data(objective0, low_res)
+Atom power_on(instrument2)
+<none of those>
+end_variable
+begin_variable
+var36
+-1
+2
+Atom power_avail(satellite1)
+<none of those>
+end_variable
+begin_variable
+var35
+-1
+2
+Atom power_avail(satellite0)
 <none of those>
 end_variable
 begin_variable
 var37
 -1
 2
-Atom have_image(rover0, objective0, colour)
+Atom power_on(instrument0)
 <none of those>
 end_variable
 begin_variable
-var18
+var34
 -1
-2
-Atom communicated_image_data(objective0, colour)
-<none of those>
-end_variable
-begin_variable
-var4
--1
-2
-Atom at_rock_sample(waypoint1)
-Atom have_rock_analysis(rover1, waypoint1)
-end_variable
-begin_variable
-var5
--1
-2
-Atom at_rock_sample(waypoint3)
-Atom have_rock_analysis(rover1, waypoint3)
-end_variable
-begin_variable
-var6
--1
-2
-Atom at_rock_sample(waypoint4)
-Atom have_rock_analysis(rover1, waypoint4)
-end_variable
-begin_variable
-var7
--1
-2
-Atom at_rock_sample(waypoint5)
-Atom have_rock_analysis(rover1, waypoint5)
-end_variable
-begin_variable
-var8
--1
-2
-Atom at_rock_sample(waypoint8)
-Atom have_rock_analysis(rover1, waypoint8)
-end_variable
-begin_variable
-var9
--1
-3
-Atom at_soil_sample(waypoint3)
-Atom have_soil_analysis(rover0, waypoint3)
-Atom have_soil_analysis(rover1, waypoint3)
-end_variable
-begin_variable
-var10
--1
-3
-Atom at_soil_sample(waypoint4)
-Atom have_soil_analysis(rover0, waypoint4)
-Atom have_soil_analysis(rover1, waypoint4)
-end_variable
-begin_variable
-var11
--1
-3
-Atom at_soil_sample(waypoint6)
-Atom have_soil_analysis(rover0, waypoint6)
-Atom have_soil_analysis(rover1, waypoint6)
-end_variable
-begin_variable
-var35
--1
-2
-Atom empty(rover0store)
-Atom full(rover0store)
-end_variable
-begin_variable
-var36
--1
-2
-Atom empty(rover1store)
-Atom full(rover1store)
-end_variable
-begin_variable
-var12
--1
-3
-Atom at_soil_sample(waypoint9)
-Atom have_soil_analysis(rover0, waypoint9)
-Atom have_soil_analysis(rover1, waypoint9)
+10
+Atom pointing(satellite1, groundstation1)
+Atom pointing(satellite1, phenomenon8)
+Atom pointing(satellite1, phenomenon9)
+Atom pointing(satellite1, planet3)
+Atom pointing(satellite1, planet5)
+Atom pointing(satellite1, star0)
+Atom pointing(satellite1, star2)
+Atom pointing(satellite1, star4)
+Atom pointing(satellite1, star6)
+Atom pointing(satellite1, star7)
 end_variable
 begin_variable
 var33
 -1
+10
+Atom pointing(satellite0, groundstation1)
+Atom pointing(satellite0, phenomenon8)
+Atom pointing(satellite0, phenomenon9)
+Atom pointing(satellite0, planet3)
+Atom pointing(satellite0, planet5)
+Atom pointing(satellite0, star0)
+Atom pointing(satellite0, star2)
+Atom pointing(satellite0, star4)
+Atom pointing(satellite0, star6)
+Atom pointing(satellite0, star7)
+end_variable
+begin_variable
+var2
+-1
 2
-Atom communicated_soil_data(waypoint6)
+Atom calibrated(instrument2)
 <none of those>
 end_variable
 begin_variable
-var30
+var1
 -1
 2
-Atom communicated_rock_data(waypoint8)
-<none of those>
-end_variable
-begin_variable
-var29
--1
-2
-Atom communicated_rock_data(waypoint5)
+Atom calibrated(instrument1)
 <none of those>
 end_variable
 begin_variable
 var28
 -1
 2
-Atom communicated_rock_data(waypoint4)
+Atom have_image(star6, infrared1)
 <none of those>
 end_variable
 begin_variable
-var31
+var25
 -1
 2
-Atom communicated_soil_data(waypoint3)
+Atom have_image(star4, infrared1)
+<none of those>
+end_variable
+begin_variable
+var13
+-1
+2
+Atom have_image(planet3, infrared1)
+<none of those>
+end_variable
+begin_variable
+var0
+-1
+2
+Atom calibrated(instrument0)
+<none of those>
+end_variable
+begin_variable
+var30
+-1
+2
+Atom have_image(star7, infrared0)
+<none of those>
+end_variable
+begin_variable
+var17
+-1
+2
+Atom have_image(planet5, thermograph2)
+<none of those>
+end_variable
+begin_variable
+var9
+-1
+2
+Atom have_image(phenomenon9, infrared0)
+<none of those>
+end_variable
+begin_variable
+var8
+-1
+2
+Atom have_image(phenomenon8, thermograph2)
 <none of those>
 end_variable
 0
 begin_state
-2
-1
-1
-1
-1
-0
-1
-1
-4
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
 1
 1
 0
 0
-0
-0
-0
-0
-0
-0
-0
-0
-0
+1
+5
+8
+1
+1
+1
+1
+1
 1
 1
 1
@@ -349,3586 +162,1706 @@ begin_state
 end_state
 begin_goal
 8
-17 0
-19 0
-21 0
-33 0
-34 0
-35 0
-36 0
-37 0
-end_goal
-429
-begin_operator
-calibrate rover0 camera4 objective3 waypoint0
-1
-14 0
-1
-0 15 -1 0
-0
-end_operator
-begin_operator
-calibrate rover0 camera4 objective3 waypoint1
-1
-14 1
-1
-0 15 -1 0
-0
-end_operator
-begin_operator
-calibrate rover0 camera4 objective3 waypoint2
-1
-14 2
-1
-0 15 -1 0
-0
-end_operator
-begin_operator
-calibrate rover0 camera4 objective3 waypoint3
-1
-14 3
-1
-0 15 -1 0
-0
-end_operator
-begin_operator
-calibrate rover0 camera4 objective3 waypoint4
-1
-14 4
-1
-0 15 -1 0
-0
-end_operator
-begin_operator
-calibrate rover0 camera4 objective3 waypoint5
-1
-14 5
-1
-0 15 -1 0
-0
-end_operator
-begin_operator
-calibrate rover0 camera4 objective3 waypoint6
-1
-14 6
-1
-0 15 -1 0
-0
-end_operator
-begin_operator
-calibrate rover1 camera2 objective3 waypoint0
-1
-8 0
-1
-0 11 -1 0
-0
-end_operator
-begin_operator
-calibrate rover1 camera2 objective3 waypoint1
-1
-8 1
-1
-0 11 -1 0
-0
-end_operator
-begin_operator
-calibrate rover1 camera2 objective3 waypoint2
-1
-8 2
-1
-0 11 -1 0
-0
-end_operator
-begin_operator
-calibrate rover1 camera2 objective3 waypoint3
-1
-8 3
-1
-0 11 -1 0
-0
-end_operator
-begin_operator
-calibrate rover1 camera2 objective3 waypoint4
-1
-8 4
-1
-0 11 -1 0
-0
-end_operator
-begin_operator
-calibrate rover1 camera2 objective3 waypoint5
-1
-8 5
-1
-0 11 -1 0
-0
-end_operator
-begin_operator
-calibrate rover1 camera2 objective3 waypoint6
-1
-8 6
-1
-0 11 -1 0
-0
-end_operator
-begin_operator
-calibrate rover1 camera3 objective0 waypoint0
-1
-8 0
-1
-0 9 -1 0
-0
-end_operator
-begin_operator
-calibrate rover1 camera3 objective0 waypoint1
-1
-8 1
-1
-0 9 -1 0
-0
-end_operator
-begin_operator
-calibrate rover1 camera3 objective0 waypoint2
-1
-8 2
-1
-0 9 -1 0
-0
-end_operator
-begin_operator
-calibrate rover1 camera3 objective0 waypoint3
-1
-8 3
-1
-0 9 -1 0
-0
-end_operator
-begin_operator
-calibrate rover1 camera3 objective0 waypoint4
-1
-8 4
-1
-0 9 -1 0
-0
-end_operator
-begin_operator
-calibrate rover1 camera3 objective0 waypoint5
-1
-8 5
-1
-0 9 -1 0
-0
-end_operator
-begin_operator
-calibrate rover1 camera3 objective0 waypoint6
-1
-8 6
-1
-0 9 -1 0
-0
-end_operator
-begin_operator
-calibrate rover2 camera1 objective3 waypoint0
-1
-5 0
-1
-0 6 -1 0
-0
-end_operator
-begin_operator
-calibrate rover2 camera1 objective3 waypoint1
-1
-5 1
-1
-0 6 -1 0
-0
-end_operator
-begin_operator
-calibrate rover2 camera1 objective3 waypoint2
-1
-5 2
-1
-0 6 -1 0
-0
-end_operator
-begin_operator
-calibrate rover2 camera1 objective3 waypoint3
-1
-5 3
-1
-0 6 -1 0
-0
-end_operator
-begin_operator
-calibrate rover2 camera1 objective3 waypoint4
-1
 5 4
+9 0
+10 0
+11 0
+13 0
+14 0
+15 0
+16 0
+end_goal
+205
+begin_operator
+calibrate satellite0 instrument0 star0
+2
+6 5
+4 0
 1
-0 6 -1 0
+0 12 -1 0
 0
 end_operator
 begin_operator
-calibrate rover2 camera1 objective3 waypoint5
-1
-5 5
-1
-0 6 -1 0
-0
-end_operator
-begin_operator
-calibrate rover2 camera1 objective3 waypoint6
-1
+calibrate satellite1 instrument1 star2
+2
 5 6
-1
-0 6 -1 0
-0
-end_operator
-begin_operator
-calibrate rover3 camera0 objective2 waypoint0
-1
 0 0
 1
+0 8 -1 0
+0
+end_operator
+begin_operator
+calibrate satellite1 instrument2 star2
+2
+5 6
+1 0
+1
+0 7 -1 0
+0
+end_operator
+begin_operator
+switch_off instrument0 satellite0
+0
+2
+0 3 -1 0
+0 4 0 1
+0
+end_operator
+begin_operator
+switch_off instrument1 satellite1
+0
+2
+0 2 -1 0
+0 0 0 1
+0
+end_operator
+begin_operator
+switch_off instrument2 satellite1
+0
+2
+0 2 -1 0
+0 1 0 1
+0
+end_operator
+begin_operator
+switch_on instrument0 satellite0
+0
+3
+0 12 -1 1
+0 3 0 1
+0 4 -1 0
+0
+end_operator
+begin_operator
+switch_on instrument1 satellite1
+0
+3
+0 8 -1 1
+0 2 0 1
+0 0 -1 0
+0
+end_operator
+begin_operator
+switch_on instrument2 satellite1
+0
+3
+0 7 -1 1
+0 2 0 1
 0 1 -1 0
 0
 end_operator
 begin_operator
-calibrate rover3 camera0 objective2 waypoint1
-1
-0 1
-1
-0 1 -1 0
-0
-end_operator
-begin_operator
-calibrate rover3 camera0 objective2 waypoint2
-1
-0 2
-1
-0 1 -1 0
-0
-end_operator
-begin_operator
-calibrate rover3 camera0 objective2 waypoint3
-1
-0 3
-1
-0 1 -1 0
-0
-end_operator
-begin_operator
-calibrate rover3 camera0 objective2 waypoint4
-1
-0 4
-1
-0 1 -1 0
-0
-end_operator
-begin_operator
-calibrate rover3 camera0 objective2 waypoint5
-1
-0 5
-1
-0 1 -1 0
-0
-end_operator
-begin_operator
-calibrate rover3 camera0 objective2 waypoint6
-1
-0 6
-1
-0 1 -1 0
-0
-end_operator
-begin_operator
-calibrate rover3 camera0 objective2 waypoint7
-1
-0 7
-1
-0 1 -1 0
-0
-end_operator
-begin_operator
-calibrate rover3 camera0 objective2 waypoint8
-1
-0 8
-1
-0 1 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover0 general objective0 colour waypoint1 waypoint7
-2
-14 1
-20 0
-1
-0 21 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover0 general objective0 colour waypoint3 waypoint7
-2
-14 3
-20 0
-1
-0 21 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover0 general objective0 colour waypoint5 waypoint7
-2
-14 5
-20 0
-1
-0 21 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover0 general objective0 colour waypoint8 waypoint7
-2
-14 8
-20 0
-1
-0 21 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover0 general objective0 low_res waypoint1 waypoint7
-2
-14 1
-18 0
-1
-0 19 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover0 general objective0 low_res waypoint3 waypoint7
-2
-14 3
-18 0
-1
-0 19 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover0 general objective0 low_res waypoint5 waypoint7
-2
-14 5
-18 0
-1
-0 19 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover0 general objective0 low_res waypoint8 waypoint7
-2
-14 8
-18 0
-1
-0 19 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover0 general objective2 low_res waypoint1 waypoint7
-2
-14 1
-16 0
-1
-0 17 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover0 general objective2 low_res waypoint3 waypoint7
-2
-14 3
-16 0
-1
-0 17 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover0 general objective2 low_res waypoint5 waypoint7
-2
-14 5
-16 0
-1
-0 17 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover0 general objective2 low_res waypoint8 waypoint7
-2
-14 8
-16 0
-1
-0 17 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover1 general objective0 colour waypoint1 waypoint7
-2
-8 1
-10 0
-1
-0 21 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover1 general objective0 colour waypoint3 waypoint7
-2
-8 3
-10 0
-1
-0 21 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover1 general objective0 colour waypoint5 waypoint7
-2
-8 5
-10 0
-1
-0 21 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover1 general objective0 colour waypoint8 waypoint7
-2
-8 8
-10 0
-1
-0 21 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover1 general objective0 low_res waypoint1 waypoint7
-2
-8 1
-13 0
-1
-0 19 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover1 general objective0 low_res waypoint3 waypoint7
-2
-8 3
-13 0
-1
-0 19 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover1 general objective0 low_res waypoint5 waypoint7
-2
-8 5
-13 0
-1
-0 19 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover1 general objective0 low_res waypoint8 waypoint7
-2
-8 8
-13 0
-1
-0 19 -1 0
-0
-end_operator
-begin_operator
-communicate_image_data rover1 general objective2 low_res waypoint1 waypoint7
-2
-8 1
+take_image satellite0 phenomenon8 instrument0 thermograph2
+3
 12 0
+6 1
+4 0
 1
-0 17 -1 0
+0 16 -1 0
 0
 end_operator
 begin_operator
-communicate_image_data rover1 general objective2 low_res waypoint3 waypoint7
-2
-8 3
+take_image satellite0 phenomenon9 instrument0 infrared0
+3
 12 0
+6 2
+4 0
 1
-0 17 -1 0
+0 15 -1 0
 0
 end_operator
 begin_operator
-communicate_image_data rover1 general objective2 low_res waypoint5 waypoint7
-2
-8 5
+take_image satellite0 planet5 instrument0 thermograph2
+3
 12 0
+6 4
+4 0
 1
-0 17 -1 0
+0 14 -1 0
 0
 end_operator
 begin_operator
-communicate_image_data rover1 general objective2 low_res waypoint8 waypoint7
-2
-8 8
+take_image satellite0 star7 instrument0 infrared0
+3
 12 0
+6 9
+4 0
 1
-0 17 -1 0
+0 13 -1 0
 0
 end_operator
 begin_operator
-communicate_image_data rover2 general objective0 colour waypoint1 waypoint7
-2
+take_image satellite1 phenomenon8 instrument1 thermograph2
+3
+8 0
 5 1
-7 0
+0 0
 1
-0 21 -1 0
+0 16 -1 0
 0
 end_operator
 begin_operator
-communicate_image_data rover2 general objective0 colour waypoint3 waypoint7
-2
+take_image satellite1 phenomenon8 instrument2 thermograph2
+3
+7 0
+5 1
+1 0
+1
+0 16 -1 0
+0
+end_operator
+begin_operator
+take_image satellite1 phenomenon9 instrument1 infrared0
+3
+8 0
+5 2
+0 0
+1
+0 15 -1 0
+0
+end_operator
+begin_operator
+take_image satellite1 planet3 instrument1 infrared1
+3
+8 0
 5 3
-7 0
+0 0
 1
-0 21 -1 0
+0 11 -1 0
 0
 end_operator
 begin_operator
-communicate_image_data rover2 general objective0 colour waypoint5 waypoint7
-2
-5 5
+take_image satellite1 planet3 instrument2 infrared1
+3
 7 0
+5 3
+1 0
 1
-0 21 -1 0
+0 11 -1 0
 0
 end_operator
 begin_operator
-communicate_image_data rover2 general objective0 colour waypoint8 waypoint7
-2
+take_image satellite1 planet5 instrument1 thermograph2
+3
+8 0
+5 4
+0 0
+1
+0 14 -1 0
+0
+end_operator
+begin_operator
+take_image satellite1 planet5 instrument2 thermograph2
+3
+7 0
+5 4
+1 0
+1
+0 14 -1 0
+0
+end_operator
+begin_operator
+take_image satellite1 star4 instrument1 infrared1
+3
+8 0
 5 7
+0 0
+1
+0 10 -1 0
+0
+end_operator
+begin_operator
+take_image satellite1 star4 instrument2 infrared1
+3
 7 0
+5 7
+1 0
 1
-0 21 -1 0
+0 10 -1 0
 0
 end_operator
 begin_operator
-communicate_image_data rover3 general objective0 colour waypoint1 waypoint7
-2
-0 1
-4 0
+take_image satellite1 star6 instrument1 infrared1
+3
+8 0
+5 8
+0 0
 1
-0 21 -1 0
+0 9 -1 0
 0
 end_operator
 begin_operator
-communicate_image_data rover3 general objective0 colour waypoint3 waypoint7
-2
-0 3
-4 0
+take_image satellite1 star6 instrument2 infrared1
+3
+7 0
+5 8
+1 0
 1
-0 21 -1 0
+0 9 -1 0
 0
 end_operator
 begin_operator
-communicate_image_data rover3 general objective0 colour waypoint5 waypoint7
-2
-0 5
-4 0
+take_image satellite1 star7 instrument1 infrared0
+3
+8 0
+5 9
+0 0
 1
-0 21 -1 0
+0 13 -1 0
 0
 end_operator
 begin_operator
-communicate_image_data rover3 general objective0 colour waypoint8 waypoint7
-2
-0 8
-4 0
+turn_to satellite0 groundstation1 phenomenon8
+0
+1
+0 6 1 0
+0
+end_operator
+begin_operator
+turn_to satellite0 groundstation1 phenomenon9
+0
+1
+0 6 2 0
+0
+end_operator
+begin_operator
+turn_to satellite0 groundstation1 planet3
+0
+1
+0 6 3 0
+0
+end_operator
+begin_operator
+turn_to satellite0 groundstation1 planet5
+0
+1
+0 6 4 0
+0
+end_operator
+begin_operator
+turn_to satellite0 groundstation1 star0
+0
+1
+0 6 5 0
+0
+end_operator
+begin_operator
+turn_to satellite0 groundstation1 star2
+0
+1
+0 6 6 0
+0
+end_operator
+begin_operator
+turn_to satellite0 groundstation1 star4
+0
+1
+0 6 7 0
+0
+end_operator
+begin_operator
+turn_to satellite0 groundstation1 star6
+0
+1
+0 6 8 0
+0
+end_operator
+begin_operator
+turn_to satellite0 groundstation1 star7
+0
+1
+0 6 9 0
+0
+end_operator
+begin_operator
+turn_to satellite0 phenomenon8 groundstation1
+0
 1
-0 21 -1 0
+0 6 0 1
 0
 end_operator
 begin_operator
-communicate_image_data rover3 general objective0 low_res waypoint1 waypoint7
-2
-0 1
-3 0
+turn_to satellite0 phenomenon8 phenomenon9
+0
+1
+0 6 2 1
+0
+end_operator
+begin_operator
+turn_to satellite0 phenomenon8 planet3
+0
+1
+0 6 3 1
+0
+end_operator
+begin_operator
+turn_to satellite0 phenomenon8 planet5
+0
 1
-0 19 -1 0
+0 6 4 1
 0
 end_operator
 begin_operator
-communicate_image_data rover3 general objective0 low_res waypoint3 waypoint7
-2
-0 3
-3 0
+turn_to satellite0 phenomenon8 star0
+0
 1
-0 19 -1 0
+0 6 5 1
 0
 end_operator
 begin_operator
-communicate_image_data rover3 general objective0 low_res waypoint5 waypoint7
-2
-0 5
-3 0
+turn_to satellite0 phenomenon8 star2
+0
 1
-0 19 -1 0
+0 6 6 1
 0
 end_operator
 begin_operator
-communicate_image_data rover3 general objective0 low_res waypoint8 waypoint7
-2
-0 8
-3 0
+turn_to satellite0 phenomenon8 star4
+0
 1
-0 19 -1 0
+0 6 7 1
 0
 end_operator
 begin_operator
-communicate_image_data rover3 general objective2 low_res waypoint1 waypoint7
-2
-0 1
-2 0
+turn_to satellite0 phenomenon8 star6
+0
 1
-0 17 -1 0
+0 6 8 1
 0
 end_operator
 begin_operator
-communicate_image_data rover3 general objective2 low_res waypoint3 waypoint7
-2
-0 3
-2 0
+turn_to satellite0 phenomenon8 star7
+0
 1
-0 17 -1 0
+0 6 9 1
 0
 end_operator
 begin_operator
-communicate_image_data rover3 general objective2 low_res waypoint5 waypoint7
-2
-0 5
-2 0
+turn_to satellite0 phenomenon9 groundstation1
+0
 1
-0 17 -1 0
+0 6 0 2
 0
 end_operator
 begin_operator
-communicate_image_data rover3 general objective2 low_res waypoint8 waypoint7
-2
-0 8
-2 0
+turn_to satellite0 phenomenon9 phenomenon8
+0
 1
-0 17 -1 0
+0 6 1 2
 0
 end_operator
 begin_operator
-communicate_rock_data rover1 general waypoint4 waypoint1 waypoint7
-2
-8 1
-24 1
+turn_to satellite0 phenomenon9 planet3
+0
 1
-0 36 -1 0
+0 6 3 2
 0
 end_operator
 begin_operator
-communicate_rock_data rover1 general waypoint4 waypoint3 waypoint7
-2
-8 3
-24 1
+turn_to satellite0 phenomenon9 planet5
+0
 1
-0 36 -1 0
+0 6 4 2
 0
 end_operator
 begin_operator
-communicate_rock_data rover1 general waypoint4 waypoint5 waypoint7
-2
-8 5
-24 1
+turn_to satellite0 phenomenon9 star0
+0
 1
-0 36 -1 0
+0 6 5 2
 0
 end_operator
 begin_operator
-communicate_rock_data rover1 general waypoint4 waypoint8 waypoint7
-2
-8 8
-24 1
+turn_to satellite0 phenomenon9 star2
+0
 1
-0 36 -1 0
+0 6 6 2
 0
 end_operator
 begin_operator
-communicate_rock_data rover1 general waypoint5 waypoint1 waypoint7
-2
-8 1
-25 1
+turn_to satellite0 phenomenon9 star4
+0
 1
-0 35 -1 0
+0 6 7 2
 0
 end_operator
 begin_operator
-communicate_rock_data rover1 general waypoint5 waypoint3 waypoint7
-2
-8 3
-25 1
+turn_to satellite0 phenomenon9 star6
+0
 1
-0 35 -1 0
+0 6 8 2
 0
 end_operator
 begin_operator
-communicate_rock_data rover1 general waypoint5 waypoint5 waypoint7
-2
-8 5
-25 1
+turn_to satellite0 phenomenon9 star7
+0
 1
-0 35 -1 0
+0 6 9 2
 0
 end_operator
 begin_operator
-communicate_rock_data rover1 general waypoint5 waypoint8 waypoint7
-2
-8 8
-25 1
+turn_to satellite0 planet3 groundstation1
+0
 1
-0 35 -1 0
+0 6 0 3
 0
 end_operator
 begin_operator
-communicate_rock_data rover1 general waypoint8 waypoint1 waypoint7
-2
-8 1
-26 1
+turn_to satellite0 planet3 phenomenon8
+0
 1
-0 34 -1 0
+0 6 1 3
 0
 end_operator
 begin_operator
-communicate_rock_data rover1 general waypoint8 waypoint3 waypoint7
-2
-8 3
-26 1
+turn_to satellite0 planet3 phenomenon9
+0
 1
-0 34 -1 0
+0 6 2 3
 0
 end_operator
 begin_operator
-communicate_rock_data rover1 general waypoint8 waypoint5 waypoint7
-2
-8 5
-26 1
+turn_to satellite0 planet3 planet5
+0
 1
-0 34 -1 0
+0 6 4 3
 0
 end_operator
 begin_operator
-communicate_rock_data rover1 general waypoint8 waypoint8 waypoint7
-2
-8 8
-26 1
+turn_to satellite0 planet3 star0
+0
 1
-0 34 -1 0
+0 6 5 3
 0
 end_operator
 begin_operator
-communicate_soil_data rover0 general waypoint3 waypoint1 waypoint7
-2
-14 1
-27 1
+turn_to satellite0 planet3 star2
+0
 1
-0 37 -1 0
+0 6 6 3
 0
 end_operator
 begin_operator
-communicate_soil_data rover0 general waypoint3 waypoint3 waypoint7
-2
-14 3
-27 1
+turn_to satellite0 planet3 star4
+0
 1
-0 37 -1 0
+0 6 7 3
 0
 end_operator
 begin_operator
-communicate_soil_data rover0 general waypoint3 waypoint5 waypoint7
-2
-14 5
-27 1
+turn_to satellite0 planet3 star6
+0
 1
-0 37 -1 0
+0 6 8 3
 0
 end_operator
 begin_operator
-communicate_soil_data rover0 general waypoint3 waypoint8 waypoint7
-2
-14 8
-27 1
+turn_to satellite0 planet3 star7
+0
 1
-0 37 -1 0
+0 6 9 3
 0
 end_operator
 begin_operator
-communicate_soil_data rover0 general waypoint6 waypoint1 waypoint7
-2
-14 1
-29 1
+turn_to satellite0 planet5 groundstation1
+0
 1
-0 33 -1 0
+0 6 0 4
 0
 end_operator
 begin_operator
-communicate_soil_data rover0 general waypoint6 waypoint3 waypoint7
-2
-14 3
-29 1
+turn_to satellite0 planet5 phenomenon8
+0
 1
-0 33 -1 0
+0 6 1 4
 0
 end_operator
 begin_operator
-communicate_soil_data rover0 general waypoint6 waypoint5 waypoint7
-2
-14 5
-29 1
+turn_to satellite0 planet5 phenomenon9
+0
 1
-0 33 -1 0
+0 6 2 4
 0
 end_operator
 begin_operator
-communicate_soil_data rover0 general waypoint6 waypoint8 waypoint7
-2
-14 8
-29 1
+turn_to satellite0 planet5 planet3
+0
 1
-0 33 -1 0
+0 6 3 4
 0
 end_operator
 begin_operator
-communicate_soil_data rover1 general waypoint3 waypoint1 waypoint7
-2
-8 1
-27 2
+turn_to satellite0 planet5 star0
+0
 1
-0 37 -1 0
+0 6 5 4
 0
 end_operator
 begin_operator
-communicate_soil_data rover1 general waypoint3 waypoint3 waypoint7
-2
-8 3
-27 2
+turn_to satellite0 planet5 star2
+0
 1
-0 37 -1 0
+0 6 6 4
 0
 end_operator
 begin_operator
-communicate_soil_data rover1 general waypoint3 waypoint5 waypoint7
-2
-8 5
-27 2
+turn_to satellite0 planet5 star4
+0
 1
-0 37 -1 0
+0 6 7 4
 0
 end_operator
 begin_operator
-communicate_soil_data rover1 general waypoint3 waypoint8 waypoint7
-2
-8 8
-27 2
+turn_to satellite0 planet5 star6
+0
 1
-0 37 -1 0
+0 6 8 4
 0
 end_operator
 begin_operator
-communicate_soil_data rover1 general waypoint6 waypoint1 waypoint7
-2
-8 1
-29 2
+turn_to satellite0 planet5 star7
+0
 1
-0 33 -1 0
+0 6 9 4
 0
 end_operator
 begin_operator
-communicate_soil_data rover1 general waypoint6 waypoint3 waypoint7
-2
-8 3
-29 2
+turn_to satellite0 star0 groundstation1
+0
 1
-0 33 -1 0
+0 6 0 5
 0
 end_operator
 begin_operator
-communicate_soil_data rover1 general waypoint6 waypoint5 waypoint7
-2
-8 5
-29 2
+turn_to satellite0 star0 phenomenon8
+0
 1
-0 33 -1 0
+0 6 1 5
 0
 end_operator
 begin_operator
-communicate_soil_data rover1 general waypoint6 waypoint8 waypoint7
-2
-8 8
-29 2
+turn_to satellite0 star0 phenomenon9
+0
 1
-0 33 -1 0
+0 6 2 5
 0
 end_operator
 begin_operator
-drop rover0 rover0store
+turn_to satellite0 star0 planet3
 0
 1
-0 30 1 0
+0 6 3 5
 0
 end_operator
 begin_operator
-drop rover1 rover1store
+turn_to satellite0 star0 planet5
 0
 1
-0 31 1 0
+0 6 4 5
 0
 end_operator
 begin_operator
-navigate rover0 waypoint0 waypoint4
+turn_to satellite0 star0 star2
 0
 1
-0 14 0 4
+0 6 6 5
 0
 end_operator
 begin_operator
-navigate rover0 waypoint1 waypoint2
+turn_to satellite0 star0 star4
 0
 1
-0 14 1 2
+0 6 7 5
 0
 end_operator
 begin_operator
-navigate rover0 waypoint1 waypoint4
+turn_to satellite0 star0 star6
 0
 1
-0 14 1 4
+0 6 8 5
 0
 end_operator
 begin_operator
-navigate rover0 waypoint1 waypoint6
+turn_to satellite0 star0 star7
 0
 1
-0 14 1 6
+0 6 9 5
 0
 end_operator
 begin_operator
-navigate rover0 waypoint1 waypoint8
+turn_to satellite0 star2 groundstation1
 0
 1
-0 14 1 8
+0 6 0 6
 0
 end_operator
 begin_operator
-navigate rover0 waypoint2 waypoint1
+turn_to satellite0 star2 phenomenon8
 0
 1
-0 14 2 1
+0 6 1 6
 0
 end_operator
 begin_operator
-navigate rover0 waypoint2 waypoint3
+turn_to satellite0 star2 phenomenon9
 0
 1
-0 14 2 3
+0 6 2 6
 0
 end_operator
 begin_operator
-navigate rover0 waypoint3 waypoint2
+turn_to satellite0 star2 planet3
 0
 1
-0 14 3 2
+0 6 3 6
 0
 end_operator
 begin_operator
-navigate rover0 waypoint4 waypoint0
+turn_to satellite0 star2 planet5
 0
 1
-0 14 4 0
+0 6 4 6
 0
 end_operator
 begin_operator
-navigate rover0 waypoint4 waypoint1
+turn_to satellite0 star2 star0
 0
 1
-0 14 4 1
+0 6 5 6
 0
 end_operator
 begin_operator
-navigate rover0 waypoint4 waypoint5
+turn_to satellite0 star2 star4
 0
 1
-0 14 4 5
+0 6 7 6
 0
 end_operator
 begin_operator
-navigate rover0 waypoint4 waypoint9
+turn_to satellite0 star2 star6
 0
 1
-0 14 4 9
+0 6 8 6
 0
 end_operator
 begin_operator
-navigate rover0 waypoint5 waypoint4
+turn_to satellite0 star2 star7
 0
 1
-0 14 5 4
+0 6 9 6
 0
 end_operator
 begin_operator
-navigate rover0 waypoint6 waypoint1
+turn_to satellite0 star4 groundstation1
 0
 1
-0 14 6 1
+0 6 0 7
 0
 end_operator
 begin_operator
-navigate rover0 waypoint7 waypoint8
+turn_to satellite0 star4 phenomenon8
 0
 1
-0 14 7 8
+0 6 1 7
 0
 end_operator
 begin_operator
-navigate rover0 waypoint8 waypoint1
+turn_to satellite0 star4 phenomenon9
 0
 1
-0 14 8 1
+0 6 2 7
 0
 end_operator
 begin_operator
-navigate rover0 waypoint8 waypoint7
+turn_to satellite0 star4 planet3
 0
 1
-0 14 8 7
+0 6 3 7
 0
 end_operator
 begin_operator
-navigate rover0 waypoint9 waypoint4
+turn_to satellite0 star4 planet5
 0
 1
-0 14 9 4
+0 6 4 7
 0
 end_operator
 begin_operator
-navigate rover1 waypoint0 waypoint3
+turn_to satellite0 star4 star0
 0
 1
-0 8 0 3
+0 6 5 7
 0
 end_operator
 begin_operator
-navigate rover1 waypoint0 waypoint4
+turn_to satellite0 star4 star2
 0
 1
-0 8 0 4
+0 6 6 7
 0
 end_operator
 begin_operator
-navigate rover1 waypoint1 waypoint2
+turn_to satellite0 star4 star6
 0
 1
-0 8 1 2
+0 6 8 7
 0
 end_operator
 begin_operator
-navigate rover1 waypoint2 waypoint1
+turn_to satellite0 star4 star7
 0
 1
-0 8 2 1
+0 6 9 7
 0
 end_operator
 begin_operator
-navigate rover1 waypoint2 waypoint4
+turn_to satellite0 star6 groundstation1
 0
 1
-0 8 2 4
+0 6 0 8
 0
 end_operator
 begin_operator
-navigate rover1 waypoint3 waypoint0
+turn_to satellite0 star6 phenomenon8
 0
 1
-0 8 3 0
+0 6 1 8
 0
 end_operator
 begin_operator
-navigate rover1 waypoint4 waypoint0
+turn_to satellite0 star6 phenomenon9
 0
 1
-0 8 4 0
+0 6 2 8
 0
 end_operator
 begin_operator
-navigate rover1 waypoint4 waypoint2
+turn_to satellite0 star6 planet3
 0
 1
-0 8 4 2
+0 6 3 8
 0
 end_operator
 begin_operator
-navigate rover1 waypoint4 waypoint5
+turn_to satellite0 star6 planet5
 0
 1
-0 8 4 5
+0 6 4 8
 0
 end_operator
 begin_operator
-navigate rover1 waypoint4 waypoint6
+turn_to satellite0 star6 star0
 0
 1
-0 8 4 6
+0 6 5 8
 0
 end_operator
 begin_operator
-navigate rover1 waypoint4 waypoint9
+turn_to satellite0 star6 star2
 0
 1
-0 8 4 9
+0 6 6 8
 0
 end_operator
 begin_operator
-navigate rover1 waypoint5 waypoint4
+turn_to satellite0 star6 star4
 0
 1
-0 8 5 4
+0 6 7 8
 0
 end_operator
 begin_operator
-navigate rover1 waypoint5 waypoint7
+turn_to satellite0 star6 star7
 0
 1
-0 8 5 7
+0 6 9 8
 0
 end_operator
 begin_operator
-navigate rover1 waypoint6 waypoint4
+turn_to satellite0 star7 groundstation1
 0
 1
-0 8 6 4
+0 6 0 9
 0
 end_operator
 begin_operator
-navigate rover1 waypoint6 waypoint8
+turn_to satellite0 star7 phenomenon8
 0
 1
-0 8 6 8
+0 6 1 9
 0
 end_operator
 begin_operator
-navigate rover1 waypoint7 waypoint5
+turn_to satellite0 star7 phenomenon9
 0
 1
-0 8 7 5
+0 6 2 9
 0
 end_operator
 begin_operator
-navigate rover1 waypoint8 waypoint6
+turn_to satellite0 star7 planet3
 0
 1
-0 8 8 6
+0 6 3 9
 0
 end_operator
 begin_operator
-navigate rover1 waypoint9 waypoint4
+turn_to satellite0 star7 planet5
 0
 1
-0 8 9 4
+0 6 4 9
 0
 end_operator
 begin_operator
-navigate rover2 waypoint0 waypoint3
+turn_to satellite0 star7 star0
 0
 1
-0 5 0 3
+0 6 5 9
 0
 end_operator
 begin_operator
-navigate rover2 waypoint0 waypoint4
+turn_to satellite0 star7 star2
 0
 1
-0 5 0 4
+0 6 6 9
 0
 end_operator
 begin_operator
-navigate rover2 waypoint0 waypoint6
+turn_to satellite0 star7 star4
 0
 1
-0 5 0 6
+0 6 7 9
 0
 end_operator
 begin_operator
-navigate rover2 waypoint0 waypoint9
+turn_to satellite0 star7 star6
 0
 1
-0 5 0 8
+0 6 8 9
 0
 end_operator
 begin_operator
-navigate rover2 waypoint1 waypoint4
+turn_to satellite1 groundstation1 phenomenon8
 0
 1
-0 5 1 4
+0 5 1 0
 0
 end_operator
 begin_operator
-navigate rover2 waypoint2 waypoint3
+turn_to satellite1 groundstation1 phenomenon9
 0
 1
-0 5 2 3
+0 5 2 0
 0
 end_operator
 begin_operator
-navigate rover2 waypoint3 waypoint0
+turn_to satellite1 groundstation1 planet3
 0
 1
 0 5 3 0
 0
 end_operator
 begin_operator
-navigate rover2 waypoint3 waypoint2
-0
-1
-0 5 3 2
-0
-end_operator
-begin_operator
-navigate rover2 waypoint4 waypoint0
+turn_to satellite1 groundstation1 planet5
 0
 1
 0 5 4 0
 0
 end_operator
 begin_operator
-navigate rover2 waypoint4 waypoint1
+turn_to satellite1 groundstation1 star0
 0
 1
-0 5 4 1
+0 5 5 0
 0
 end_operator
 begin_operator
-navigate rover2 waypoint4 waypoint5
-0
-1
-0 5 4 5
-0
-end_operator
-begin_operator
-navigate rover2 waypoint4 waypoint8
-0
-1
-0 5 4 7
-0
-end_operator
-begin_operator
-navigate rover2 waypoint5 waypoint4
-0
-1
-0 5 5 4
-0
-end_operator
-begin_operator
-navigate rover2 waypoint6 waypoint0
+turn_to satellite1 groundstation1 star2
 0
 1
 0 5 6 0
 0
 end_operator
 begin_operator
-navigate rover2 waypoint8 waypoint4
+turn_to satellite1 groundstation1 star4
 0
 1
-0 5 7 4
+0 5 7 0
 0
 end_operator
 begin_operator
-navigate rover2 waypoint9 waypoint0
+turn_to satellite1 groundstation1 star6
 0
 1
 0 5 8 0
 0
 end_operator
 begin_operator
-navigate rover3 waypoint0 waypoint6
+turn_to satellite1 groundstation1 star7
 0
 1
-0 0 0 6
+0 5 9 0
 0
 end_operator
 begin_operator
-navigate rover3 waypoint1 waypoint2
+turn_to satellite1 phenomenon8 groundstation1
 0
 1
-0 0 1 2
+0 5 0 1
 0
 end_operator
 begin_operator
-navigate rover3 waypoint1 waypoint4
+turn_to satellite1 phenomenon8 phenomenon9
 0
 1
-0 0 1 4
+0 5 2 1
 0
 end_operator
 begin_operator
-navigate rover3 waypoint1 waypoint5
+turn_to satellite1 phenomenon8 planet3
 0
 1
-0 0 1 5
+0 5 3 1
 0
 end_operator
 begin_operator
-navigate rover3 waypoint1 waypoint7
+turn_to satellite1 phenomenon8 planet5
 0
 1
-0 0 1 7
+0 5 4 1
 0
 end_operator
 begin_operator
-navigate rover3 waypoint2 waypoint1
+turn_to satellite1 phenomenon8 star0
 0
 1
-0 0 2 1
+0 5 5 1
 0
 end_operator
 begin_operator
-navigate rover3 waypoint2 waypoint6
+turn_to satellite1 phenomenon8 star2
 0
 1
-0 0 2 6
+0 5 6 1
 0
 end_operator
 begin_operator
-navigate rover3 waypoint2 waypoint9
+turn_to satellite1 phenomenon8 star4
 0
 1
-0 0 2 9
+0 5 7 1
 0
 end_operator
 begin_operator
-navigate rover3 waypoint3 waypoint6
+turn_to satellite1 phenomenon8 star6
 0
 1
-0 0 3 6
+0 5 8 1
 0
 end_operator
 begin_operator
-navigate rover3 waypoint4 waypoint1
+turn_to satellite1 phenomenon8 star7
 0
 1
-0 0 4 1
+0 5 9 1
 0
 end_operator
 begin_operator
-navigate rover3 waypoint5 waypoint1
+turn_to satellite1 phenomenon9 groundstation1
 0
 1
-0 0 5 1
+0 5 0 2
 0
 end_operator
 begin_operator
-navigate rover3 waypoint6 waypoint0
+turn_to satellite1 phenomenon9 phenomenon8
 0
 1
-0 0 6 0
+0 5 1 2
 0
 end_operator
 begin_operator
-navigate rover3 waypoint6 waypoint2
+turn_to satellite1 phenomenon9 planet3
 0
 1
-0 0 6 2
+0 5 3 2
 0
 end_operator
 begin_operator
-navigate rover3 waypoint6 waypoint3
+turn_to satellite1 phenomenon9 planet5
 0
 1
-0 0 6 3
+0 5 4 2
 0
 end_operator
 begin_operator
-navigate rover3 waypoint6 waypoint8
+turn_to satellite1 phenomenon9 star0
 0
 1
-0 0 6 8
+0 5 5 2
 0
 end_operator
 begin_operator
-navigate rover3 waypoint7 waypoint1
+turn_to satellite1 phenomenon9 star2
 0
 1
-0 0 7 1
+0 5 6 2
 0
 end_operator
 begin_operator
-navigate rover3 waypoint8 waypoint6
+turn_to satellite1 phenomenon9 star4
 0
 1
-0 0 8 6
+0 5 7 2
 0
 end_operator
 begin_operator
-navigate rover3 waypoint9 waypoint2
+turn_to satellite1 phenomenon9 star6
 0
 1
-0 0 9 2
+0 5 8 2
 0
 end_operator
 begin_operator
-sample_rock rover1 rover1store waypoint1
-1
-8 1
-2
-0 22 0 1
-0 31 0 1
+turn_to satellite1 phenomenon9 star7
 0
-end_operator
-begin_operator
-sample_rock rover1 rover1store waypoint3
 1
-8 3
-2
-0 23 0 1
-0 31 0 1
+0 5 9 2
 0
 end_operator
 begin_operator
-sample_rock rover1 rover1store waypoint4
-1
-8 4
-2
-0 24 0 1
-0 31 0 1
+turn_to satellite1 planet3 groundstation1
 0
-end_operator
-begin_operator
-sample_rock rover1 rover1store waypoint5
 1
-8 5
-2
-0 25 0 1
-0 31 0 1
+0 5 0 3
 0
 end_operator
 begin_operator
-sample_rock rover1 rover1store waypoint8
-1
-8 8
-2
-0 26 0 1
-0 31 0 1
+turn_to satellite1 planet3 phenomenon8
 0
-end_operator
-begin_operator
-sample_soil rover0 rover0store waypoint3
 1
-14 3
-2
-0 27 0 1
-0 30 0 1
+0 5 1 3
 0
 end_operator
 begin_operator
-sample_soil rover0 rover0store waypoint4
-1
-14 4
-2
-0 28 0 1
-0 30 0 1
+turn_to satellite1 planet3 phenomenon9
 0
-end_operator
-begin_operator
-sample_soil rover0 rover0store waypoint6
 1
-14 6
-2
-0 29 0 1
-0 30 0 1
+0 5 2 3
 0
 end_operator
 begin_operator
-sample_soil rover0 rover0store waypoint9
-1
-14 9
-2
-0 32 0 1
-0 30 0 1
+turn_to satellite1 planet3 planet5
 0
-end_operator
-begin_operator
-sample_soil rover1 rover1store waypoint3
 1
-8 3
-2
-0 27 0 2
-0 31 0 1
+0 5 4 3
 0
 end_operator
 begin_operator
-sample_soil rover1 rover1store waypoint4
-1
-8 4
-2
-0 28 0 2
-0 31 0 1
+turn_to satellite1 planet3 star0
 0
-end_operator
-begin_operator
-sample_soil rover1 rover1store waypoint6
 1
-8 6
-2
-0 29 0 2
-0 31 0 1
+0 5 5 3
 0
 end_operator
 begin_operator
-sample_soil rover1 rover1store waypoint9
-1
-8 9
-2
-0 32 0 2
-0 31 0 1
+turn_to satellite1 planet3 star2
 0
-end_operator
-begin_operator
-take_image rover0 waypoint0 objective0 camera4 colour
 1
-14 0
-2
-0 15 0 1
-0 20 -1 0
+0 5 6 3
 0
 end_operator
 begin_operator
-take_image rover0 waypoint0 objective0 camera4 low_res
-1
-14 0
-2
-0 15 0 1
-0 18 -1 0
+turn_to satellite1 planet3 star4
 0
-end_operator
-begin_operator
-take_image rover0 waypoint0 objective1 camera4 colour
 1
-14 0
-1
-0 15 0 1
+0 5 7 3
 0
 end_operator
 begin_operator
-take_image rover0 waypoint0 objective1 camera4 low_res
-1
-14 0
-1
-0 15 0 1
+turn_to satellite1 planet3 star6
 0
-end_operator
-begin_operator
-take_image rover0 waypoint0 objective2 camera4 colour
-1
-14 0
 1
-0 15 0 1
+0 5 8 3
 0
 end_operator
 begin_operator
-take_image rover0 waypoint0 objective2 camera4 low_res
-1
-14 0
-2
-0 15 0 1
-0 16 -1 0
+turn_to satellite1 planet3 star7
 0
-end_operator
-begin_operator
-take_image rover0 waypoint0 objective3 camera4 colour
-1
-14 0
 1
-0 15 0 1
+0 5 9 3
 0
 end_operator
 begin_operator
-take_image rover0 waypoint0 objective3 camera4 low_res
-1
-14 0
-1
-0 15 0 1
+turn_to satellite1 planet5 groundstation1
 0
-end_operator
-begin_operator
-take_image rover0 waypoint1 objective0 camera4 colour
 1
-14 1
-2
-0 15 0 1
-0 20 -1 0
+0 5 0 4
 0
 end_operator
 begin_operator
-take_image rover0 waypoint1 objective0 camera4 low_res
-1
-14 1
-2
-0 15 0 1
-0 18 -1 0
+turn_to satellite1 planet5 phenomenon8
 0
-end_operator
-begin_operator
-take_image rover0 waypoint1 objective1 camera4 colour
-1
-14 1
 1
-0 15 0 1
+0 5 1 4
 0
 end_operator
 begin_operator
-take_image rover0 waypoint1 objective1 camera4 low_res
-1
-14 1
-1
-0 15 0 1
+turn_to satellite1 planet5 phenomenon9
 0
-end_operator
-begin_operator
-take_image rover0 waypoint1 objective2 camera4 colour
 1
-14 1
-1
-0 15 0 1
+0 5 2 4
 0
 end_operator
 begin_operator
-take_image rover0 waypoint1 objective2 camera4 low_res
-1
-14 1
-2
-0 15 0 1
-0 16 -1 0
+turn_to satellite1 planet5 planet3
 0
-end_operator
-begin_operator
-take_image rover0 waypoint1 objective3 camera4 colour
 1
-14 1
-1
-0 15 0 1
+0 5 3 4
 0
 end_operator
 begin_operator
-take_image rover0 waypoint1 objective3 camera4 low_res
-1
-14 1
-1
-0 15 0 1
+turn_to satellite1 planet5 star0
 0
-end_operator
-begin_operator
-take_image rover0 waypoint2 objective0 camera4 colour
 1
-14 2
-2
-0 15 0 1
-0 20 -1 0
+0 5 5 4
 0
 end_operator
 begin_operator
-take_image rover0 waypoint2 objective0 camera4 low_res
-1
-14 2
-2
-0 15 0 1
-0 18 -1 0
+turn_to satellite1 planet5 star2
 0
-end_operator
-begin_operator
-take_image rover0 waypoint2 objective1 camera4 colour
 1
-14 2
-1
-0 15 0 1
+0 5 6 4
 0
 end_operator
 begin_operator
-take_image rover0 waypoint2 objective1 camera4 low_res
-1
-14 2
-1
-0 15 0 1
+turn_to satellite1 planet5 star4
 0
-end_operator
-begin_operator
-take_image rover0 waypoint2 objective2 camera4 colour
-1
-14 2
 1
-0 15 0 1
+0 5 7 4
 0
 end_operator
 begin_operator
-take_image rover0 waypoint2 objective2 camera4 low_res
-1
-14 2
-2
-0 15 0 1
-0 16 -1 0
+turn_to satellite1 planet5 star6
 0
-end_operator
-begin_operator
-take_image rover0 waypoint2 objective3 camera4 colour
-1
-14 2
 1
-0 15 0 1
+0 5 8 4
 0
 end_operator
 begin_operator
-take_image rover0 waypoint2 objective3 camera4 low_res
-1
-14 2
-1
-0 15 0 1
+turn_to satellite1 planet5 star7
 0
-end_operator
-begin_operator
-take_image rover0 waypoint3 objective0 camera4 colour
 1
-14 3
-2
-0 15 0 1
-0 20 -1 0
+0 5 9 4
 0
 end_operator
 begin_operator
-take_image rover0 waypoint3 objective0 camera4 low_res
-1
-14 3
-2
-0 15 0 1
-0 18 -1 0
+turn_to satellite1 star0 groundstation1
 0
-end_operator
-begin_operator
-take_image rover0 waypoint3 objective1 camera4 colour
-1
-14 3
 1
-0 15 0 1
+0 5 0 5
 0
 end_operator
 begin_operator
-take_image rover0 waypoint3 objective1 camera4 low_res
-1
-14 3
-1
-0 15 0 1
+turn_to satellite1 star0 phenomenon8
 0
-end_operator
-begin_operator
-take_image rover0 waypoint3 objective2 camera4 colour
 1
-14 3
-1
-0 15 0 1
+0 5 1 5
 0
 end_operator
 begin_operator
-take_image rover0 waypoint3 objective2 camera4 low_res
-1
-14 3
-2
-0 15 0 1
-0 16 -1 0
+turn_to satellite1 star0 phenomenon9
 0
-end_operator
-begin_operator
-take_image rover0 waypoint3 objective3 camera4 colour
 1
-14 3
-1
-0 15 0 1
+0 5 2 5
 0
 end_operator
 begin_operator
-take_image rover0 waypoint3 objective3 camera4 low_res
-1
-14 3
-1
-0 15 0 1
+turn_to satellite1 star0 planet3
 0
-end_operator
-begin_operator
-take_image rover0 waypoint4 objective0 camera4 colour
 1
-14 4
-2
-0 15 0 1
-0 20 -1 0
+0 5 3 5
 0
 end_operator
 begin_operator
-take_image rover0 waypoint4 objective0 camera4 low_res
-1
-14 4
-2
-0 15 0 1
-0 18 -1 0
+turn_to satellite1 star0 planet5
 0
-end_operator
-begin_operator
-take_image rover0 waypoint4 objective1 camera4 colour
 1
-14 4
-1
-0 15 0 1
+0 5 4 5
 0
 end_operator
 begin_operator
-take_image rover0 waypoint4 objective1 camera4 low_res
-1
-14 4
-1
-0 15 0 1
+turn_to satellite1 star0 star2
 0
-end_operator
-begin_operator
-take_image rover0 waypoint4 objective2 camera4 colour
-1
-14 4
 1
-0 15 0 1
+0 5 6 5
 0
 end_operator
 begin_operator
-take_image rover0 waypoint4 objective2 camera4 low_res
-1
-14 4
-2
-0 15 0 1
-0 16 -1 0
+turn_to satellite1 star0 star4
 0
-end_operator
-begin_operator
-take_image rover0 waypoint4 objective3 camera4 colour
-1
-14 4
 1
-0 15 0 1
+0 5 7 5
 0
 end_operator
 begin_operator
-take_image rover0 waypoint4 objective3 camera4 low_res
-1
-14 4
-1
-0 15 0 1
+turn_to satellite1 star0 star6
 0
-end_operator
-begin_operator
-take_image rover0 waypoint5 objective0 camera4 colour
 1
-14 5
-2
-0 15 0 1
-0 20 -1 0
+0 5 8 5
 0
 end_operator
 begin_operator
-take_image rover0 waypoint5 objective0 camera4 low_res
-1
-14 5
-2
-0 15 0 1
-0 18 -1 0
+turn_to satellite1 star0 star7
 0
-end_operator
-begin_operator
-take_image rover0 waypoint5 objective1 camera4 colour
-1
-14 5
 1
-0 15 0 1
+0 5 9 5
 0
 end_operator
 begin_operator
-take_image rover0 waypoint5 objective1 camera4 low_res
-1
-14 5
-1
-0 15 0 1
+turn_to satellite1 star2 groundstation1
 0
-end_operator
-begin_operator
-take_image rover0 waypoint5 objective2 camera4 colour
 1
-14 5
-1
-0 15 0 1
+0 5 0 6
 0
 end_operator
 begin_operator
-take_image rover0 waypoint5 objective2 camera4 low_res
-1
-14 5
-2
-0 15 0 1
-0 16 -1 0
+turn_to satellite1 star2 phenomenon8
 0
-end_operator
-begin_operator
-take_image rover0 waypoint5 objective3 camera4 colour
 1
-14 5
-1
-0 15 0 1
+0 5 1 6
 0
 end_operator
 begin_operator
-take_image rover0 waypoint5 objective3 camera4 low_res
-1
-14 5
-1
-0 15 0 1
+turn_to satellite1 star2 phenomenon9
 0
-end_operator
-begin_operator
-take_image rover0 waypoint6 objective0 camera4 colour
 1
-14 6
-2
-0 15 0 1
-0 20 -1 0
+0 5 2 6
 0
 end_operator
 begin_operator
-take_image rover0 waypoint6 objective0 camera4 low_res
-1
-14 6
-2
-0 15 0 1
-0 18 -1 0
+turn_to satellite1 star2 planet3
 0
-end_operator
-begin_operator
-take_image rover0 waypoint6 objective1 camera4 colour
 1
-14 6
-1
-0 15 0 1
+0 5 3 6
 0
 end_operator
 begin_operator
-take_image rover0 waypoint6 objective1 camera4 low_res
-1
-14 6
-1
-0 15 0 1
+turn_to satellite1 star2 planet5
 0
-end_operator
-begin_operator
-take_image rover0 waypoint6 objective2 camera4 colour
-1
-14 6
 1
-0 15 0 1
+0 5 4 6
 0
 end_operator
 begin_operator
-take_image rover0 waypoint6 objective2 camera4 low_res
-1
-14 6
-2
-0 15 0 1
-0 16 -1 0
+turn_to satellite1 star2 star0
 0
-end_operator
-begin_operator
-take_image rover0 waypoint6 objective3 camera4 colour
-1
-14 6
 1
-0 15 0 1
+0 5 5 6
 0
 end_operator
 begin_operator
-take_image rover0 waypoint6 objective3 camera4 low_res
-1
-14 6
-1
-0 15 0 1
+turn_to satellite1 star2 star4
 0
-end_operator
-begin_operator
-take_image rover0 waypoint7 objective2 camera4 colour
 1
-14 7
-1
-0 15 0 1
+0 5 7 6
 0
 end_operator
 begin_operator
-take_image rover0 waypoint7 objective2 camera4 low_res
-1
-14 7
-2
-0 15 0 1
-0 16 -1 0
+turn_to satellite1 star2 star6
 0
-end_operator
-begin_operator
-take_image rover0 waypoint8 objective2 camera4 colour
 1
-14 8
-1
-0 15 0 1
+0 5 8 6
 0
 end_operator
 begin_operator
-take_image rover0 waypoint8 objective2 camera4 low_res
-1
-14 8
-2
-0 15 0 1
-0 16 -1 0
+turn_to satellite1 star2 star7
 0
-end_operator
-begin_operator
-take_image rover1 waypoint0 objective0 camera2 low_res
 1
-8 0
-2
-0 11 0 1
-0 13 -1 0
+0 5 9 6
 0
 end_operator
 begin_operator
-take_image rover1 waypoint0 objective0 camera3 colour
-1
-8 0
-2
-0 9 0 1
-0 10 -1 0
+turn_to satellite1 star4 groundstation1
 0
-end_operator
-begin_operator
-take_image rover1 waypoint0 objective0 camera3 low_res
 1
-8 0
-2
-0 9 0 1
-0 13 -1 0
+0 5 0 7
 0
 end_operator
 begin_operator
-take_image rover1 waypoint0 objective1 camera2 low_res
-1
-8 0
-1
-0 11 0 1
+turn_to satellite1 star4 phenomenon8
 0
-end_operator
-begin_operator
-take_image rover1 waypoint0 objective1 camera3 colour
-1
-8 0
 1
-0 9 0 1
+0 5 1 7
 0
 end_operator
 begin_operator
-take_image rover1 waypoint0 objective1 camera3 low_res
-1
-8 0
-1
-0 9 0 1
+turn_to satellite1 star4 phenomenon9
 0
-end_operator
-begin_operator
-take_image rover1 waypoint0 objective2 camera2 low_res
 1
-8 0
-2
-0 11 0 1
-0 12 -1 0
+0 5 2 7
 0
 end_operator
 begin_operator
-take_image rover1 waypoint0 objective2 camera3 colour
-1
-8 0
-1
-0 9 0 1
+turn_to satellite1 star4 planet3
 0
-end_operator
-begin_operator
-take_image rover1 waypoint0 objective2 camera3 low_res
 1
-8 0
-2
-0 9 0 1
-0 12 -1 0
+0 5 3 7
 0
 end_operator
 begin_operator
-take_image rover1 waypoint0 objective3 camera2 low_res
-1
-8 0
-1
-0 11 0 1
+turn_to satellite1 star4 planet5
 0
-end_operator
-begin_operator
-take_image rover1 waypoint0 objective3 camera3 colour
 1
-8 0
-1
-0 9 0 1
+0 5 4 7
 0
 end_operator
 begin_operator
-take_image rover1 waypoint0 objective3 camera3 low_res
-1
-8 0
-1
-0 9 0 1
+turn_to satellite1 star4 star0
 0
-end_operator
-begin_operator
-take_image rover1 waypoint1 objective0 camera2 low_res
 1
-8 1
-2
-0 11 0 1
-0 13 -1 0
+0 5 5 7
 0
 end_operator
 begin_operator
-take_image rover1 waypoint1 objective0 camera3 colour
-1
-8 1
-2
-0 9 0 1
-0 10 -1 0
+turn_to satellite1 star4 star2
 0
-end_operator
-begin_operator
-take_image rover1 waypoint1 objective0 camera3 low_res
 1
-8 1
-2
-0 9 0 1
-0 13 -1 0
+0 5 6 7
 0
 end_operator
 begin_operator
-take_image rover1 waypoint1 objective1 camera2 low_res
-1
-8 1
-1
-0 11 0 1
+turn_to satellite1 star4 star6
 0
-end_operator
-begin_operator
-take_image rover1 waypoint1 objective1 camera3 colour
 1
-8 1
-1
-0 9 0 1
+0 5 8 7
 0
 end_operator
 begin_operator
-take_image rover1 waypoint1 objective1 camera3 low_res
-1
-8 1
-1
-0 9 0 1
+turn_to satellite1 star4 star7
 0
-end_operator
-begin_operator
-take_image rover1 waypoint1 objective2 camera2 low_res
 1
-8 1
-2
-0 11 0 1
-0 12 -1 0
+0 5 9 7
 0
 end_operator
 begin_operator
-take_image rover1 waypoint1 objective2 camera3 colour
-1
-8 1
-1
-0 9 0 1
+turn_to satellite1 star6 groundstation1
 0
-end_operator
-begin_operator
-take_image rover1 waypoint1 objective2 camera3 low_res
 1
-8 1
-2
-0 9 0 1
-0 12 -1 0
+0 5 0 8
 0
 end_operator
 begin_operator
-take_image rover1 waypoint1 objective3 camera2 low_res
-1
-8 1
-1
-0 11 0 1
+turn_to satellite1 star6 phenomenon8
 0
-end_operator
-begin_operator
-take_image rover1 waypoint1 objective3 camera3 colour
-1
-8 1
 1
-0 9 0 1
+0 5 1 8
 0
 end_operator
 begin_operator
-take_image rover1 waypoint1 objective3 camera3 low_res
-1
-8 1
-1
-0 9 0 1
+turn_to satellite1 star6 phenomenon9
 0
-end_operator
-begin_operator
-take_image rover1 waypoint2 objective0 camera2 low_res
 1
-8 2
-2
-0 11 0 1
-0 13 -1 0
+0 5 2 8
 0
 end_operator
 begin_operator
-take_image rover1 waypoint2 objective0 camera3 colour
-1
-8 2
-2
-0 9 0 1
-0 10 -1 0
+turn_to satellite1 star6 planet3
 0
-end_operator
-begin_operator
-take_image rover1 waypoint2 objective0 camera3 low_res
 1
-8 2
-2
-0 9 0 1
-0 13 -1 0
+0 5 3 8
 0
 end_operator
 begin_operator
-take_image rover1 waypoint2 objective1 camera2 low_res
-1
-8 2
-1
-0 11 0 1
+turn_to satellite1 star6 planet5
 0
-end_operator
-begin_operator
-take_image rover1 waypoint2 objective1 camera3 colour
-1
-8 2
 1
-0 9 0 1
+0 5 4 8
 0
 end_operator
 begin_operator
-take_image rover1 waypoint2 objective1 camera3 low_res
-1
-8 2
-1
-0 9 0 1
+turn_to satellite1 star6 star0
 0
-end_operator
-begin_operator
-take_image rover1 waypoint2 objective2 camera2 low_res
 1
-8 2
-2
-0 11 0 1
-0 12 -1 0
+0 5 5 8
 0
 end_operator
 begin_operator
-take_image rover1 waypoint2 objective2 camera3 colour
-1
-8 2
-1
-0 9 0 1
+turn_to satellite1 star6 star2
 0
-end_operator
-begin_operator
-take_image rover1 waypoint2 objective2 camera3 low_res
 1
-8 2
-2
-0 9 0 1
-0 12 -1 0
+0 5 6 8
 0
 end_operator
 begin_operator
-take_image rover1 waypoint2 objective3 camera2 low_res
-1
-8 2
-1
-0 11 0 1
+turn_to satellite1 star6 star4
 0
-end_operator
-begin_operator
-take_image rover1 waypoint2 objective3 camera3 colour
 1
-8 2
-1
-0 9 0 1
+0 5 7 8
 0
 end_operator
 begin_operator
-take_image rover1 waypoint2 objective3 camera3 low_res
-1
-8 2
-1
-0 9 0 1
+turn_to satellite1 star6 star7
 0
-end_operator
-begin_operator
-take_image rover1 waypoint3 objective0 camera2 low_res
 1
-8 3
-2
-0 11 0 1
-0 13 -1 0
+0 5 9 8
 0
 end_operator
 begin_operator
-take_image rover1 waypoint3 objective0 camera3 colour
-1
-8 3
-2
-0 9 0 1
-0 10 -1 0
+turn_to satellite1 star7 groundstation1
 0
-end_operator
-begin_operator
-take_image rover1 waypoint3 objective0 camera3 low_res
 1
-8 3
-2
-0 9 0 1
-0 13 -1 0
+0 5 0 9
 0
 end_operator
 begin_operator
-take_image rover1 waypoint3 objective1 camera2 low_res
-1
-8 3
-1
-0 11 0 1
+turn_to satellite1 star7 phenomenon8
 0
-end_operator
-begin_operator
-take_image rover1 waypoint3 objective1 camera3 colour
 1
-8 3
-1
-0 9 0 1
+0 5 1 9
 0
 end_operator
 begin_operator
-take_image rover1 waypoint3 objective1 camera3 low_res
-1
-8 3
-1
-0 9 0 1
+turn_to satellite1 star7 phenomenon9
 0
-end_operator
-begin_operator
-take_image rover1 waypoint3 objective2 camera2 low_res
 1
-8 3
-2
-0 11 0 1
-0 12 -1 0
+0 5 2 9
 0
 end_operator
 begin_operator
-take_image rover1 waypoint3 objective2 camera3 colour
-1
-8 3
-1
-0 9 0 1
+turn_to satellite1 star7 planet3
 0
-end_operator
-begin_operator
-take_image rover1 waypoint3 objective2 camera3 low_res
 1
-8 3
-2
-0 9 0 1
-0 12 -1 0
+0 5 3 9
 0
 end_operator
 begin_operator
-take_image rover1 waypoint3 objective3 camera2 low_res
-1
-8 3
-1
-0 11 0 1
+turn_to satellite1 star7 planet5
 0
-end_operator
-begin_operator
-take_image rover1 waypoint3 objective3 camera3 colour
-1
-8 3
 1
-0 9 0 1
+0 5 4 9
 0
 end_operator
 begin_operator
-take_image rover1 waypoint3 objective3 camera3 low_res
-1
-8 3
-1
-0 9 0 1
+turn_to satellite1 star7 star0
 0
-end_operator
-begin_operator
-take_image rover1 waypoint4 objective0 camera2 low_res
 1
-8 4
-2
-0 11 0 1
-0 13 -1 0
+0 5 5 9
 0
 end_operator
 begin_operator
-take_image rover1 waypoint4 objective0 camera3 colour
-1
-8 4
-2
-0 9 0 1
-0 10 -1 0
+turn_to satellite1 star7 star2
 0
-end_operator
-begin_operator
-take_image rover1 waypoint4 objective0 camera3 low_res
 1
-8 4
-2
-0 9 0 1
-0 13 -1 0
+0 5 6 9
 0
 end_operator
 begin_operator
-take_image rover1 waypoint4 objective1 camera2 low_res
-1
-8 4
-1
-0 11 0 1
+turn_to satellite1 star7 star4
 0
-end_operator
-begin_operator
-take_image rover1 waypoint4 objective1 camera3 colour
 1
-8 4
-1
-0 9 0 1
+0 5 7 9
 0
 end_operator
 begin_operator
-take_image rover1 waypoint4 objective1 camera3 low_res
-1
-8 4
-1
-0 9 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint4 objective2 camera2 low_res
-1
-8 4
-2
-0 11 0 1
-0 12 -1 0
-0
-end_operator
-begin_operator
-take_image rover1 waypoint4 objective2 camera3 colour
-1
-8 4
-1
-0 9 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint4 objective2 camera3 low_res
-1
-8 4
-2
-0 9 0 1
-0 12 -1 0
-0
-end_operator
-begin_operator
-take_image rover1 waypoint4 objective3 camera2 low_res
-1
-8 4
-1
-0 11 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint4 objective3 camera3 colour
-1
-8 4
-1
-0 9 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint4 objective3 camera3 low_res
-1
-8 4
-1
-0 9 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint5 objective0 camera2 low_res
-1
-8 5
-2
-0 11 0 1
-0 13 -1 0
-0
-end_operator
-begin_operator
-take_image rover1 waypoint5 objective0 camera3 colour
-1
-8 5
-2
-0 9 0 1
-0 10 -1 0
-0
-end_operator
-begin_operator
-take_image rover1 waypoint5 objective0 camera3 low_res
-1
-8 5
-2
-0 9 0 1
-0 13 -1 0
-0
-end_operator
-begin_operator
-take_image rover1 waypoint5 objective1 camera2 low_res
-1
-8 5
-1
-0 11 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint5 objective1 camera3 colour
-1
-8 5
-1
-0 9 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint5 objective1 camera3 low_res
-1
-8 5
-1
-0 9 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint5 objective2 camera2 low_res
-1
-8 5
-2
-0 11 0 1
-0 12 -1 0
-0
-end_operator
-begin_operator
-take_image rover1 waypoint5 objective2 camera3 colour
-1
-8 5
-1
-0 9 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint5 objective2 camera3 low_res
-1
-8 5
-2
-0 9 0 1
-0 12 -1 0
-0
-end_operator
-begin_operator
-take_image rover1 waypoint5 objective3 camera2 low_res
-1
-8 5
-1
-0 11 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint5 objective3 camera3 colour
-1
-8 5
-1
-0 9 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint5 objective3 camera3 low_res
-1
-8 5
-1
-0 9 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint6 objective0 camera2 low_res
-1
-8 6
-2
-0 11 0 1
-0 13 -1 0
-0
-end_operator
-begin_operator
-take_image rover1 waypoint6 objective0 camera3 colour
-1
-8 6
-2
-0 9 0 1
-0 10 -1 0
-0
-end_operator
-begin_operator
-take_image rover1 waypoint6 objective0 camera3 low_res
-1
-8 6
-2
-0 9 0 1
-0 13 -1 0
-0
-end_operator
-begin_operator
-take_image rover1 waypoint6 objective1 camera2 low_res
-1
-8 6
-1
-0 11 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint6 objective1 camera3 colour
-1
-8 6
-1
-0 9 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint6 objective1 camera3 low_res
-1
-8 6
-1
-0 9 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint6 objective2 camera2 low_res
-1
-8 6
-2
-0 11 0 1
-0 12 -1 0
-0
-end_operator
-begin_operator
-take_image rover1 waypoint6 objective2 camera3 colour
-1
-8 6
-1
-0 9 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint6 objective2 camera3 low_res
-1
-8 6
-2
-0 9 0 1
-0 12 -1 0
-0
-end_operator
-begin_operator
-take_image rover1 waypoint6 objective3 camera2 low_res
-1
-8 6
-1
-0 11 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint6 objective3 camera3 colour
-1
-8 6
-1
-0 9 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint6 objective3 camera3 low_res
-1
-8 6
-1
-0 9 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint7 objective2 camera2 low_res
-1
-8 7
-2
-0 11 0 1
-0 12 -1 0
-0
-end_operator
-begin_operator
-take_image rover1 waypoint7 objective2 camera3 colour
-1
-8 7
-1
-0 9 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint7 objective2 camera3 low_res
-1
-8 7
-2
-0 9 0 1
-0 12 -1 0
-0
-end_operator
-begin_operator
-take_image rover1 waypoint8 objective2 camera2 low_res
-1
-8 8
-2
-0 11 0 1
-0 12 -1 0
-0
-end_operator
-begin_operator
-take_image rover1 waypoint8 objective2 camera3 colour
-1
-8 8
-1
-0 9 0 1
-0
-end_operator
-begin_operator
-take_image rover1 waypoint8 objective2 camera3 low_res
-1
-8 8
-2
-0 9 0 1
-0 12 -1 0
-0
-end_operator
-begin_operator
-take_image rover2 waypoint0 objective0 camera1 colour
-1
-5 0
-2
-0 6 0 1
-0 7 -1 0
-0
-end_operator
-begin_operator
-take_image rover2 waypoint0 objective1 camera1 colour
-1
-5 0
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint0 objective2 camera1 colour
-1
-5 0
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint0 objective3 camera1 colour
-1
-5 0
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint1 objective0 camera1 colour
-1
-5 1
-2
-0 6 0 1
-0 7 -1 0
-0
-end_operator
-begin_operator
-take_image rover2 waypoint1 objective1 camera1 colour
-1
-5 1
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint1 objective2 camera1 colour
-1
-5 1
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint1 objective3 camera1 colour
-1
-5 1
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint2 objective0 camera1 colour
-1
-5 2
-2
-0 6 0 1
-0 7 -1 0
-0
-end_operator
-begin_operator
-take_image rover2 waypoint2 objective1 camera1 colour
-1
-5 2
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint2 objective2 camera1 colour
-1
-5 2
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint2 objective3 camera1 colour
-1
-5 2
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint3 objective0 camera1 colour
-1
-5 3
-2
-0 6 0 1
-0 7 -1 0
-0
-end_operator
-begin_operator
-take_image rover2 waypoint3 objective1 camera1 colour
-1
-5 3
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint3 objective2 camera1 colour
-1
-5 3
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint3 objective3 camera1 colour
-1
-5 3
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint4 objective0 camera1 colour
-1
-5 4
-2
-0 6 0 1
-0 7 -1 0
-0
-end_operator
-begin_operator
-take_image rover2 waypoint4 objective1 camera1 colour
-1
-5 4
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint4 objective2 camera1 colour
-1
-5 4
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint4 objective3 camera1 colour
-1
-5 4
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint5 objective0 camera1 colour
-1
-5 5
-2
-0 6 0 1
-0 7 -1 0
-0
-end_operator
-begin_operator
-take_image rover2 waypoint5 objective1 camera1 colour
-1
-5 5
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint5 objective2 camera1 colour
-1
-5 5
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint5 objective3 camera1 colour
-1
-5 5
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint6 objective0 camera1 colour
-1
-5 6
-2
-0 6 0 1
-0 7 -1 0
-0
-end_operator
-begin_operator
-take_image rover2 waypoint6 objective1 camera1 colour
-1
-5 6
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint6 objective2 camera1 colour
-1
-5 6
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint6 objective3 camera1 colour
-1
-5 6
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover2 waypoint8 objective2 camera1 colour
-1
-5 7
-1
-0 6 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint0 objective0 camera0 colour
-1
-0 0
-2
-0 1 0 1
-0 4 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint0 objective0 camera0 low_res
-1
-0 0
-2
-0 1 0 1
-0 3 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint0 objective1 camera0 colour
-1
-0 0
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint0 objective1 camera0 low_res
-1
-0 0
-1
-0 1 0 1
+turn_to satellite1 star7 star6
 0
-end_operator
-begin_operator
-take_image rover3 waypoint0 objective2 camera0 colour
-1
-0 0
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint0 objective2 camera0 low_res
-1
-0 0
-2
-0 1 0 1
-0 2 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint0 objective3 camera0 colour
-1
-0 0
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint0 objective3 camera0 low_res
-1
-0 0
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint1 objective0 camera0 colour
-1
-0 1
-2
-0 1 0 1
-0 4 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint1 objective0 camera0 low_res
-1
-0 1
-2
-0 1 0 1
-0 3 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint1 objective1 camera0 colour
-1
-0 1
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint1 objective1 camera0 low_res
-1
-0 1
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint1 objective2 camera0 colour
-1
-0 1
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint1 objective2 camera0 low_res
-1
-0 1
-2
-0 1 0 1
-0 2 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint1 objective3 camera0 colour
-1
-0 1
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint1 objective3 camera0 low_res
-1
-0 1
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint2 objective0 camera0 colour
-1
-0 2
-2
-0 1 0 1
-0 4 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint2 objective0 camera0 low_res
-1
-0 2
-2
-0 1 0 1
-0 3 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint2 objective1 camera0 colour
-1
-0 2
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint2 objective1 camera0 low_res
-1
-0 2
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint2 objective2 camera0 colour
-1
-0 2
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint2 objective2 camera0 low_res
-1
-0 2
-2
-0 1 0 1
-0 2 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint2 objective3 camera0 colour
-1
-0 2
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint2 objective3 camera0 low_res
-1
-0 2
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint3 objective0 camera0 colour
-1
-0 3
-2
-0 1 0 1
-0 4 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint3 objective0 camera0 low_res
-1
-0 3
-2
-0 1 0 1
-0 3 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint3 objective1 camera0 colour
-1
-0 3
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint3 objective1 camera0 low_res
-1
-0 3
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint3 objective2 camera0 colour
-1
-0 3
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint3 objective2 camera0 low_res
-1
-0 3
-2
-0 1 0 1
-0 2 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint3 objective3 camera0 colour
-1
-0 3
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint3 objective3 camera0 low_res
-1
-0 3
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint4 objective0 camera0 colour
-1
-0 4
-2
-0 1 0 1
-0 4 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint4 objective0 camera0 low_res
-1
-0 4
-2
-0 1 0 1
-0 3 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint4 objective1 camera0 colour
-1
-0 4
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint4 objective1 camera0 low_res
-1
-0 4
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint4 objective2 camera0 colour
-1
-0 4
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint4 objective2 camera0 low_res
-1
-0 4
-2
-0 1 0 1
-0 2 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint4 objective3 camera0 colour
-1
-0 4
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint4 objective3 camera0 low_res
-1
-0 4
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint5 objective0 camera0 colour
-1
-0 5
-2
-0 1 0 1
-0 4 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint5 objective0 camera0 low_res
-1
-0 5
-2
-0 1 0 1
-0 3 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint5 objective1 camera0 colour
-1
-0 5
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint5 objective1 camera0 low_res
-1
-0 5
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint5 objective2 camera0 colour
-1
-0 5
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint5 objective2 camera0 low_res
-1
-0 5
-2
-0 1 0 1
-0 2 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint5 objective3 camera0 colour
-1
-0 5
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint5 objective3 camera0 low_res
-1
-0 5
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint6 objective0 camera0 colour
-1
-0 6
-2
-0 1 0 1
-0 4 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint6 objective0 camera0 low_res
-1
-0 6
-2
-0 1 0 1
-0 3 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint6 objective1 camera0 colour
-1
-0 6
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint6 objective1 camera0 low_res
-1
-0 6
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint6 objective2 camera0 colour
-1
-0 6
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint6 objective2 camera0 low_res
-1
-0 6
-2
-0 1 0 1
-0 2 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint6 objective3 camera0 colour
-1
-0 6
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint6 objective3 camera0 low_res
-1
-0 6
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint7 objective2 camera0 colour
-1
-0 7
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint7 objective2 camera0 low_res
-1
-0 7
-2
-0 1 0 1
-0 2 -1 0
-0
-end_operator
-begin_operator
-take_image rover3 waypoint8 objective2 camera0 colour
-1
-0 8
-1
-0 1 0 1
-0
-end_operator
-begin_operator
-take_image rover3 waypoint8 objective2 camera0 low_res
 1
-0 8
-2
-0 1 0 1
-0 2 -1 0
+0 5 8 9
 0
 end_operator
 0
 begin_SG
-switch 14
+switch 12
+check 0
+switch 6
+check 0
+check 0
+switch 4
+check 0
+check 1
+9
+check 0
+check 0
+switch 4
+check 0
+check 1
+10
+check 0
+check 0
+check 0
+switch 4
+check 0
+check 1
+11
+check 0
+check 0
+check 0
+check 0
+check 0
+check 0
+switch 4
+check 0
+check 1
+12
+check 0
+check 0
+check 0
 check 0
 switch 8
-check 2
-0
+check 0
+switch 5
+check 0
+check 0
+switch 0
+check 0
+check 1
+13
+check 0
+check 0
+switch 0
+check 0
+check 1
+15
+check 0
+check 0
+switch 0
+check 0
+check 1
+16
+check 0
+check 0
+switch 0
+check 0
+check 1
+18
+check 0
+check 0
+check 0
+check 0
+switch 0
+check 0
+check 1
+20
+check 0
+check 0
+switch 0
+check 0
+check 1
+22
+check 0
+check 0
+switch 0
+check 0
+check 1
+24
+check 0
+check 0
+check 0
+check 0
+switch 7
+check 0
+switch 5
+check 0
+check 0
+switch 1
+check 0
+check 1
+14
+check 0
+check 0
+check 0
+switch 1
+check 0
+check 1
+17
+check 0
+check 0
+switch 1
+check 0
+check 1
+19
+check 0
+check 0
+check 0
+check 0
+switch 1
+check 0
+check 1
+21
+check 0
+check 0
+switch 1
+check 0
+check 1
+23
+check 0
+check 0
+check 0
+check 0
+check 0
+switch 6
+check 0
+check 9
+34
+43
+52
+61
+70
+79
+88
+97
+106
+check 9
+25
+44
+53
+62
+71
+80
+89
+98
 107
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 15
-check 0
-check 8
-190
-191
-192
-193
-194
-195
-196
-197
-check 0
-check 0
-switch 8
-check 5
-1
+check 9
+26
+35
+54
+63
+72
+81
+90
+99
 108
+check 9
+27
+36
+45
+64
+73
+82
+91
+100
 109
+check 9
+28
+37
+46
+55
+74
+83
+92
+101
 110
+switch 5
+check 9
+29
+38
+47
+56
+65
+84
+93
+102
 111
 check 0
 check 0
@@ -3940,3158 +1873,1054 @@ check 0
 check 0
 check 0
 check 0
-switch 27
-check 0
-check 0
-check 1
-89
-check 0
-switch 29
-check 0
-check 0
-check 1
-93
-check 0
-switch 15
-check 0
-check 8
-198
-199
-200
-201
-202
-203
-204
-205
-check 0
-switch 20
-check 0
-check 1
-37
-check 0
-switch 18
-check 0
-check 1
-41
-check 0
-switch 16
-check 0
-check 1
-45
-check 0
-check 0
-switch 8
-check 3
-2
-112
-113
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 15
-check 0
-check 8
-206
-207
-208
-209
-210
-211
-212
-213
-check 0
-check 0
-switch 8
-check 2
-3
-114
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 27
-check 0
-switch 30
-check 0
-check 1
-182
-check 0
-check 0
-check 1
-90
-check 0
-switch 29
-check 0
-check 0
-check 1
-94
-check 0
-switch 15
-check 0
-check 8
-214
-215
-216
-217
-218
-219
-220
-221
-check 0
-switch 20
-check 0
-check 1
-38
-check 0
-switch 18
-check 0
-check 1
-42
-check 0
-switch 16
-check 0
-check 1
-46
-check 0
-check 0
-switch 8
-check 5
-4
-115
-116
-117
-118
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 28
-check 0
-switch 30
-check 0
-check 1
-183
-check 0
-check 0
-check 0
-check 0
-switch 15
-check 0
-check 8
-222
-223
-224
-225
-226
-227
-228
-229
-check 0
-check 0
-switch 8
-check 2
-5
-119
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 27
-check 0
-check 0
-check 1
-91
-check 0
-switch 29
-check 0
-check 0
-check 1
-95
-check 0
-switch 15
-check 0
-check 8
-230
-231
-232
-233
-234
-235
-236
-237
-check 0
-switch 20
-check 0
-check 1
-39
-check 0
-switch 18
-check 0
-check 1
-43
-check 0
-switch 16
-check 0
-check 1
-47
-check 0
-check 0
-switch 8
-check 2
-6
-120
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 29
-check 0
-switch 30
-check 0
-check 1
-184
-check 0
-check 0
-check 0
-check 0
-switch 15
-check 0
-check 8
-238
-239
-240
-241
-242
-243
-244
-245
-check 0
-check 0
-switch 8
-check 1
-121
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 15
-check 0
-check 2
-246
-247
-check 0
-check 0
-switch 8
-check 2
-122
-123
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 27
-check 0
-check 0
-check 1
-92
-check 0
-switch 29
-check 0
-check 0
-check 1
-96
-check 0
-switch 15
-check 0
-check 2
-248
-249
-check 0
-switch 20
-check 0
-check 1
-40
-check 0
-switch 18
-check 0
-check 1
-44
-check 0
-switch 16
-check 0
-check 1
-48
-check 0
-check 0
-switch 8
-check 1
-124
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 32
-check 0
-switch 30
-check 0
-check 1
-185
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 8
-check 0
-switch 5
-check 4
-7
-14
-125
-126
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 11
-check 0
-check 4
-250
-253
-256
-259
-check 0
-switch 9
-check 0
-check 8
-251
-252
-254
-255
-257
-258
-260
-261
-check 0
-check 0
-switch 5
-check 3
-8
-15
-127
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 22
-check 0
-switch 31
-check 0
-check 1
-177
-check 0
-check 0
-check 0
-switch 24
-check 0
-check 0
-check 1
-77
-switch 25
-check 0
-check 0
-check 1
-81
-switch 26
-check 0
-check 0
-check 1
-85
-switch 27
-check 0
-check 0
-check 0
-check 1
-97
-switch 29
-check 0
-check 0
-check 0
-check 1
-101
-switch 11
-check 0
-check 4
-262
-265
-268
-271
-check 0
-switch 9
-check 0
-check 8
-263
-264
-266
-267
-269
-270
-272
-273
-check 0
-switch 10
-check 0
-check 1
-49
-check 0
-switch 13
-check 0
-check 1
-53
-check 0
-switch 12
-check 0
-check 1
-57
-check 0
-check 0
-switch 5
-check 4
-9
-16
-128
-129
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 11
-check 0
-check 4
-274
-277
-280
-283
-check 0
-switch 9
-check 0
-check 8
-275
-276
-278
-279
-281
-282
-284
-285
-check 0
-check 0
-switch 5
-check 3
-10
-17
-130
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 23
-check 0
-switch 31
-check 0
-check 1
-178
-check 0
-check 0
-check 0
-switch 24
-check 0
-check 0
-check 1
-78
-switch 25
-check 0
-check 0
-check 1
-82
-switch 26
-check 0
-check 0
-check 1
-86
-switch 27
-check 0
-switch 31
-check 0
-check 1
-186
-check 0
-check 0
-check 0
-check 1
-98
-switch 29
-check 0
-check 0
-check 0
-check 1
-102
-switch 11
-check 0
-check 4
-286
-289
-292
-295
-check 0
-switch 9
-check 0
-check 8
-287
-288
-290
-291
-293
-294
-296
-297
-check 0
-switch 10
-check 0
-check 1
-50
-check 0
-switch 13
-check 0
-check 1
-54
-check 0
-switch 12
-check 0
-check 1
-58
-check 0
-check 0
-switch 5
-check 7
-11
-18
-131
-132
-133
-134
-135
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 24
-check 0
-switch 31
-check 0
-check 1
-179
-check 0
-check 0
-check 0
-switch 28
-check 0
-switch 31
-check 0
-check 1
-187
-check 0
-check 0
-check 0
-check 0
-switch 11
-check 0
-check 4
-298
-301
-304
-307
-check 0
-switch 9
-check 0
-check 8
-299
-300
-302
-303
-305
-306
-308
-309
-check 0
-check 0
-switch 5
-check 4
-12
-19
-136
-137
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 24
-check 0
-check 0
-check 1
-79
-switch 25
-check 0
-switch 31
-check 0
-check 1
-180
-check 0
-check 0
-check 1
-83
-switch 26
-check 0
-check 0
-check 1
-87
-switch 27
-check 0
-check 0
-check 0
-check 1
-99
-switch 29
-check 0
-check 0
-check 0
-check 1
-103
-switch 11
-check 0
-check 4
-310
-313
-316
-319
-check 0
-switch 9
-check 0
-check 8
-311
-312
-314
-315
-317
-318
-320
-321
-check 0
-switch 10
-check 0
-check 1
-51
-check 0
-switch 13
-check 0
-check 1
-55
-check 0
-switch 12
-check 0
-check 1
-59
-check 0
-check 0
-switch 5
-check 4
-13
-20
-138
-139
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 29
-check 0
-switch 31
-check 0
-check 1
-188
-check 0
-check 0
-check 0
-check 0
-switch 11
-check 0
-check 4
-322
-325
-328
-331
-check 0
-switch 9
-check 0
-check 8
-323
-324
-326
-327
-329
-330
-332
-333
-check 0
-check 0
-switch 5
-check 1
-140
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 11
-check 0
-check 1
-334
-check 0
-switch 9
-check 0
-check 2
-335
-336
-check 0
-check 0
-switch 5
-check 1
-141
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 24
-check 0
-check 0
-check 1
-80
-switch 25
-check 0
-check 0
-check 1
-84
-switch 26
-check 0
-switch 31
-check 0
-check 1
-181
-check 0
-check 0
-check 1
-88
-switch 27
-check 0
-check 0
-check 0
-check 1
-100
-switch 29
-check 0
-check 0
-check 0
-check 1
-104
-switch 11
-check 0
-check 1
-337
-check 0
-switch 9
-check 0
-check 2
-338
-339
-check 0
-switch 10
-check 0
-check 1
-52
-check 0
-switch 13
-check 0
-check 1
-56
-check 0
-switch 12
-check 0
-check 1
-60
-check 0
-check 0
-switch 5
-check 1
-142
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 32
-check 0
-switch 31
-check 0
-check 1
-189
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 5
-check 0
-switch 0
-check 5
-21
-143
-144
-145
-146
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 6
-check 0
-check 4
-340
-341
-342
-343
-check 0
-check 0
-switch 0
-check 2
-22
-147
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 6
-check 0
-check 4
-344
-345
-346
-347
-check 0
-switch 7
-check 0
-check 1
-61
-check 0
-check 0
-switch 0
-check 2
-23
-148
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 6
-check 0
-check 4
-348
-349
-350
-351
-check 0
-check 0
-switch 0
-check 3
-24
-149
-150
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 6
-check 0
-check 4
-352
-353
-354
-355
-check 0
-switch 7
-check 0
-check 1
-62
-check 0
-check 0
-switch 0
-check 5
-25
-151
-152
-153
-154
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 6
-check 0
-check 4
-356
-357
-358
-359
-check 0
-check 0
-switch 0
-check 2
-26
-155
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 6
-check 0
-check 4
-360
-361
-362
-363
-check 0
-switch 7
-check 0
-check 1
-63
-check 0
-check 0
-switch 0
-check 2
-27
-156
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 6
-check 0
-check 4
-364
-365
-366
-367
-check 0
-check 0
-switch 0
-check 1
-157
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-check 0
-switch 6
-check 0
-check 1
-368
-check 0
-switch 7
-check 0
-check 1
-64
-check 0
-check 0
-check 1
-158
-switch 0
-check 0
-switch 22
-check 2
-28
-159
-check 0
-check 0
-switch 1
-check 0
-check 8
-369
-370
-371
-372
-373
-374
-375
-376
-check 0
-check 0
-switch 22
-check 5
-29
-160
-161
-162
-163
-check 0
-check 0
-switch 1
-check 0
-check 8
-377
-378
-379
-380
-381
-382
-383
-384
-check 0
 switch 4
 check 0
 check 1
-65
-check 0
-switch 3
-check 0
-check 1
-69
-check 0
-switch 2
-check 0
-check 1
-73
+0
 check 0
 check 0
-switch 22
-check 4
+check 9
 30
-164
-165
-166
-check 0
-check 0
-switch 1
-check 0
-check 8
-385
-386
-387
-388
-389
-390
-391
-392
-check 0
-check 0
-switch 22
-check 2
-31
-167
-check 0
-check 0
-switch 1
-check 0
-check 8
-393
-394
-395
-396
-397
-398
-399
-400
-check 0
-switch 4
-check 0
-check 1
+39
+48
+57
 66
-check 0
-switch 3
-check 0
-check 1
-70
-check 0
-switch 2
-check 0
-check 1
-74
-check 0
-check 0
-switch 22
-check 2
-32
-168
-check 0
-check 0
-switch 1
-check 0
-check 8
-401
-402
-403
-404
-405
-406
-407
-408
-check 0
-check 0
-switch 22
-check 2
-33
-169
-check 0
-check 0
-switch 1
-check 0
-check 8
-409
-410
-411
-412
-413
-414
-415
-416
-check 0
-switch 4
-check 0
-check 1
-67
-check 0
-switch 3
-check 0
-check 1
-71
-check 0
-switch 2
-check 0
-check 1
 75
+94
+103
+112
+check 9
+31
+40
+49
+58
+67
+76
+85
+104
+113
+check 9
+32
+41
+50
+59
+68
+77
+86
+95
+114
+check 9
+33
+42
+51
+60
+69
+78
+87
+96
+105
+switch 5
 check 0
-check 0
-switch 22
-check 5
-34
+check 9
+124
+133
+142
+151
+160
+169
+178
+187
+196
+check 9
+115
+134
+143
+152
+161
 170
+179
+188
+197
+check 9
+116
+125
+144
+153
+162
 171
+180
+189
+198
+check 9
+117
+126
+135
+154
+163
 172
+181
+190
+199
+check 9
+118
+127
+136
+145
+164
 173
-check 0
-check 0
-switch 1
-check 0
-check 8
-417
-418
-419
-420
-421
-422
-423
-424
-check 0
-check 0
-switch 22
-check 2
-35
+182
+191
+200
+check 9
+119
+128
+137
+146
+155
 174
+183
+192
+201
+switch 3
+check 9
+120
+129
+138
+147
+156
+165
+184
+193
+202
 check 0
+check 0
+switch 0
+check 0
+check 1
+1
 check 0
 switch 1
 check 0
-check 2
-425
-426
+check 1
+2
 check 0
 check 0
-switch 22
-check 2
-36
+check 9
+121
+130
+139
+148
+157
+166
 175
+194
+203
+check 9
+122
+131
+140
+149
+158
+167
+176
+185
+204
+check 9
+123
+132
+141
+150
+159
+168
+177
+186
+195
+switch 3
 check 0
+check 1
+6
 check 0
-switch 1
+switch 2
 check 0
 check 2
-427
-428
+7
+8
 check 0
 switch 4
 check 0
 check 1
-68
+3
 check 0
-switch 3
-check 0
-check 1
-72
-check 0
-switch 2
+switch 0
 check 0
 check 1
-76
+4
 check 0
-check 0
-check 1
-176
-switch 30
-check 0
+switch 1
 check 0
 check 1
-105
-switch 31
+5
 check 0
-check 0
-check 1
-106
 check 0
 end_SG
 begin_DTG
 1
-6
-159
-0
+1
 4
-2
-160
 0
-4
-161
-0
-5
-162
+1
 0
 7
-163
-0
-3
 1
-164
-0
-6
-165
-0
-9
-166
-0
-1
-6
-167
-0
+2 0
+end_DTG
+begin_DTG
 1
 1
-168
+5
 0
 1
-1
-169
-0
-4
-0
-170
-0
-2
-171
-0
-3
-172
 0
 8
-173
-0
+1
+2 0
+end_DTG
+begin_DTG
 1
 1
-174
+7
 0
+2
+0
+4
+1
+0 0
+0
+5
+1
+1 0
+end_DTG
+begin_DTG
+1
 1
 6
-175
 0
 1
-2
-176
 0
+3
+1
+4 0
+end_DTG
+begin_DTG
+1
+1
+3
+0
+1
+0
+6
+1
+3 0
 end_DTG
 begin_DTG
 9
 1
-414
-1
-0 5
-1
-400
-1
-0 3
-1
-401
-1
-0 4
-1
-417
-1
-0 6
-1
-425
-1
-0 7
-1
-427
-1
-0 8
-1
-384
-1
-0 1
-1
-370
-1
-0 0
-1
-385
-1
-0 2
-9
+124
 0
-28
-1
-0 0
-0
-29
-1
-0 1
-0
-30
-1
-0 2
-0
-31
-1
-0 3
-0
-32
-1
-0 4
-0
-33
-1
-0 5
-0
-34
-1
-0 6
-0
-35
-1
-0 7
-0
-36
-1
-0 8
-end_DTG
-begin_DTG
-0
-9
-0
-374
 2
-0 0
-1 0
+133
 0
-382
-2
-0 1
-1 0
+3
+142
 0
-390
-2
-0 2
-1 0
-0
-398
-2
-0 3
-1 0
-0
-406
-2
-0 4
-1 0
-0
-414
-2
-0 5
-1 0
-0
-422
-2
-0 6
-1 0
-0
-426
-2
-0 7
-1 0
-0
-428
-2
-0 8
-1 0
-end_DTG
-begin_DTG
-0
-7
-0
-370
-2
-0 0
-1 0
-0
-378
-2
-0 1
-1 0
-0
-386
-2
-0 2
-1 0
-0
-394
-2
-0 3
-1 0
-0
-402
-2
-0 4
-1 0
-0
-410
-2
-0 5
-1 0
-0
-418
-2
-0 6
-1 0
-end_DTG
-begin_DTG
-0
-7
-0
-369
-2
-0 0
-1 0
-0
-377
-2
-0 1
-1 0
-0
-385
-2
-0 2
-1 0
-0
-393
-2
-0 3
-1 0
-0
-401
-2
-0 4
-1 0
-0
-409
-2
-0 5
-1 0
-0
-417
-2
-0 6
-1 0
-end_DTG
-begin_DTG
 4
+151
+0
+5
+160
+0
+6
+169
+0
+7
+178
+0
+8
+187
+0
+9
+196
+0
+9
+0
+115
+0
+2
+134
+0
 3
 143
 0
 4
-144
-0
-6
-145
-0
-8
-146
-0
-1
-4
-147
-0
-1
-3
-148
-0
-2
-0
-149
-0
-2
-150
-0
-4
-0
-151
-0
-1
 152
 0
 5
-153
-0
-7
-154
-0
-1
-4
-155
-0
-1
-0
-156
-0
-1
-4
-157
-0
-1
-0
-158
-0
-end_DTG
-begin_DTG
-8
-1
-354
-1
-5 3
-1
-368
-1
-5 7
-1
-367
-1
-5 6
-1
-363
-1
-5 5
-1
-359
-1
-5 4
-1
-340
-1
-5 0
-1
-351
-1
-5 2
-1
-347
-1
-5 1
-7
-0
-21
-1
-5 0
-0
-22
-1
-5 1
-0
-23
-1
-5 2
-0
-24
-1
-5 3
-0
-25
-1
-5 4
-0
-26
-1
-5 5
-0
-27
-1
-5 6
-end_DTG
-begin_DTG
-0
-7
-0
-340
-2
-5 0
-6 0
-0
-344
-2
-5 1
-6 0
-0
-348
-2
-5 2
-6 0
-0
-352
-2
-5 3
-6 0
-0
-356
-2
-5 4
-6 0
-0
-360
-2
-5 5
-6 0
-0
-364
-2
-5 6
-6 0
-end_DTG
-begin_DTG
-2
-3
-125
-0
-4
-126
-0
-1
-2
-127
-0
-2
-1
-128
-0
-4
-129
-0
-1
-0
-130
-0
-5
-0
-131
-0
-2
-132
-0
-5
-133
+161
 0
 6
-134
-0
-9
-135
-0
-2
-4
-136
+170
 0
 7
-137
-0
-2
-4
-138
+179
 0
 8
-139
-0
-1
-5
-140
-0
-1
-6
-141
-0
-1
-4
-142
-0
-end_DTG
-begin_DTG
-9
-1
-318
-1
-8 5
-1
-297
-1
-8 3
-1
-299
-1
-8 4
-1
-323
-1
-8 6
-1
-335
-1
-8 7
-1
-338
-1
-8 8
-1
-273
-1
-8 1
-1
-252
-1
-8 0
-1
-275
-1
-8 2
-7
-0
-14
-1
-8 0
-0
-15
-1
-8 1
-0
-16
-1
-8 2
-0
-17
-1
-8 3
-0
-18
-1
-8 4
-0
-19
-1
-8 5
-0
-20
-1
-8 6
-end_DTG
-begin_DTG
-0
-7
-0
-251
-2
-8 0
-9 0
-0
-263
-2
-8 1
-9 0
-0
-275
-2
-8 2
-9 0
-0
-287
-2
-8 3
-9 0
-0
-299
-2
-8 4
-9 0
-0
-311
-2
-8 5
-9 0
-0
-323
-2
-8 6
-9 0
-end_DTG
-begin_DTG
-9
-1
-295
-1
-8 3
-1
-337
-1
-8 8
-1
-334
-1
-8 7
-1
-331
-1
-8 6
-1
-319
-1
-8 5
-1
-307
-1
-8 4
-1
-250
-1
-8 0
-1
-283
-1
-8 2
-1
-271
-1
-8 1
-7
-0
-7
-1
-8 0
-0
-8
-1
-8 1
+188
 0
 9
-1
-8 2
+197
 0
-10
-1
-8 3
+9
 0
-11
-1
-8 4
-0
-12
-1
-8 5
-0
-13
-1
-8 6
-end_DTG
-begin_DTG
-0
-18
-0
-306
-2
-8 4
-9 0
-0
-339
-2
-8 8
-9 0
-0
-337
-2
-8 8
-11 0
-0
-336
-2
-8 7
-9 0
-0
-334
-2
-8 7
-11 0
-0
-330
-2
-8 6
-9 0
-0
-328
-2
-8 6
-11 0
-0
-318
-2
-8 5
-9 0
-0
-316
-2
-8 5
-11 0
-0
-256
-2
-8 0
-11 0
-0
-304
-2
-8 4
-11 0
-0
-294
-2
-8 3
-9 0
-0
-292
-2
-8 3
-11 0
-0
-282
-2
-8 2
-9 0
-0
-280
-2
-8 2
-11 0
-0
-270
-2
-8 1
-9 0
-0
-268
-2
-8 1
-11 0
-0
-258
-2
-8 0
-9 0
-end_DTG
-begin_DTG
-0
-14
-0
-250
-2
-8 0
-11 0
-0
-252
-2
-8 0
-9 0
-0
-262
-2
-8 1
-11 0
-0
-264
-2
-8 1
-9 0
-0
-274
-2
-8 2
-11 0
-0
-276
-2
-8 2
-9 0
-0
-286
-2
-8 3
-11 0
-0
-288
-2
-8 3
-9 0
-0
-298
-2
-8 4
-11 0
-0
-300
-2
-8 4
-9 0
-0
-310
-2
-8 5
-11 0
-0
-312
-2
-8 5
-9 0
-0
-322
-2
-8 6
-11 0
-0
-324
-2
-8 6
-9 0
-end_DTG
-begin_DTG
-1
-4
-107
-0
-4
-2
-108
-0
-4
-109
-0
-6
-110
-0
-8
-111
-0
-2
-1
-112
-0
-3
-113
-0
-1
-2
-114
-0
-4
-0
-115
-0
-1
 116
 0
+1
+125
+0
+3
+144
+0
+4
+153
+0
 5
-117
+162
+0
+6
+171
+0
+7
+180
+0
+8
+189
 0
 9
+198
+0
+9
+0
+117
+0
+1
+126
+0
+2
+135
+0
+4
+154
+0
+5
+163
+0
+6
+172
+0
+7
+181
+0
+8
+190
+0
+9
+199
+0
+9
+0
 118
 0
 1
-4
+127
+0
+2
+136
+0
+3
+145
+0
+5
+164
+0
+6
+173
+0
+7
+182
+0
+8
+191
+0
+9
+200
+0
+9
+0
 119
 0
 1
-1
+128
+0
+2
+137
+0
+3
+146
+0
+4
+155
+0
+6
+174
+0
+7
+183
+0
+8
+192
+0
+9
+201
+0
+9
+0
 120
 0
 1
-8
-121
+129
 0
 2
-1
-122
+138
+0
+3
+147
+0
+4
+156
+0
+5
+165
 0
 7
+184
+0
+8
+193
+0
+9
+202
+0
+9
+0
+121
+0
+1
+130
+0
+2
+139
+0
+3
+148
+0
+4
+157
+0
+5
+166
+0
+6
+175
+0
+8
+194
+0
+9
+203
+0
+9
+0
+122
+0
+1
+131
+0
+2
+140
+0
+3
+149
+0
+4
+158
+0
+5
+167
+0
+6
+176
+0
+7
+185
+0
+9
+204
+0
+9
+0
 123
 0
 1
-4
-124
-0
-end_DTG
-begin_DTG
-9
-1
-235
-1
-14 5
-1
-221
-1
-14 3
-1
-222
-1
-14 4
-1
-238
-1
-14 6
-1
-246
-1
-14 7
-1
-248
-1
-14 8
-1
-205
-1
-14 1
-1
-191
-1
-14 0
-1
-206
-1
-14 2
-7
-0
-0
-1
-14 0
-0
-1
-1
-14 1
+132
 0
 2
-1
-14 2
+141
 0
 3
-1
-14 3
+150
 0
 4
-1
-14 4
+159
 0
 5
-1
-14 5
+168
 0
 6
-1
-14 6
+177
+0
+7
+186
+0
+8
+195
+0
 end_DTG
 begin_DTG
+9
+1
+34
+0
+2
+43
+0
+3
+52
+0
+4
+61
+0
+5
+70
+0
+6
+79
+0
+7
+88
+0
+8
+97
+0
+9
+106
 0
 9
 0
-195
+25
+0
 2
-14 0
-15 0
-0
-203
-2
-14 1
-15 0
-0
-211
-2
-14 2
-15 0
-0
-219
-2
-14 3
-15 0
-0
-227
-2
-14 4
-15 0
-0
-235
-2
-14 5
-15 0
-0
-243
-2
-14 6
-15 0
-0
-247
-2
-14 7
-15 0
-0
-249
-2
-14 8
-15 0
-end_DTG
-begin_DTG
-0
-12
-0
-45
-2
-14 1
-16 0
-0
-46
-2
-14 3
-16 0
-0
-47
-2
-14 5
-16 0
-0
-48
-2
-14 8
-16 0
-0
-57
-2
-8 1
-12 0
-0
-58
-2
-8 3
-12 0
-0
-59
-2
-8 5
-12 0
-0
-60
-2
-8 8
-12 0
-0
-73
-2
-0 1
-2 0
-0
-74
-2
-0 3
-2 0
-0
-75
-2
-0 5
-2 0
-0
-76
-2
-0 8
-2 0
-end_DTG
-begin_DTG
-0
-7
-0
-191
-2
-14 0
-15 0
-0
-199
-2
-14 1
-15 0
-0
-207
-2
-14 2
-15 0
-0
-215
-2
-14 3
-15 0
-0
-223
-2
-14 4
-15 0
-0
-231
-2
-14 5
-15 0
-0
-239
-2
-14 6
-15 0
-end_DTG
-begin_DTG
-0
-12
-0
-41
-2
-14 1
-18 0
-0
-42
-2
-14 3
-18 0
-0
-43
-2
-14 5
-18 0
-0
 44
-2
-14 8
-18 0
 0
+3
 53
-2
-8 1
-13 0
 0
-54
-2
-8 3
-13 0
+4
+62
 0
-55
-2
-8 5
-13 0
-0
-56
-2
-8 8
-13 0
-0
-69
-2
-0 1
-3 0
-0
-70
-2
-0 3
-3 0
-0
+5
 71
-2
-0 5
-3 0
 0
-72
-2
-0 8
-3 0
-end_DTG
-begin_DTG
+6
+80
 0
 7
+89
 0
-190
-2
-14 0
-15 0
+8
+98
 0
-198
-2
-14 1
-15 0
+9
+107
 0
-206
-2
-14 2
-15 0
+9
 0
-214
-2
-14 3
-15 0
+26
 0
-222
-2
-14 4
-15 0
-0
-230
-2
-14 5
-15 0
-0
-238
-2
-14 6
-15 0
-end_DTG
-begin_DTG
-0
-16
-0
-37
-2
-14 1
-20 0
-0
-38
-2
-14 3
-20 0
-0
-39
-2
-14 5
-20 0
-0
-40
-2
-14 8
-20 0
-0
-49
-2
-8 1
-10 0
-0
-50
-2
-8 3
-10 0
-0
-51
-2
-8 5
-10 0
-0
-52
-2
-8 8
-10 0
-0
-61
-2
-5 1
-7 0
-0
-62
-2
-5 3
-7 0
-0
-63
-2
-5 5
-7 0
-0
-64
-2
-5 7
-7 0
-0
-65
-2
-0 1
-4 0
-0
-66
-2
-0 3
-4 0
-0
-67
-2
-0 5
-4 0
-0
-68
-2
-0 8
-4 0
-end_DTG
-begin_DTG
 1
-1
-177
-2
-8 1
-31 0
+35
 0
-end_DTG
-begin_DTG
-1
-1
-178
-2
-8 3
-31 0
+3
+54
 0
-end_DTG
-begin_DTG
-1
-1
-179
-2
-8 4
-31 0
-0
-end_DTG
-begin_DTG
-1
-1
-180
-2
-8 5
-31 0
-0
-end_DTG
-begin_DTG
-1
-1
-181
-2
-8 8
-31 0
-0
-end_DTG
-begin_DTG
-2
-1
-182
-2
-14 3
-30 0
-2
-186
-2
-8 3
-31 0
-0
-0
-end_DTG
-begin_DTG
-2
-1
-183
-2
-14 4
-30 0
-2
-187
-2
-8 4
-31 0
-0
-0
-end_DTG
-begin_DTG
-2
-1
-184
-2
-14 6
-30 0
-2
-188
-2
-8 6
-31 0
-0
-0
-end_DTG
-begin_DTG
 4
-1
-182
-2
-14 3
-27 0
-1
-183
-2
-14 4
-28 0
-1
-184
-2
-14 6
-29 0
-1
-185
-2
-14 9
-32 0
-1
+63
 0
+5
+72
+0
+6
+81
+0
+7
+90
+0
+8
+99
+0
+9
+108
+0
+9
+0
+27
+0
+1
+36
+0
+2
+45
+0
+4
+64
+0
+5
+73
+0
+6
+82
+0
+7
+91
+0
+8
+100
+0
+9
+109
+0
+9
+0
+28
+0
+1
+37
+0
+2
+46
+0
+3
+55
+0
+5
+74
+0
+6
+83
+0
+7
+92
+0
+8
+101
+0
+9
+110
+0
+9
+0
+29
+0
+1
+38
+0
+2
+47
+0
+3
+56
+0
+4
+65
+0
+6
+84
+0
+7
+93
+0
+8
+102
+0
+9
+111
+0
+9
+0
+30
+0
+1
+39
+0
+2
+48
+0
+3
+57
+0
+4
+66
+0
+5
+75
+0
+7
+94
+0
+8
+103
+0
+9
+112
+0
+9
+0
+31
+0
+1
+40
+0
+2
+49
+0
+3
+58
+0
+4
+67
+0
+5
+76
+0
+6
+85
+0
+8
+104
+0
+9
+113
+0
+9
+0
+32
+0
+1
+41
+0
+2
+50
+0
+3
+59
+0
+4
+68
+0
+5
+77
+0
+6
+86
+0
+7
+95
+0
+9
+114
+0
+9
+0
+33
+0
+1
+42
+0
+2
+51
+0
+3
+60
+0
+4
+69
+0
+5
+78
+0
+6
+87
+0
+7
+96
+0
+8
 105
 0
 end_DTG
 begin_DTG
+1
+1
+8
+1
+2 0
+1
+0
+2
+2
+5 6
+1 0
+end_DTG
+begin_DTG
+1
+1
+7
+1
+2 0
+1
+0
+1
+2
+5 6
+0 0
+end_DTG
+begin_DTG
+0
+2
+0
+22
+3
+8 0
+5 8
+0 0
+0
+23
+3
+7 0
+5 8
+1 0
+end_DTG
+begin_DTG
+0
+2
+0
+20
+3
+8 0
+5 7
+0 0
+0
+21
+3
+7 0
+5 7
+1 0
+end_DTG
+begin_DTG
+0
+2
+0
+16
+3
+8 0
+5 3
+0 0
+0
+17
+3
+7 0
+5 3
+1 0
+end_DTG
+begin_DTG
+1
+1
+6
+1
+3 0
+1
+0
+0
+2
+6 5
+4 0
+end_DTG
+begin_DTG
+0
+2
+0
+12
+3
+12 0
+6 9
+4 0
+0
+24
+3
+8 0
+5 9
+0 0
+end_DTG
+begin_DTG
+0
+3
+0
+11
+3
+12 0
+6 4
+4 0
+0
+18
+3
+8 0
+5 4
+0 0
+0
+19
+3
+7 0
+5 4
+1 0
+end_DTG
+begin_DTG
+0
+2
+0
+10
+3
+12 0
+6 2
+4 0
+0
+15
+3
+8 0
+5 2
+0 0
+end_DTG
+begin_DTG
+0
+3
+0
 9
-1
-177
-2
-8 1
-22 0
-1
-178
-2
-8 3
-23 0
-1
-179
-2
-8 4
-24 0
-1
-180
-2
-8 5
-25 0
-1
-181
-2
-8 8
-26 0
-1
-186
-2
-8 3
-27 0
-1
-187
-2
-8 4
-28 0
-1
-188
-2
-8 6
-29 0
-1
-189
-2
-8 9
-32 0
-1
+3
+12 0
+6 1
+4 0
 0
-106
+13
+3
+8 0
+5 1
+0 0
 0
-end_DTG
-begin_DTG
-2
-1
-185
-2
-14 9
-30 0
-2
-189
-2
-8 9
-31 0
-0
-0
-end_DTG
-begin_DTG
-0
-8
-0
-93
-2
-14 1
-29 1
-0
-94
-2
-14 3
-29 1
-0
-95
-2
-14 5
-29 1
-0
-96
-2
-14 8
-29 1
-0
-101
-2
-8 1
-29 2
-0
-102
-2
-8 3
-29 2
-0
-103
-2
-8 5
-29 2
-0
-104
-2
-8 8
-29 2
-end_DTG
-begin_DTG
-0
-4
-0
-85
-2
-8 1
-26 1
-0
-86
-2
-8 3
-26 1
-0
-87
-2
-8 5
-26 1
-0
-88
-2
-8 8
-26 1
-end_DTG
-begin_DTG
-0
-4
-0
-81
-2
-8 1
-25 1
-0
-82
-2
-8 3
-25 1
-0
-83
-2
-8 5
-25 1
-0
-84
-2
-8 8
-25 1
-end_DTG
-begin_DTG
-0
-4
-0
-77
-2
-8 1
-24 1
-0
-78
-2
-8 3
-24 1
-0
-79
-2
-8 5
-24 1
-0
-80
-2
-8 8
-24 1
-end_DTG
-begin_DTG
-0
-8
-0
-89
-2
-14 1
-27 1
-0
-90
-2
-14 3
-27 1
-0
-91
-2
-14 5
-27 1
-0
-92
-2
-14 8
-27 1
-0
-97
-2
-8 1
-27 2
-0
-98
-2
-8 3
-27 2
-0
-99
-2
-8 5
-27 2
-0
-100
-2
-8 8
-27 2
+14
+3
+7 0
+5 1
+1 0
 end_DTG
 begin_CG
-7
-1 69
-21 4
-19 4
-17 4
-4 7
-3 7
-2 9
-3
-4 7
-3 7
-2 9
-1
-17 4
-1
-19 4
-1
-21 4
-3
-6 36
-21 4
-7 7
-1
-7 7
-1
-21 4
-23
-22 1
-23 1
-24 1
-25 1
-26 1
-27 1
-28 1
-29 1
-32 1
-11 37
-9 67
-21 4
-19 4
-17 4
-36 4
-35 4
-34 4
-37 4
-33 4
-31 9
-10 7
-13 14
-12 18
-3
-10 7
-13 7
-12 9
-1
-21 4
-2
-13 7
-12 9
-1
-17 4
-1
-19 4
-14
-27 1
-28 1
-29 1
-32 1
-15 67
-21 4
-19 4
-17 4
-37 4
-33 4
-30 4
-20 7
-18 7
-16 9
-3
-20 7
-18 7
-16 9
-1
-17 4
-0
-1
-19 4
-0
-1
-21 4
-0
-1
-31 1
-1
-31 1
-2
-36 4
-31 1
-2
-35 4
-31 1
-2
-34 4
-31 1
-3
-37 8
-30 1
-31 1
-2
-30 1
-31 1
-3
-33 8
-30 1
-31 1
-4
-27 1
-28 1
-29 1
-32 1
 9
-22 1
-23 1
-24 1
-25 1
-26 1
-27 1
-28 1
-29 1
-32 1
+8 1
+16 1
+15 1
+11 1
+14 1
+10 1
+9 1
+13 1
+2 1
+7
+7 1
+16 1
+11 1
+14 1
+10 1
+9 1
+2 1
+4
+8 1
+7 1
+0 1
+1 1
 2
-30 1
-31 1
+12 1
+4 1
+6
+12 1
+16 1
+15 1
+14 1
+13 1
+3 1
+9
+8 1
+7 1
+16 2
+15 1
+11 2
+14 2
+10 2
+9 2
+13 1
+5
+12 1
+16 1
+15 1
+14 1
+13 1
+5
+16 1
+11 1
+14 1
+10 1
+9 1
+7
+16 1
+15 1
+11 1
+14 1
+10 1
+9 1
+13 1
 0
+0
+0
+4
+16 1
+15 1
+14 1
+13 1
 0
 0
 0
