@@ -19,7 +19,6 @@
 ^new-scripts/reports/
 ^new-scripts/preprocessed-tasks/
 ^new-scripts/exp-.*/
-^benchmarks/
 ^misc/
 ^new-scripts/
 ^ref-results/
