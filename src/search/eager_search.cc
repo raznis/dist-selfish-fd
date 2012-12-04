@@ -92,19 +92,58 @@ void EagerSearch::statistics() const {
 
 int EagerSearch::step() {
 	receive_messages();
-	if(g_received_termination){
-		cout << "Received Termination message!" << endl;
-		return SOLVED;
-	}
-	if (g_num_of_agents_confirming_current_solution == g_num_of_agents - 1 || (g_marginal_search && g_num_of_agents_confirming_current_solution == g_num_of_agents - 2)) {//current solution confirmed by all other agents
-		cout << "SOLVED!!!" << endl;
-		//TODO - send out termination message so that agents will get ready for the trace back
-		for (int i = 0; i < g_num_of_agents; i++) {
-			Message* m = new Message(g_current_solution, 0, g_g_of_current_solution,
-					0, i, TERMINATION, vector<bool>());
-			g_ma_comm->sendMessage(m);
+
+	//TERMINATION DETECTION
+	if (g_multiple_goal) {
+		bool all_terminate = true;
+		for (int i = 0; i <= g_received_termination.size() && all_terminate;
+				i++) {
+			all_terminate = g_received_termination[i];
 		}
-		return SOLVED;
+		if (all_terminate) {
+			cout << "Received Termination messages for all agents!" << endl;
+			return SOLVED;
+		}
+		for (int marginal_agent = 0; marginal_agent <= g_num_of_agents;
+				marginal_agent++) {
+			if (g_num_of_agents_confirming_current_solution[marginal_agent]
+					== g_num_of_agents - 1
+					&& !g_received_termination[marginal_agent]) {
+				cout << "SOLVED MARGINAL PROBLEM " << marginal_agent << endl;
+				g_received_termination[marginal_agent] = true;
+				//send out termination message
+				for (int i = 0; i < g_num_of_agents; i++) {
+					Message* m = new Message(
+							g_current_solution[g_num_of_agents], 0,
+							g_g_of_current_solution[g_num_of_agents],
+							marginal_agent, i, TERMINATION, vector<bool>());
+					g_ma_comm->sendMessage(m);
+				}
+			}
+		}
+
+	} else {
+		if (g_received_termination[g_num_of_agents]) {
+			cout << "Received Termination message (for optimal solution)!"
+					<< endl;
+			return SOLVED;
+		}
+		if (g_num_of_agents_confirming_current_solution[g_num_of_agents]
+				== g_num_of_agents - 1
+				|| (g_marginal_search
+						&& g_num_of_agents_confirming_current_solution[g_num_of_agents]
+								== g_num_of_agents - 2)) {//current solution confirmed by all other agents
+			cout << "SOLVED!!!" << endl;
+			//TODO - send out termination message so that agents will get ready for the trace back
+			for (int i = 0; i < g_num_of_agents; i++) {
+				Message* m = new Message(g_current_solution[g_num_of_agents], 0,
+						g_g_of_current_solution[g_num_of_agents],
+						g_num_of_agents, i, TERMINATION, vector<bool>());
+				g_ma_comm->sendMessage(m);
+			}
+			cout << "Sent all termination messages. " << endl;
+			return SOLVED;
+		}
 	}
 	pair<SearchNode, bool> n = fetch_next_node();
 	if (!n.second) {
@@ -117,40 +156,120 @@ int EagerSearch::step() {
 
 	State s = node.get_state();
 	if (check_goal_and_set_plan(s)) {
+		if (g_multiple_goal) {
+			if (node.get_creating_op()->agent == g_agent_id) {//I own this goal state
+				for (int marginal_agent = 0; marginal_agent <= g_num_of_agents;
+						marginal_agent++) {	//last iteration is the optimal solution
+					if ((marginal_agent < g_num_of_agents
+							&& !node.get_participating_agents()[marginal_agent])
+							|| marginal_agent == g_num_of_agents) { //marginal agent does not participate
+						if (g_g_of_current_solution[marginal_agent] == -1
+								|| g_g_of_current_solution[marginal_agent]
+										> node.get_g()) { // this is the first solution I found or this is a better solution than the best one found so far.
+							cout << "Found solution with g=" << node.get_g()
+									<< " for marginal agent " << marginal_agent
+									<< ", Participating agents: ";
+							for (int i = 0; i < g_num_of_agents; i++)
+								cout << node.get_participating_agents()[i]
+										<< ", ";
+							cout << endl;
+							delete (g_current_solution[marginal_agent]);
+							g_current_solution[marginal_agent] = new State(s);
+							g_g_of_current_solution[marginal_agent] =
+									node.get_g();
+							g_num_of_agents_confirming_current_solution[marginal_agent] =
+									0;
+							for (int i = 0; i < g_num_of_agents; i++) {
+								Message* m = new Message(&s,
+										node.get_creating_op(), node.get_g(), 0,
+										i, SEARCH_NODE,
+										node.get_participating_agents());
+								g_ma_comm->sendMessage(m);
+							}
+						}
+					}
+				}
 
-		if (node.get_creating_op()->agent == g_agent_id) {//I own this goal state
+			} else {	//This goal state was sent to me
+				for (int marginal_agent = 0; marginal_agent <= g_num_of_agents;
+						marginal_agent++) {	//last iteration is the optimal solution
+					if ((marginal_agent < g_num_of_agents
+							&& !node.get_participating_agents()[marginal_agent])
+							|| marginal_agent == g_num_of_agents) { //marginal agent does not participate
 
-			//broadcast solution
-			if (g_g_of_current_solution == -1
-					|| g_g_of_current_solution > node.get_g()) {// this is the first solution I found or this is a better solution than the best one found so far.
-				cout << "Found solution with g=" << node.get_g()
-						<< ", Participating agents: ";
-				for (int i = 0; i < g_num_of_agents; i++)
-					cout << node.get_participating_agents()[i] << ", ";
-				cout << endl;
-				delete (g_current_solution);
-				g_current_solution = new State(s);
-				g_g_of_current_solution = node.get_g();
-				g_num_of_agents_confirming_current_solution = 0;
-				for (int i = 0; i < g_num_of_agents; i++) {
+						if (g_g_of_current_solution[marginal_agent] == -1
+								|| g_g_of_current_solution[marginal_agent]
+										>= node.get_g()) { // this is the first solution I saw or this is a better or equal solution than the best one found so far.
+										//send confirmation message
+							cout
+									<< "Sending confirmation of solution for marginal agent "
+									<< marginal_agent << " to agent "
+									<< node.get_creating_op()->agent
+									<< " , participating agents: ";
+							for (int i = 0; i < g_num_of_agents; i++)
+								cout << node.get_participating_agents()[i]
+										<< ", ";
+							cout << endl;
+							g_g_of_current_solution[marginal_agent] =
+									node.get_g();
+							Message* m = new Message(&s, node.get_creating_op(),
+									node.get_g(), marginal_agent,
+									node.get_creating_op()->agent,
+									SOLUTION_CONFIRMATION,
+									node.get_participating_agents()); //TODO - HACK HACK  using h value as the marginal agent that's relevant for this solution confirmation
+							g_ma_comm->sendMessage(m);
+
+						}
+
+					}
+				}
+
+			}
+		} else {	//NOT PERFORMING MULTI_GOAL SEARCH
+			int marginal_agent = g_num_of_agents;//HACK HACK this represents the index of the optimal solution
+			if (node.get_creating_op()->agent == g_agent_id) { //I own this goal state
+
+				if (g_g_of_current_solution[marginal_agent] == -1
+						|| g_g_of_current_solution[marginal_agent]
+								> node.get_g()) { // this is the first solution I found or this is a better solution than the best one found so far.
+					cout << "Found solution with g=" << node.get_g()
+							<< " for marginal agent " << marginal_agent
+							<< ", Participating agents: ";
+					for (int i = 0; i < g_num_of_agents; i++)
+						cout << node.get_participating_agents()[i] << ", ";
+					cout << endl;
+					delete (g_current_solution[marginal_agent]);
+					g_current_solution[marginal_agent] = new State(s);
+					g_g_of_current_solution[marginal_agent] = node.get_g();
+					g_num_of_agents_confirming_current_solution[marginal_agent] =
+							0;
+					for (int i = 0; i < g_num_of_agents; i++) {
+						Message* m = new Message(&s, node.get_creating_op(),
+								node.get_g(), 0, i, SEARCH_NODE,
+								node.get_participating_agents());
+						g_ma_comm->sendMessage(m);
+					}
+				}
+
+			} else {	//This goal state was sent to me
+				if (g_g_of_current_solution[marginal_agent] == -1
+						|| g_g_of_current_solution[marginal_agent]
+								>= node.get_g()) { // this is the first solution I saw or this is a better or equal solution than the best one found so far.
+								//send confirmation message
+					cout << "Sending confirmation of solution to agent "
+							<< node.get_creating_op()->agent
+							<< ", participating agents: ";
+					for (int i = 0; i < g_num_of_agents; i++)
+						cout << node.get_participating_agents()[i] << ", ";
+					cout << endl;
+					g_g_of_current_solution[marginal_agent] = node.get_g();
 					Message* m = new Message(&s, node.get_creating_op(),
-							node.get_g(), 0, i, SEARCH_NODE,
-							node.get_participating_agents());
+							node.get_g(), marginal_agent,
+							node.get_creating_op()->agent,
+							SOLUTION_CONFIRMATION,
+							node.get_participating_agents()); //TODO - HACK HACK  using h value as the marginal agent that's relevant for this solution confirmation
 					g_ma_comm->sendMessage(m);
 				}
-			}
-		} else {	//This goal state was sent to me
-			if (g_g_of_current_solution == -1
-					|| g_g_of_current_solution >= node.get_g()) {// this is the first solution I found or this is a better or equal solution than the best one found so far.
-							//send confirmation message
-				cout << "Sending confirmation of solution to agent "
-						<< node.get_creating_op()->agent << endl;
-				g_g_of_current_solution = node.get_g();
-				Message* m = new Message(&s, node.get_creating_op(),
-						node.get_g(), 0, node.get_creating_op()->agent,
-						SOLUTION_CONFIRMATION, node.get_participating_agents());
-				g_ma_comm->sendMessage(m);
-
 			}
 		}
 		//return SOLVED;
@@ -225,7 +344,8 @@ void EagerSearch::send_state_to_relevant_agents(const Operator* op,
 	for (int op_idx = 0; op_idx < g_operators.size(); op_idx++) {
 		Operator curr_op = g_operators[op_idx];
 		if (sent_message_to_agent[curr_op.agent] || !curr_op.is_public
-				|| curr_op.agent == g_agent_id || (g_marginal_search && g_marginal_agent == curr_op.agent))
+				|| curr_op.agent == g_agent_id
+				|| (g_marginal_search && g_marginal_agent == curr_op.agent))
 			continue;
 		//curr_op is public, owned by a different agent, which we did not mark as one to send a message to.
 		if (curr_op.is_applicable_public(new_state)) {
@@ -343,10 +463,7 @@ void EagerSearch::handle_state_from_message(State succ_state,
 
 	vector<bool> participating_agents;
 	for (int i = 0; i < g_num_of_agents; i++) {
-		if (g_multiple_goal)
-			participating_agents.push_back(participating[i]);
-		else
-			participating_agents.push_back(true);
+		participating_agents.push_back((bool) participating[i]);
 	}
 	SearchNode succ_node = search_space.get_node(succ_state);
 
@@ -448,32 +565,43 @@ void EagerSearch::receive_messages() {
 	while (!g_ma_comm->noIncomingMessage()) {
 		Message* m = g_ma_comm->receiveMessage();
 		State new_state = State(m);
-		if(g_marginal_search && m->sender_id == g_marginal_agent)
+		if (g_marginal_search && m->sender_id == g_marginal_agent)
 			continue;
 		if (m->msgType == SEARCH_NODE) {
 			handle_state_from_message(new_state,
 					((const Operator*) &g_operators[m->creating_op_index]),
-					(int) m->g, (int) m->h, (bool*) m->participating_agents);
+					(int) m->g, (int) m->h, ((bool*) m->participating_agents));
 		} else if (m->msgType == SOLUTION_CONFIRMATION) {
-			if (!g_current_solution) {
-				cout
-						<< "received solution confirmation without having a solution!!!"
+			int marginal_agent = (int) m->h;//TODO - HACK HACK  using h value as the marginal agent that's relevant for this solution confirmation
+			if (!g_current_solution[marginal_agent]) {
+				cout << "received solution confirmation from agent "
+						<< (int) m->sender_id << " for marginal agent "
+						<< marginal_agent << " without having a solution!!!"
 						<< endl;
 			} else {
-				cout
-						<< "received solution confirmation, checking equality with current solution..."
-						<< endl;
-				if (g_current_solution->operator ==(new_state)) {
-					g_num_of_agents_confirming_current_solution++;
+				cout << "received solution confirmation for marginal agent "
+						<< marginal_agent << " from agent "
+						<< (int) m->sender_id << ", participating agents: ";
+				for (int i = 0; i < g_num_of_agents; i++)
+					cout << ((bool*) m->participating_agents)[i] << ", ";
+				cout << endl;
+				cout << " checking equality with current solution..." << endl;
+				if (g_current_solution[marginal_agent]->operator ==(
+						new_state)) {
+					g_num_of_agents_confirming_current_solution[marginal_agent]++;
 					cout << "received confirmation from agent "
 							<< (int) m->sender_id
 							<< ", number of confirming agents is "
-							<< g_num_of_agents_confirming_current_solution
+							<< g_num_of_agents_confirming_current_solution[marginal_agent]
 							<< endl;
 				}
 			}
-		} else if(m->msgType == TERMINATION){
-			g_received_termination = true;
+		} else if (m->msgType == TERMINATION) {
+			cout << "received termination for marginal problem " << (int) m->h
+					<< endl;
+			g_received_termination[(int) m->h] = true;
+			if (g_multiple_goal)
+				continue;
 			return;
 		}
 

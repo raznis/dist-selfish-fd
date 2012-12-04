@@ -362,17 +362,17 @@ bool g_marginal_search = false;
 int g_marginal_agent = -1;
 int g_num_of_agents = -1;
 bool g_multiple_goal = false;
-vector<int> g_marginal_solution_for_agent;
+
 bool g_parallel_search = false;
 
 int g_agent_id = -1;
 MAComm* g_ma_comm;
 MAConfiguration g_comm_config;
-State* g_current_solution;
-int g_g_of_current_solution = -1;
-int g_num_of_agents_confirming_current_solution = 0;
-vector<bool> g_agents_confirming_current_solution;
-bool g_received_termination = false;
+vector<State*> g_current_solution;
+vector<int> g_g_of_current_solution;
+vector<int> g_num_of_agents_confirming_current_solution;
+
+vector<bool> g_received_termination;
 int g_num_of_messages_sent = 0;
 int g_num_of_messages_received = 0;
 bool g_message_delay = false;
@@ -439,9 +439,16 @@ void partition_by_agent_names(const char* configFileName) {
 			agent_names[i] = line;
 			cout << "agent " << i << ": " << agent_names[i] << endl;
 			agent_ids[i] = i;
-			g_marginal_solution_for_agent.push_back(-1);//-1 means that we haven't found a marginal solution for the agent.
+			g_current_solution.push_back(0);//marginal solutions for the agents
+			g_g_of_current_solution.push_back(-1); //-1 means that we haven't found a marginal solution for the agent.
+			g_num_of_agents_confirming_current_solution.push_back(0);
+			g_received_termination.push_back(false);
+
 		}
-		g_marginal_solution_for_agent.push_back(-1); //another value for the optimal plan
+		g_current_solution.push_back(0);	//another value for the optimal plan
+		g_g_of_current_solution.push_back(-1); //another value for the optimal plan
+		g_num_of_agents_confirming_current_solution.push_back(0);//another value for the optimal plan
+		g_received_termination.push_back(false);//another value for the optimal plan
 
 		myfile.close();
 		cout << "Closed agent names configuration file" << endl;
@@ -788,12 +795,12 @@ void initialize_communication(const char* configFileName) {
 	g_comm_config = g_ma_comm->getConfigCopy();
 	g_agent_id = g_ma_comm->getConfigCopy().thisId;
 
-	//These are used for maintaining the current solution and who confirmed it.
-	g_g_of_current_solution = -1;
-	g_num_of_agents_confirming_current_solution = 0;
-	for (int i = 0; i < g_comm_config.nAgents(); i++) {
-		g_agents_confirming_current_solution.push_back(false);
-	}
+	//These are used for maintaining the current solution and who confirmed it. //TODO - removed when implementing multi_goal changes
+//	g_g_of_current_solution = -1;
+//	g_num_of_agents_confirming_current_solution = 0;
+//	for (int i = 0; i < g_comm_config.nAgents(); i++) {
+//		g_agents_confirming_current_solution.push_back(false);
+//	}
 //	for (int i = 0; i < g_comm_config.nAgents(); i++) {
 //		cout << g_agents_confirming_current_solution[i] << ",";
 //	}

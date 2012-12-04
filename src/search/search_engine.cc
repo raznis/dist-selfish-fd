@@ -52,25 +52,28 @@ bool SearchEngine::check_goal_and_set_plan(const State &state) {
 		Plan plan;
 		if (g_multiple_goal && false) {	//TODO - this is for testing the participating agents is passed in the messages. Not yet implemented the actual multigoal
 
-			search_space.trace_path(state, plan);
+			//TODO - this is what needs to be done -- depend on the traceback of the solution in order to determine participating agents.
+			//However, this should be done at a later time, and also, we need to watch out for the communication complexity.
+			//Of course, we need to implem,ent traceback before this can be done.
+			//search_space.trace_path(state, plan);
 
-			bool found_all_marginal_solutions = true;
-			for (int i = 0; i <= g_num_of_agents; i++) { //last value is the optimal plan (does not have to exclude any agent)
-				if (g_marginal_solution_for_agent[i] == -1
-						&& !did_agent_participate(plan, i)) {
-					g_marginal_solution_for_agent[i] = calculate_plan_cost(
-							plan);
-					cout << "found plan excluding agent " << i << " with cost "
-							<< g_marginal_solution_for_agent[i] << endl;
-					if(i == g_num_of_agents)
-						set_plan(plan);
-				}
-				if (g_marginal_solution_for_agent[i] == -1)
-					found_all_marginal_solutions = false;
-			}
-			if (found_all_marginal_solutions)
-				return true;
-			return false;
+//			bool found_all_marginal_solutions = true;
+//			for (int i = 0; i <= g_num_of_agents; i++) { //last value is the optimal plan (does not have to exclude any agent)
+//				if (g_marginal_solution_for_agent[i] == -1
+//						&& !did_agent_participate(plan, i)) {
+//					g_marginal_solution_for_agent[i] = calculate_plan_cost(
+//							plan);
+//					cout << "found plan excluding agent " << i << " with cost "
+//							<< g_marginal_solution_for_agent[i] << endl;
+//					if(i == g_num_of_agents)
+//						set_plan(plan);
+//				}
+//				if (g_marginal_solution_for_agent[i] == -1)
+//					found_all_marginal_solutions = false;
+//			}
+//			if (found_all_marginal_solutions)
+//				return true;
+//			return false;
 		}
 //		cout << "Solution found!" << endl;
 //		cout << "Path trace is not yet implemented..." << endl;

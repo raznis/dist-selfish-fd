@@ -31,10 +31,10 @@ struct Message {
 	unsigned short creating_op_index; //This will work only if the order of operators is constant between agents.
 	//const state_var_t *parent_state;	//I think this isn't necessary
 	int num_of_vars; //This is the size of vars.
-	int num_of_actions_in_plan;
+	//int num_of_actions_in_plan;
 
 	state_var_t* vars; // values for vars
-	int* operator_indices_of_plan;	//this holds the plan (indices of operators in the plan)
+	//int* operator_indices_of_plan;	//this holds the plan (indices of operators in the plan)
 	bool* participating_agents;
 
 private:

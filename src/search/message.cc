@@ -39,16 +39,19 @@ Message::Message(State* new_state, const Operator *creating_op, int g_value,
 		vars[i] = state_vars[i];
 
 	// ToDo Raz: initialize num_of_actions_in_plan and operator_indices_of_plan
-	num_of_actions_in_plan = 0;
-	operator_indices_of_plan = 0;
-
-	participating_agents = new bool[g_num_of_agents];
-
-	for (int i = 0; i < g_num_of_agents; i++) {
-		if (g_multiple_goal)
+//	num_of_actions_in_plan = 0;
+//	operator_indices_of_plan = 0;
+	if (msgType == SEARCH_NODE || msgType == SOLUTION_CONFIRMATION) {
+		participating_agents = new bool[g_num_of_agents];
+		for (int i = 0; i < g_num_of_agents; i++) {
 			participating_agents[i] = participating[i];
-		else
+		}
+	}
+	if (msgType == TERMINATION) {
+		participating_agents = new bool[g_num_of_agents];
+		for (int i = 0; i < g_num_of_agents; i++) {
 			participating_agents[i] = true;
+		}
 	}
 }
 //TRACE BACK MESSAGE
@@ -69,20 +72,20 @@ Message::Message(StateProxy &current_state, vector<const Operator *> &path,
 		vars[i] = current_state.state_data[i];
 	}
 	cout << endl;
-	//cout<<"done updating vars..." <<endl;
-	num_of_actions_in_plan = path.size();
-	operator_indices_of_plan = new int[num_of_actions_in_plan];
-	//cout<<"num of actions: "<<num_of_actions_in_plan<<endl;
-	for (int i = 0; i < num_of_actions_in_plan; i++)
-		operator_indices_of_plan[i] = get_op_index(path[i]);
-	//cout<<"done building trace message."<<endl;
+	cout << "done updating vars..." << path[0]->is_public << endl;
+//	num_of_actions_in_plan = path.size();
+//	operator_indices_of_plan = new int[num_of_actions_in_plan];
+//	//cout<<"num of actions: "<<num_of_actions_in_plan<<endl;
+//	for (int i = 0; i < num_of_actions_in_plan; i++)
+//		operator_indices_of_plan[i] = get_op_index(path[i]);
+//	//cout<<"done building trace message."<<endl;
 }
 
 Message::~Message() {
 	if (vars)
 		delete[] vars;
-	if (operator_indices_of_plan)
-		delete[] operator_indices_of_plan;
+//	if (operator_indices_of_plan)
+//		delete[] operator_indices_of_plan;
 	if (participating_agents)
 		delete[] participating_agents;
 }
@@ -109,11 +112,11 @@ int Message::serialize(char* buffer) const {
 	memcpy(p, vars, fieldSize);
 	p += fieldSize;
 
-	fieldSize = num_of_actions_in_plan * sizeof(int);
-	memcpy(p, operator_indices_of_plan, fieldSize);
-	p += fieldSize;
+//	fieldSize = num_of_actions_in_plan * sizeof(int);
+//	memcpy(p, operator_indices_of_plan, fieldSize);
+//	p += fieldSize;
 
-	if (g_multiple_goal && msgType == SEARCH_NODE) {
+	if ((msgType == SEARCH_NODE) || (msgType == SOLUTION_CONFIRMATION) || (msgType == TERMINATION)) {
 		fieldSize = g_num_of_agents * sizeof(bool);
 		memcpy(p, participating_agents, fieldSize);
 		p += fieldSize;
@@ -135,14 +138,14 @@ Message* Message::deserialize(char* buffer) {
 		p += fieldSize;
 	}
 
-	if (m->num_of_actions_in_plan) {
-		fieldSize = m->num_of_actions_in_plan * sizeof(int);
-		m->operator_indices_of_plan = new int[m->num_of_actions_in_plan];
-		memcpy(m->operator_indices_of_plan, p, fieldSize);
-		p += fieldSize;
-	}
+//	if (m->num_of_actions_in_plan) {
+//		fieldSize = m->num_of_actions_in_plan * sizeof(int);
+//		m->operator_indices_of_plan = new int[m->num_of_actions_in_plan];
+//		memcpy(m->operator_indices_of_plan, p, fieldSize);
+//		p += fieldSize;
+//	}
 
-	if (g_multiple_goal && m->msgType == SEARCH_NODE) {
+	if ((m->msgType == SEARCH_NODE) || (m->msgType == SOLUTION_CONFIRMATION) || (m->msgType == TERMINATION)) {
 		fieldSize = g_num_of_agents * sizeof(bool);
 		m->participating_agents = new bool[g_num_of_agents];
 		memcpy(m->participating_agents, p, fieldSize);

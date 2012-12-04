@@ -80,10 +80,8 @@ void SearchNode::open_initial(int h) {
 	info.parent_state = 0;
 	info.creating_operator = 0;
 	info.network_parent = false;
-	if (g_multiple_goal) {
-		for (int i = 0; i < g_num_of_agents; i++)
-			info.participated_agents.push_back(false);
-	}
+	for (int i = 0; i < g_num_of_agents; i++)
+		info.participated_agents.push_back(false);
 }
 
 void SearchNode::open(int h, const SearchNode &parent_node,
@@ -99,13 +97,9 @@ void SearchNode::open(int h, const SearchNode &parent_node,
 	info.network_parent = false;
 
 	for (int i = 0; i < g_num_of_agents; i++) {
-		if (g_multiple_goal){
 		info.participated_agents.push_back(
 				parent_node.info.participated_agents[i]);
 		info.participated_agents[parent_op->agent] = true;
-		}
-		else
-			info.participated_agents.push_back(true);
 	}
 
 }
@@ -120,14 +114,10 @@ void SearchNode::open(int h, int g, const Operator *parent_op, State succ_state,
 	info.parent_state = succ_state.get_buffer(); //This is set to be the actual state, used for traceback stage
 	info.creating_operator = parent_op;
 	info.network_parent = true;
-	//TODO - handle the participating agents!
-	if (g_multiple_goal) {
-		//cout << "Here..." << endl;
-		for (int i = 0; i < g_num_of_agents; i++)
-			info.participated_agents[i] = participating[i];
-	}
+	for (int i = 0; i < g_num_of_agents; i++)
+		info.participated_agents.push_back(participating[i]);
 }
-
+//TODO - HANDLE PARTICIPATING AGENTS WHEN REOPENING!!!!!!
 void SearchNode::reopen(const SearchNode &parent_node,
 		const Operator *parent_op) {
 	assert(
@@ -141,14 +131,14 @@ void SearchNode::reopen(const SearchNode &parent_node,
 	info.real_g = parent_node.info.real_g + parent_op->get_cost();
 	info.parent_state = parent_node.state_buffer;
 	info.creating_operator = parent_op;
-	if (g_multiple_goal) {
-		info.participated_agents.clear();
-		for (int i = 0; i < g_num_of_agents; i++)
-			info.participated_agents.push_back(
-					parent_node.info.participated_agents[i]);
-		info.participated_agents[parent_op->agent] = true;
-	}
+	info.participated_agents.clear();
+	for (int i = 0; i < g_num_of_agents; i++)
+		info.participated_agents.push_back(
+				parent_node.info.participated_agents[i]);
+	info.participated_agents[parent_op->agent] = true;
+
 }
+//TODO - HANDLE PARTICIPATING AGENTS WHEN REOPENING!!!!!!
 //reopening a search node from a message
 void SearchNode::reopen(int g, const Operator *parent_op, State state,
 		vector<bool> participating) {
@@ -159,13 +149,12 @@ void SearchNode::reopen(int g, const Operator *parent_op, State state,
 	info.creating_operator = parent_op;
 	info.network_parent = true;
 
-	if (g_multiple_goal) {
-		info.participated_agents.clear();
-		for (int i = 0; i < g_num_of_agents; i++)
-			info.participated_agents[i] = participating[i];
-	}
-}
+	info.participated_agents.clear();
+	for (int i = 0; i < g_num_of_agents; i++)
+		info.participated_agents[i] = participating[i];
 
+}
+//TODO - HANDLE PARTICIPATING AGENTS WHEN REOPENING!!!!!!
 // like reopen, except doesn't change status
 void SearchNode::update_parent(const SearchNode &parent_node,
 		const Operator *parent_op) {
@@ -202,18 +191,21 @@ void SearchNode::dump() {
 }
 
 bool SearchNode::is_relevant_for_mariginal_search() {
-	bool found_non_participating_agent = false;
-	for (int i = 0; i < g_num_of_agents; i++) {
-		if (!info.participated_agents[i]) {
-			found_non_participating_agent = true;
-			if (g_marginal_solution_for_agent[i] == -1)
-				return true;
-		}
-	}
-	if (!found_non_participating_agent
-			&& g_marginal_solution_for_agent[g_num_of_agents] == -1)
-		return true;
-	return false;
+	//TODO - IMPLEMENT!!!!!
+
+//	bool found_non_participating_agent = false;
+//	for (int i = 0; i < g_num_of_agents; i++) {
+//		if (!info.participated_agents[i]) {
+//			found_non_participating_agent = true;
+//			if (g_marginal_solution_for_agent[i] == -1)
+//				return true;
+//		}
+//	}
+//	if (!found_non_participating_agent
+//			&& g_marginal_solution_for_agent[g_num_of_agents] == -1)
+//		return true;
+//	return false;
+	return true;
 }
 
 class SearchSpace::HashTable: public __gnu_cxx::hash_map<StateProxy,
