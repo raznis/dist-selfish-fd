@@ -9,8 +9,7 @@ using namespace std;
 #include "option_parser.h"
 
 SearchEngine::SearchEngine(const Options &opts) :
-		search_space(OperatorCost(opts.get_enum("cost_type"))), cost_type(
-				OperatorCost(opts.get_enum("cost_type"))) {
+		search_space(OperatorCost(opts.get_enum("cost_type"))), cost_type(OperatorCost(opts.get_enum("cost_type"))) {
 	solved = false;
 	if (opts.get<int>("bound") < 0) {
 		cerr << "error: negative cost bound " << opts.get<int>("bound") << endl;
@@ -99,8 +98,6 @@ void SearchEngine::add_options_to_parser(OptionParser &parser) {
 	cost_types.push_back("NORMAL");
 	cost_types.push_back("ONE");
 	cost_types.push_back("PLUSONE");
-	parser.add_enum_option("cost_type", cost_types, "NORMAL",
-			"operator cost adjustment type");
-	parser.add_option<int>("bound", numeric_limits<int>::max(),
-			"bound on plan cost");
+	parser.add_enum_option("cost_type", cost_types, "NORMAL", "operator cost adjustment type");
+	parser.add_option<int>("bound", numeric_limits<int>::max(), "bound on plan cost");
 }

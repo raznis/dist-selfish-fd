@@ -54,7 +54,8 @@ public:
 
 	void dump();
 
-	bool is_relevant_for_mariginal_search();
+	bool is_relevant_for_marginal_search();
+	bool is_state_with_agent_action_relevant_for_marginal_search(int agent);
 
 	void open(int h, int g, const Operator *parent_op, State succ_state, vector<bool> participating);
 	void reopen(int g, const Operator *parent_op, State state, vector<bool> participating);

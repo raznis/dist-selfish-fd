@@ -10,8 +10,7 @@
 using namespace std;
 using namespace __gnu_cxx;
 
-SearchNode::SearchNode(state_var_t *state_buffer_, SearchNodeInfo &info_,
-		OperatorCost cost_type_) :
+SearchNode::SearchNode(state_var_t *state_buffer_, SearchNodeInfo &info_, OperatorCost cost_type_) :
 		state_buffer(state_buffer_), info(info_), cost_type(cost_type_) {
 }
 
@@ -84,12 +83,10 @@ void SearchNode::open_initial(int h) {
 		info.participated_agents.push_back(false);
 }
 
-void SearchNode::open(int h, const SearchNode &parent_node,
-		const Operator *parent_op) {
+void SearchNode::open(int h, const SearchNode &parent_node, const Operator *parent_op) {
 	assert(info.status == SearchNodeInfo::NEW);
 	info.status = SearchNodeInfo::OPEN;
-	info.g = parent_node.info.g
-			+ get_adjusted_action_cost(*parent_op, cost_type);
+	info.g = parent_node.info.g + get_adjusted_action_cost(*parent_op, cost_type);
 	info.real_g = parent_node.info.real_g + parent_op->get_cost();
 	info.h = h;
 	info.parent_state = parent_node.state_buffer;
@@ -97,15 +94,13 @@ void SearchNode::open(int h, const SearchNode &parent_node,
 	info.network_parent = false;
 
 	for (int i = 0; i < g_num_of_agents; i++) {
-		info.participated_agents.push_back(
-				parent_node.info.participated_agents[i]);
+		info.participated_agents.push_back(parent_node.info.participated_agents[i]);
 		info.participated_agents[parent_op->agent] = true;
 	}
 
 }
 //opening a state from a message
-void SearchNode::open(int h, int g, const Operator *parent_op, State succ_state,
-		vector<bool> participating) {
+void SearchNode::open(int h, int g, const Operator *parent_op, State succ_state, vector<bool> participating) {
 	assert(info.status == SearchNodeInfo::NEW);
 	info.status = SearchNodeInfo::OPEN;
 	info.g = g;
@@ -118,30 +113,25 @@ void SearchNode::open(int h, int g, const Operator *parent_op, State succ_state,
 		info.participated_agents.push_back(participating[i]);
 }
 //TODO - HANDLE PARTICIPATING AGENTS WHEN REOPENING!!!!!!
-void SearchNode::reopen(const SearchNode &parent_node,
-		const Operator *parent_op) {
-	assert(
-			info.status == SearchNodeInfo::OPEN || info.status == SearchNodeInfo::CLOSED);
+void SearchNode::reopen(const SearchNode &parent_node, const Operator *parent_op) {
+	assert( info.status == SearchNodeInfo::OPEN || info.status == SearchNodeInfo::CLOSED);
 
 	// The latter possibility is for inconsistent heuristics, which
 	// may require reopening closed nodes.
 	info.status = SearchNodeInfo::OPEN;
-	info.g = parent_node.info.g
-			+ get_adjusted_action_cost(*parent_op, cost_type);
+	info.g = parent_node.info.g + get_adjusted_action_cost(*parent_op, cost_type);
 	info.real_g = parent_node.info.real_g + parent_op->get_cost();
 	info.parent_state = parent_node.state_buffer;
 	info.creating_operator = parent_op;
 	info.participated_agents.clear();
 	for (int i = 0; i < g_num_of_agents; i++)
-		info.participated_agents.push_back(
-				parent_node.info.participated_agents[i]);
+		info.participated_agents.push_back(parent_node.info.participated_agents[i]);
 	info.participated_agents[parent_op->agent] = true;
 
 }
 //TODO - HANDLE PARTICIPATING AGENTS WHEN REOPENING!!!!!!
 //reopening a search node from a message
-void SearchNode::reopen(int g, const Operator *parent_op, State state,
-		vector<bool> participating) {
+void SearchNode::reopen(int g, const Operator *parent_op, State state, vector<bool> participating) {
 	info.status = SearchNodeInfo::OPEN;
 	info.g = g;
 	info.real_g = g; //TODO(Raz) - find out the difference, maybe needs to be added to message.
@@ -156,14 +146,11 @@ void SearchNode::reopen(int g, const Operator *parent_op, State state,
 }
 //TODO - HANDLE PARTICIPATING AGENTS WHEN REOPENING!!!!!!
 // like reopen, except doesn't change status
-void SearchNode::update_parent(const SearchNode &parent_node,
-		const Operator *parent_op) {
-	assert(
-			info.status == SearchNodeInfo::OPEN || info.status == SearchNodeInfo::CLOSED);
+void SearchNode::update_parent(const SearchNode &parent_node, const Operator *parent_op) {
+	assert( info.status == SearchNodeInfo::OPEN || info.status == SearchNodeInfo::CLOSED);
 	// The latter possibility is for inconsistent heuristics, which
 	// may require reopening closed nodes.
-	info.g = parent_node.info.g
-			+ get_adjusted_action_cost(*parent_op, cost_type);
+	info.g = parent_node.info.g + get_adjusted_action_cost(*parent_op, cost_type);
 	info.real_g = parent_node.info.real_g + parent_op->get_cost();
 	info.parent_state = parent_node.state_buffer;
 	info.creating_operator = parent_op;
@@ -186,30 +173,40 @@ void SearchNode::mark_as_dead_end() {
 void SearchNode::dump() {
 	cout << state_buffer << ": ";
 	State(state_buffer).dump();
-	cout << " created by " << info.creating_operator->get_name() << " from "
-			<< info.parent_state << endl;
+	cout << " created by " << info.creating_operator->get_name() << " from " << info.parent_state << endl;
 }
 
-bool SearchNode::is_relevant_for_mariginal_search() {
-	//TODO - IMPLEMENT!!!!!
-
-//	bool found_non_participating_agent = false;
-//	for (int i = 0; i < g_num_of_agents; i++) {
-//		if (!info.participated_agents[i]) {
-//			found_non_participating_agent = true;
-//			if (g_marginal_solution_for_agent[i] == -1)
-//				return true;
-//		}
-//	}
-//	if (!found_non_participating_agent
-//			&& g_marginal_solution_for_agent[g_num_of_agents] == -1)
-//		return true;
-//	return false;
-	return true;
+bool SearchNode::is_relevant_for_marginal_search() {
+	if (!g_received_termination[g_num_of_agents])
+		return true;
+	for (int i = 0; i < g_num_of_agents; i++) {
+		if (!info.participated_agents[i]) {
+			if (!g_received_termination[i])
+				return true;
+		}
+	}
+	return false;
 }
 
-class SearchSpace::HashTable: public __gnu_cxx::hash_map<StateProxy,
-		SearchNodeInfo> {
+bool SearchNode::is_state_with_agent_action_relevant_for_marginal_search(int agent) {
+	if (!g_received_termination[g_num_of_agents])
+		return true;
+
+	if (info.participated_agents[agent])
+		return true;
+
+	//Another agent does not participate
+	for (int i = 0; i < g_num_of_agents; i++) {
+		if (!info.participated_agents[i] && i != agent) {
+			if (!g_received_termination[i])
+				return true;
+		}
+	}
+
+	return false;
+}
+
+class SearchSpace::HashTable: public __gnu_cxx::hash_map<StateProxy, SearchNodeInfo> {
 	// This is more like a typedef really, but we need a proper class
 	// so that we can hide the information in the header file by using
 	// a forward declaration. This is also the reason why the hash
@@ -231,8 +228,7 @@ int SearchSpace::size() const {
 
 SearchNode SearchSpace::get_node(const State &state) {
 	static SearchNodeInfo default_info;
-	pair<HashTable::iterator, bool> result = nodes->insert(
-			make_pair(StateProxy(&state), default_info));
+	pair<HashTable::iterator, bool> result = nodes->insert(make_pair(StateProxy(&state), default_info));
 	if (result.second) {
 		// This is a new entry: Must give the state permanent lifetime.
 		result.first->first.make_permanent();
@@ -241,8 +237,7 @@ SearchNode SearchSpace::get_node(const State &state) {
 	return SearchNode(iter->first.state_data, iter->second, cost_type);
 }
 
-void SearchSpace::trace_path(const State &goal_state,
-		vector<const Operator *> &path) const {
+void SearchSpace::trace_path(const State &goal_state, vector<const Operator *> &path) const {
 	StateProxy current_state(&goal_state);
 	assert(path.empty());
 	for (;;) {
@@ -253,21 +248,18 @@ void SearchSpace::trace_path(const State &goal_state,
 		if (op == 0)
 			break;
 		path.push_back(op);
-		current_state = StateProxy(
-				const_cast<state_var_t *>(info.parent_state));
+		current_state = StateProxy(const_cast<state_var_t *>(info.parent_state));
 	}
 	reverse(path.begin(), path.end());
 }
 
 void SearchSpace::dump() {
 	int i = 0;
-	for (HashTable::iterator iter = nodes->begin(); iter != nodes->end();
-			iter++) {
+	for (HashTable::iterator iter = nodes->begin(); iter != nodes->end(); iter++) {
 		cout << "#" << i++ << " (" << iter->first.state_data << "): ";
 		State(iter->first.state_data).dump();
 		if (iter->second.creating_operator && iter->second.parent_state) {
-			cout << " created by " << iter->second.creating_operator->get_name()
-					<< " from " << iter->second.parent_state << endl;
+			cout << " created by " << iter->second.creating_operator->get_name() << " from " << iter->second.parent_state << endl;
 		} else {
 			cout << "has no parent" << endl;
 		}

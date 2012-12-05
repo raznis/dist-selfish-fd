@@ -199,7 +199,7 @@ SearchEngine *OptionParser::parse_cmd_line(
         	i++;
             cout << "running marginal search without agent " << g_marginal_agent << endl;
         } else if (arg.compare("--multiple_goal") == 0) {
-        	g_multiple_goal = true;
+			g_multiple_goal = true;
             cout << "running search for multiple goals " << endl;
         } else if (arg.compare("--symmetry") == 0) {
         	g_symmetry_pruning = true;

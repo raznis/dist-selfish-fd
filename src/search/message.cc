@@ -21,9 +21,8 @@ Message::Message() {
 	memset(this, 0, sizeof(Message));
 }
 
-Message::Message(State* new_state, const Operator *creating_op, int g_value,
-		int h_value, unsigned char destination_id, unsigned char mes_type,
-		vector<bool> participating) {
+Message::Message(State* new_state, const Operator *creating_op, int g_value, int h_value, unsigned char destination_id,
+		unsigned char mes_type, vector<bool> participating) {
 	dest_id = destination_id;
 	creating_op_index = get_op_index(creating_op);
 	g = g_value;
@@ -55,8 +54,7 @@ Message::Message(State* new_state, const Operator *creating_op, int g_value,
 	}
 }
 //TRACE BACK MESSAGE
-Message::Message(StateProxy &current_state, vector<const Operator *> &path,
-		int target_agent) {
+Message::Message(StateProxy &current_state, vector<const Operator *> &path, int target_agent) {
 	//cout<<"starting to build the trace back message..." <<endl;
 	dest_id = target_agent;
 	//cout<<"sending to agent " << (int)dest_id << endl;
@@ -91,11 +89,9 @@ Message::~Message() {
 }
 //SHOULD BE USED ONLY WHEN RECEIVING MESSAGES
 void Message::dump() const {
-	cout << "Message " << message_id << " from agent " << (int) sender_id
-			<< " to agent " << (int) dest_id << ", op index = "
+	cout << "Message " << message_id << " from agent " << (int) sender_id << " to agent " << (int) dest_id << ", op index = "
 			<< (int) creating_op_index << endl;
-	cout << "g = " << g << ", h = " << h << ", message_type = " << (int) msgType
-			<< ", num of vars = " << num_of_vars << endl;
+	cout << "g = " << g << ", h = " << h << ", message_type = " << (int) msgType << ", num of vars = " << num_of_vars << endl;
 	for (int i = 0; i < g_variable_domain.size(); i++) {
 		cout << (int) vars[i] << ",";
 	}

@@ -54,8 +54,7 @@ void *listenerThreadEntry(void *data) {
 
 	Message* m = NULL;
 	try {
-		while ((m = MAProtocol::receiveMsg(sock)) != NULL && m->msgType
-				!= MSG_FIN)
+		while ((m = MAProtocol::receiveMsg(sock)) != NULL && m->msgType != MSG_FIN)
 			// NULL - TCP connection terminated
 			// MSG_FIN - remote agent requests a connection termination
 			comm->m_InQueue.push(m);
@@ -89,8 +88,8 @@ void *senderThreadEntry(void *data) {
 		if (m->msgType == MSG_FIN)
 			fin = true;
 		else {
-			if (comm->m_Sockets[m->dest_id]){
-				if(g_message_delay && !m->msgType == SOLUTION_CONFIRMATION){
+			if (comm->m_Sockets[m->dest_id]) {
+				if (g_message_delay && !m->msgType == SOLUTION_CONFIRMATION) {
 					usleep((rand() % 10000) * 10);
 				}
 				MAProtocol::sendMsg(comm->m_Sockets[m->dest_id], m);
@@ -145,7 +144,7 @@ Message* MAProtocol::receiveMsg(TCPSocket *sock) {
 }
 
 MAComm::MAComm(const char *configFileName, int agent_id) :
-	m_InQueue("InQueue"), m_OutQueue("OutQueue") {
+		m_InQueue("InQueue"), m_OutQueue("OutQueue") {
 	m_ThreadCounter = 0;
 	pthread_mutex_init(&m_Mutex, NULL);
 	pthread_cond_init(&m_NoThreadsCond, NULL);
@@ -222,8 +221,7 @@ void MAComm::waitForConnections() {
 
 			// Create listener thread
 			pthread_t threadID; // Thread ID from pthread_create()
-			if (pthread_create(&threadID, NULL, listenerThreadEntry,
-					(void *) new ListenerData(agent, this)) != 0) {
+			if (pthread_create(&threadID, NULL, listenerThreadEntry, (void *) new ListenerData(agent, this)) != 0) {
 				cerr << "Unable to create thread" << endl;
 				exit(1);
 			}
@@ -254,8 +252,7 @@ void MAComm::initiateConnections() {
 
 			// Create listener thread
 			pthread_t threadID; // Thread ID from pthread_create()
-			if (pthread_create(&threadID, NULL, listenerThreadEntry,
-					(void *) new ListenerData(agent, this)) != 0) {
+			if (pthread_create(&threadID, NULL, listenerThreadEntry, (void *) new ListenerData(agent, this)) != 0) {
 				cerr << "Unable to create thread" << endl;
 				exit(1);
 			}
@@ -297,12 +294,9 @@ void MAComm::setConfiguration(const char *configFileName, int agent_id) {
 			} else {
 				IPAddress addr;
 				addr.host = line.substr(0, pos);
-				addr.port = atoi(
-						line.substr(pos + 1, line.length() - pos - 1).c_str());
+				addr.port = atoi(line.substr(pos + 1, line.length() - pos - 1).c_str());
 				m_Config.servers.push_back(addr);
-				cout << "Adding agent " << m_Config.servers.size() - 1
-						<< " with address " << addr.host << ":" << addr.port
-						<< endl;
+				cout << "Adding agent " << m_Config.servers.size() - 1 << " with address " << addr.host << ":" << addr.port << endl;
 			}
 		}
 
@@ -335,8 +329,7 @@ void MAComm::disconnect() {
 		try {
 			string host = m_Config.servers[agent].host;
 			unsigned short port = m_Config.servers[agent].port;
-			cout << "Sending FIN to agent " << agent << " " << host << ":"
-					<< port << "... " << endl;
+			cout << "Sending FIN to agent " << agent << " " << host << ":" << port << "... " << endl;
 			m->dest_id = agent;
 			if (m_Sockets[agent])
 				MAProtocol::sendMsg(m_Sockets[agent], m);
@@ -356,6 +349,4 @@ void MAComm::disconnect() {
 
 	cout << "MAComm successfuly disconnected" << endl;
 }
-
-
 

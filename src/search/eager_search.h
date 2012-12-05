@@ -51,12 +51,9 @@ public:
 	 * MA-A* stuff
 	 */
 	void receive_messages();
-	void handle_state(State succ_state, const Operator *op,
-			set<const Operator *> preferred_ops, SearchNode node, State s);
-	void handle_state_from_message(State succ_state,
-			const Operator *op, int g_from_message, int h_from_message, bool* participating);
-	void send_state_to_relevant_agents(const Operator* op, State new_state,
-			int g, int h, vector<bool> participating);
+	void handle_state(State succ_state, const Operator *op, set<const Operator *> preferred_ops, SearchNode node, State s);
+	void handle_state_from_message(State succ_state, const Operator *op, int g_from_message, int h_from_message, bool* participating);
+	void send_state_to_relevant_agents(const Operator* op, State new_state, int g, int h, vector<bool> participating);
 
 };
 
