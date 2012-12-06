@@ -205,6 +205,10 @@ SearchEngine *OptionParser::parse_cmd_line(
         	g_symmetry_pruning = true;
             cout << "running partition of action graph and symmetry pruning " << endl;
         } else if (arg.compare("--parallel") == 0) {
+        	if(dry_run && g_agents_search){
+        		cout << "--parallel must be ordered before --agents. Exiting..." << endl;
+        		exit(1);
+        	}
         	g_parallel_search = true;
             cout << "running parallel search " << endl;
         } else if (arg.compare("--delay") == 0) {

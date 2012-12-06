@@ -76,8 +76,7 @@ void save_plan(const vector<const Operator *> &plan, int iter) {
 		outfile.open(out.str().c_str(), ios::out);
 	}
 	for (int i = 0; i < plan.size(); i++) {
-		cout << plan[i]->get_name() << " (" << plan[i]->get_cost() << ")"
-				<< endl;
+		cout << plan[i]->get_name() << " (" << plan[i]->get_cost() << ")" << endl;
 		outfile << "(" << plan[i]->get_name() << ")" << endl;
 	}
 	outfile.close();
@@ -114,9 +113,7 @@ void check_magic(istream &in, string magic) {
 		cout << "Failed to match magic word '" << magic << "'." << endl;
 		cout << "Got '" << word << "'." << endl;
 		if (magic == "begin_version") {
-			cerr << "Possible cause: you are running the planner "
-					<< "on a preprocessor file from " << endl
-					<< "an older version." << endl;
+			cerr << "Possible cause: you are running the planner " << "on a preprocessor file from " << endl << "an older version." << endl;
 		}
 		exit(1);
 	}
@@ -128,8 +125,7 @@ void read_and_verify_version(istream &in) {
 	in >> version;
 	check_magic(in, "end_version");
 	if (version != PRE_FILE_VERSION) {
-		cerr << "Expected preprocessor file version " << PRE_FILE_VERSION
-				<< ", got " << version << "." << endl;
+		cerr << "Expected preprocessor file version " << PRE_FILE_VERSION << ", got " << version << "." << endl;
 		cerr << "Exiting." << endl;
 		exit(1);
 	}
@@ -157,8 +153,7 @@ void read_variables(istream &in) {
 		g_variable_domain.push_back(range);
 		if (range > numeric_limits<state_var_t>::max()) {
 			cerr << "This should not have happened!" << endl;
-			cerr << "Are you using the downward script, or are you using "
-					<< "downward-1 directly?" << endl;
+			cerr << "Are you using the downward script, or are you using " << "downward-1 directly?" << endl;
 			exit(1);
 		}
 
@@ -237,8 +232,7 @@ void read_goal(istream &in) {
 void dump_goal() {
 	cout << "Goal Conditions:" << endl;
 	for (int i = 0; i < g_goal.size(); i++)
-		cout << "  " << g_variable_name[g_goal[i].first] << ": "
-				<< g_goal[i].second << endl;
+		cout << "  " << g_variable_name[g_goal[i].first] << ": " << g_goal[i].second << endl;
 }
 
 void read_operators(istream &in) {
@@ -281,8 +275,7 @@ void dump_everything() {
 	// TODO: Dump the actual fact names.
 	cout << "Variables (" << g_variable_name.size() << "):" << endl;
 	for (int i = 0; i < g_variable_name.size(); i++)
-		cout << "  " << g_variable_name[i] << " (range " << g_variable_domain[i]
-				<< ")" << endl;
+		cout << "  " << g_variable_name[i] << " (range " << g_variable_domain[i] << ")" << endl;
 	cout << "Initial State:" << endl;
 	g_initial_state->dump();
 	dump_goal();
@@ -296,8 +289,7 @@ void dump_everything() {
 
 void verify_no_axioms_no_cond_effects() {
 	if (!g_axioms.empty()) {
-		cerr << "Heuristic does not support axioms!" << endl << "Terminating."
-				<< endl;
+		cerr << "Heuristic does not support axioms!" << endl << "Terminating." << endl;
 		exit(1);
 	}
 
@@ -313,12 +305,10 @@ void verify_no_axioms_no_cond_effects() {
 			int var = pre_post[j].var;
 			int pre = pre_post[j].pre;
 			int post = pre_post[j].post;
-			if (pre == -1 && cond.size() == 1 && cond[0].var == var
-					&& cond[0].prev != post && g_variable_domain[var] == 2)
+			if (pre == -1 && cond.size() == 1 && cond[0].var == var && cond[0].prev != post && g_variable_domain[var] == 2)
 				continue;
 
-			cerr << "Heuristic does not support conditional effects "
-					<< "(operator " << g_operators[i].get_name() << ")" << endl
+			cerr << "Heuristic does not support conditional effects " << "(operator " << g_operators[i].get_name() << ")" << endl
 					<< "Terminating." << endl;
 			exit(1);
 		}
@@ -386,27 +376,22 @@ void update_private_public_actions() {
 	cout << "Updating public and private actions... " << endl;
 	int public_actions = 0;
 	int private_actions = 0;
-	int zero_cost_Actions = 0;
 	for (int op_idx = 0; op_idx < g_operators.size(); op_idx++) {
-		if (g_operators[op_idx].uses_public_variable()
-				|| g_operators[op_idx].affect_goal_variable()) {
+		if (g_operators[op_idx].uses_public_variable() || g_operators[op_idx].affect_goal_variable()) {
 			g_operators[op_idx].is_public = true;
 			public_actions++;
 		} else {
 			g_operators[op_idx].is_public = false;
 			//assigning 0-cost to private actions not belonging to the agent
-			if (!g_parallel_search && g_operators[op_idx].agent != g_agent_id){
+			if (!g_parallel_search && g_operators[op_idx].agent != g_agent_id) {
 				g_operators[op_idx].set_cost(0);
-				cout << g_operators[op_idx].get_name() << endl;
-				zero_cost_Actions++;
 			}
 			private_actions++;
 		}
 		//		cout << op_idx << ", "<< g_operators[op_idx].get_name() << ", "
 		//				<< g_operators[op_idx].is_public << endl;
 	}
-	cout << "public: " << public_actions << ", private: " << private_actions << ", zero cost actions: " << zero_cost_Actions
-			<< endl;
+	cout << "public: " << public_actions << ", private: " << private_actions << endl;
 }
 
 /*
@@ -416,8 +401,7 @@ void update_private_public_actions() {
 void partition_by_agent_names(const char* configFileName) {
 
 	string line;
-	cout << "Opening agent names configuration file: " << configFileName
-			<< endl;
+	cout << "Opening agent names configuration file: " << configFileName << endl;
 	ifstream myfile(configFileName);
 	int nAgents = 0;
 	//int use_local_heuristic;
@@ -443,7 +427,7 @@ void partition_by_agent_names(const char* configFileName) {
 			agent_names[i] = line;
 			cout << "agent " << i << ": " << agent_names[i] << endl;
 			agent_ids[i] = i;
-			g_current_solution.push_back(0);//marginal solutions for the agents
+			g_current_solution.push_back(0);		//marginal solutions for the agents
 			g_g_of_current_solution.push_back(-1); //-1 means that we haven't found a marginal solution for the agent.
 			g_num_of_agents_confirming_current_solution.push_back(0);
 			g_received_termination.push_back(false);
@@ -451,8 +435,8 @@ void partition_by_agent_names(const char* configFileName) {
 		}
 		g_current_solution.push_back(0);	//another value for the optimal plan
 		g_g_of_current_solution.push_back(-1); //another value for the optimal plan
-		g_num_of_agents_confirming_current_solution.push_back(0);//another value for the optimal plan
-		g_received_termination.push_back(false);//another value for the optimal plan
+		g_num_of_agents_confirming_current_solution.push_back(0); //another value for the optimal plan
+		g_received_termination.push_back(false); //another value for the optimal plan
 
 		myfile.close();
 		cout << "Closed agent names configuration file" << endl;
@@ -524,9 +508,8 @@ bool should_be_connected_in_action_graph(int op1_idx, int op2_idx) {
 			if (op2_prepost[j].var == var) {
 				int other_pre = op2_prepost[j].pre;
 				int other_post = op2_prepost[j].post;
-				if (pre == other_pre || post == other_pre || pre == other_post
-						|| post == other_post) //TODO - check last condition (have the same effect)
-								{
+				if (pre == other_pre || post == other_pre || pre == other_post || post == other_post) //TODO - check last condition (have the same effect)
+						{
 					if (g_operator_switchability)
 						g_operator_switchability[min][max] = 1;
 					return true;
@@ -565,8 +548,7 @@ bool should_be_connected_in_action_graph(int op1_idx, int op2_idx) {
 }
 
 void create_action_graph() {
-	cout << "creating action graph, number of nodes: " << g_operators.size()
-			<< endl;
+	cout << "creating action graph, number of nodes: " << g_operators.size() << endl;
 	int num_of_edges = 0;
 	ofstream action_graph_file;
 	action_graph_file.open("temp_action_graph");
@@ -604,20 +586,17 @@ void create_action_graph() {
 
 }
 
-double update_private_and_public(vector<int> num_of_private_actions,
-		vector<int> num_of_actions) {
+double update_private_and_public(vector<int> num_of_private_actions, vector<int> num_of_actions) {
 	//	cout << "done." << endl;
 	for (int i = 0; i < g_operators.size(); i++) {
-		if (!g_operators[i].is_public
-				&& g_operators[i].affect_goal_variable()) {
+		if (!g_operators[i].is_public && g_operators[i].affect_goal_variable()) {
 			//this sets all goal achieving actions as public.
 			g_operators[i].is_public = true;
 			num_of_private_actions[g_operators[i].agent]--;
 			g_num_of_public_actions++;
 		}
 		for (int j = i + 1; j < g_operators.size(); j++) {
-			if (g_operators[i].agent != g_operators[j].agent
-					&& should_be_connected_in_action_graph(i, j)) {
+			if (g_operators[i].agent != g_operators[j].agent && should_be_connected_in_action_graph(i, j)) {
 				if (!g_operators[i].is_public) {
 					g_operators[i].is_public = true;
 					num_of_private_actions[g_operators[i].agent]--;
@@ -639,10 +618,8 @@ double update_private_and_public(vector<int> num_of_private_actions,
 	for (int i = 0; i < num_of_actions.size(); i++) {
 		//		cout << "Agent " << i << ": " << num_of_private_actions[i] << "/"
 		//				<< num_of_actions[i] << " private actions" << endl;
-		symmetry_factor += (num_of_private_actions[i]
-				/ (double) g_operators.size())
-				* ((g_operators.size() - num_of_actions[i])
-						/ (double) g_operators.size());
+		symmetry_factor += (num_of_private_actions[i] / (double) g_operators.size())
+				* ((g_operators.size() - num_of_actions[i]) / (double) g_operators.size());
 	}
 	cout << "Symmetry factor is: " << symmetry_factor << endl;
 	return symmetry_factor;
@@ -670,8 +647,7 @@ double update_ops_with_agents(const char* num_of_partitions) {
 	//	cout << "removing partition file...";
 	partition_file.close();
 	remove(filename.c_str());
-	double symmetry_factor = update_private_and_public(num_of_private_actions,
-			num_of_actions);
+	double symmetry_factor = update_private_and_public(num_of_private_actions, num_of_actions);
 
 	return symmetry_factor;
 	//computing the results of our formula:
@@ -699,9 +675,8 @@ void perform_optimal_partition() {
 	int res_graphchk = system("graphchk action_graph");
 	cout << res_graphchk << endl;
 
-	string ufactor_values[] = { "-ufactor=100", "-ufactor=300", "-ufactor=500",
-			"-ufactor=700", "-ufactor=900", "-ufactor=1100", "-ufactor=1300",
-			"-ufactor=1500", "-ufactor=1700", "-ufactor=1900" };
+	string ufactor_values[] = { "-ufactor=100", "-ufactor=300", "-ufactor=500", "-ufactor=700", "-ufactor=900", "-ufactor=1100",
+			"-ufactor=1300", "-ufactor=1500", "-ufactor=1700", "-ufactor=1900" };
 	string objtype_values[] = { "-objtype=cut", "-objtype=vol" };
 	string num_of_agents_values[] = { "2", "3", "4", "5", "6" };
 	string ptype_values[] = { "-ptype=rb", "-ptype=kway" };
@@ -739,8 +714,7 @@ void perform_optimal_partition() {
 						//cout << buffer << endl;
 						res_gpmetis = system(buffer.c_str());
 						cout << "ignore: " << res_gpmetis << endl;
-						double res = update_ops_with_agents(
-								num_of_agents_values[agents].c_str());
+						double res = update_ops_with_agents(num_of_agents_values[agents].c_str());
 
 						//-------------------
 						if (file)
@@ -763,12 +737,10 @@ void perform_optimal_partition() {
 	}
 
 	if (best_symmetry_score_found > 0) {
-		cout << "best score: " << best_symmetry_score_found << ", with config "
-				<< best_config_found << endl;
+		cout << "best score: " << best_symmetry_score_found << ", with config " << best_config_found << endl;
 		res_gpmetis = system(best_config_found.c_str());
 		//cout << best_config_found[best_config_found.length()- 1] << endl;
-		const char* partitions = best_config_found.substr(
-				best_config_found.length() - 1, 1).c_str();
+		const char* partitions = best_config_found.substr(best_config_found.length() - 1, 1).c_str();
 
 		double best_score = update_ops_with_agents(partitions);
 		cout << "Best score is: " << best_score << endl;
