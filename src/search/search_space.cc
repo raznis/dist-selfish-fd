@@ -141,7 +141,7 @@ void SearchNode::reopen(int g, const Operator *parent_op, State state, vector<bo
 
 	info.participated_agents.clear();
 	for (int i = 0; i < g_num_of_agents; i++)
-		info.participated_agents[i] = participating[i];
+		info.participated_agents.push_back(participating[i]);
 
 }
 //TODO - HANDLE PARTICIPATING AGENTS WHEN REOPENING!!!!!!

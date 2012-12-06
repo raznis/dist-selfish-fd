@@ -386,6 +386,7 @@ void update_private_public_actions() {
 	cout << "Updating public and private actions... " << endl;
 	int public_actions = 0;
 	int private_actions = 0;
+	int zero_cost_Actions = 0;
 	for (int op_idx = 0; op_idx < g_operators.size(); op_idx++) {
 		if (g_operators[op_idx].uses_public_variable()
 				|| g_operators[op_idx].affect_goal_variable()) {
@@ -394,14 +395,17 @@ void update_private_public_actions() {
 		} else {
 			g_operators[op_idx].is_public = false;
 			//assigning 0-cost to private actions not belonging to the agent
-			if (!g_parallel_search && g_operators[op_idx].agent != g_agent_id)
+			if (!g_parallel_search && g_operators[op_idx].agent != g_agent_id){
 				g_operators[op_idx].set_cost(0);
+				cout << g_operators[op_idx].get_name() << endl;
+				zero_cost_Actions++;
+			}
 			private_actions++;
 		}
 		//		cout << op_idx << ", "<< g_operators[op_idx].get_name() << ", "
 		//				<< g_operators[op_idx].is_public << endl;
 	}
-	cout << "public: " << public_actions << ", private: " << private_actions
+	cout << "public: " << public_actions << ", private: " << private_actions << ", zero cost actions: " << zero_cost_Actions
 			<< endl;
 }
 
