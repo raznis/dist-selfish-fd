@@ -1,1 +1,1 @@
-./search/downward --search "astar(lmcut())" --agents 0 --parallel < output
+./search/downward --search "astar(lmcut())" [--parallel] --agents 0 [--marginal 2] [--multiple_goal] < output
