@@ -90,3 +90,14 @@ local.properties
 ^scripts/
 ^src/plan_numbers_and_cost$
 ^src/elapsed.time$
+
+downward-1
+downward-2
+downward-4
+preprocess
+validate
+Makefile.depend
+*.pyc
+.gitignore~
+src/agents~
+src/comm~
