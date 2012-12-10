@@ -101,3 +101,4 @@ Makefile.depend
 .gitignore~
 src/agents~
 src/comm~
+.cproject
