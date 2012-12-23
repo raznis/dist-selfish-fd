@@ -92,6 +92,8 @@ local.properties
 ^src/elapsed.time$
 
 downward-1
+downward-1-debug
+downward-1-profile
 downward-2
 downward-4
 preprocess

@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 #include <pthread.h>
+#include <unistd.h>
 using namespace std;
 
 class TCPSocket;

@@ -4,6 +4,7 @@
 #include <ostream>
 #include <utility>
 #include <vector>
+#include <unistd.h>
 
 extern void register_event_handlers();
 
