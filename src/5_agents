@@ -1,0 +1,7 @@
+./search/downward --search "eager_greedy([ff(),cea()])" --agents 0 < output > 0 &
+./search/downward --search "eager_greedy([ff(),cea()])" --agents 1 < output > 1 &
+./search/downward --search "eager_greedy([ff(),cea()])" --agents 2 < output > 2 &
+./search/downward --search "eager_greedy([ff(),cea()])" --agents 3 < output > 3 &
+./search/downward --search "eager_greedy([ff(),cea()])" --agents 4 < output > 4
+python parse_results.py 5
+

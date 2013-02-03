@@ -1,0 +1,4 @@
+./search/downward --agents 0 --search "astar(merge_and_shrink(count=1, merge_strategy=MERGE_LINEAR_REVERSE_LEVEL, shrink_strategy=shrink_bisimulation(max_states=10000, greedy=false, group_by_h=true), expensive_statistics=false))" < output > 0 &
+./search/downward --agents 1 --search "astar(merge_and_shrink(count=1, merge_strategy=MERGE_LINEAR_REVERSE_LEVEL, shrink_strategy=shrink_bisimulation(max_states=10000, greedy=false, group_by_h=true), expensive_statistics=false))" < output > 1 
+python parse_results.py 2
+
