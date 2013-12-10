@@ -1,0 +1,66 @@
+10agents:
+dist: 220804 1483569 49639 4.57 44.91 133 0
+FD:
+Plan cost: 121
+Initial state h value: 83/95.
+Expanded 4687 state(s).
+Reopened 0 state(s).
+Evaluated 152999 state(s).
+Evaluations: 305998
+Generated 407653 state(s).
+Dead ends: 0 state(s).
+Search space hash size: 152999
+Search space hash bucket count: 196613
+Search time: 18.54s
+Total time: 18.62s
+
+
+15:
+dist: 8842 63769 6579 0.74 10.13 143 0
+FD:
+Plan cost: 124
+Initial state h value: 88/102.
+Expanded 11600 state(s).
+Reopened 0 state(s).
+Evaluated 448741 state(s).
+Evaluations: 897482
+Generated 1293624 state(s).
+Dead ends: 0 state(s).
+Search space hash size: 448741
+Search space hash bucket count: 786433
+Search time: 67.62s
+Total time: 67.73s
+
+20:
+dist: 5911 45676 5352 0.61 10.57 126 0
+FD:
+Plan cost: 106
+Initial state h value: 85/80.
+Expanded 10162 state(s).
+Reopened 0 state(s).
+Evaluated 641001 state(s).
+Evaluations: 1282002
+Generated 1490963 state(s).
+Dead ends: 0 state(s).
+Search space hash size: 641001
+Search space hash bucket count: 786433
+Search time: 110.91s
+Total time: 111.06s
+
+25:
+dist: 
+FD:
+Plan cost: 139
+Initial state h value: 107/134.
+Expanded 16024 state(s).
+Reopened 0 state(s).
+Evaluated 1021830 state(s).
+Evaluations: 2043660
+Generated 2675150 state(s).
+Dead ends: 0 state(s).
+Search space hash size: 1021830
+Search space hash bucket count: 1572869
+Search time: 272.8s
+Total time: 273.07s
+
+
