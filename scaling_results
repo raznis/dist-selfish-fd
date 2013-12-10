@@ -48,19 +48,83 @@ Search time: 110.91s
 Total time: 111.06s
 
 25:
+dist: 6786 49798 5040 1.03 22.36 153 0
+FD:
+Plan cost: 123
+Initial state h value: 114/95.
+Expanded 11950 state(s).
+Reopened 0 state(s).
+Evaluated 857604 state(s).
+Evaluations: 1715208
+Generated 2126789 state(s).
+Dead ends: 0 state(s).
+Search space hash size: 857604
+Search space hash bucket count: 1572869
+Search time: 221.73s
+Total time: 221.94s
+
+30:
+dist: 6643 70811 5951 1.91 47.02 175 0
+FD:
+Plan cost: 148
+Initial state h value: 105/122.
+Expanded 35698 state(s).
+Reopened 0 state(s).
+Evaluated 2818319 state(s).
+Evaluations: 5636638
+Generated 7365789 state(s).
+Dead ends: 0 state(s).
+Search space hash size: 2818319
+Search space hash bucket count: 3145739
+Search time: 887.21s
+Total time: 887.51s
+
+35: 35agents_35_25_22_3_22
 dist: 
 FD:
-Plan cost: 139
-Initial state h value: 107/134.
-Expanded 16024 state(s).
+Plan cost: 115
+Initial state h value: 101/92.
+Expanded 2315 state(s).
 Reopened 0 state(s).
-Evaluated 1021830 state(s).
-Evaluations: 2043660
-Generated 2675150 state(s).
+Evaluated 365485 state(s).
+Evaluations: 730970
+Generated 612467 state(s).
 Dead ends: 0 state(s).
-Search space hash size: 1021830
+Search space hash size: 365485
+Search space hash bucket count: 393241
+Search time: 142.98s
+Total time: 143.32s
+
+35: 35agents_35_26_22_3_22
+dist: 7999 75576 4588 2.01 51.52 148 0
+FD: 
+Plan cost: 105
+Initial state h value: 84/91.
+Expanded 7461 state(s).
+Reopened 0 state(s).
+Evaluated 789903 state(s).
+Evaluations: 1579806
+Generated 1734605 state(s).
+Dead ends: 0 state(s).
+Search space hash size: 789903
 Search space hash bucket count: 1572869
-Search time: 272.8s
-Total time: 273.07s
+Search time: 251.46s
+Total time: 251.83s
+
+35: 35agents_35_28_22_3_22
+dist:
+FD:
+Plan cost: 144
+Initial state h value: 108/127.
+Expanded 39314 state(s).
+Reopened 0 state(s).
+Evaluated 3784995 state(s).
+Evaluations: 7569990
+Generated 10241253 state(s).
+Dead ends: 0 state(s).
+Search space hash size: 3784995
+Search space hash bucket count: 6291469
+Search time: 1156.75s
+Total time: 1157.05s
 
 
