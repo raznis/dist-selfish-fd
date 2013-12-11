@@ -1,3 +1,5 @@
+ROVERS
+
 10agents:
 dist: 220804 1483569 49639 4.57 44.91 133 0
 FD:
@@ -126,5 +128,56 @@ Search space hash size: 3784995
 Search space hash bucket count: 6291469
 Search time: 1156.75s
 Total time: 1157.05s
+
+
+
+SATELLITES
+15
+dist: 5019 228244 1063 2.28 28.68 43 0
+FD:
+Plan cost: 39
+Initial state h value: 95/44.
+Expanded 40 state(s).
+Reopened 0 state(s).
+Evaluated 23990 state(s).
+Evaluations: 47980
+Generated 24838 state(s).
+Dead ends: 0 state(s).
+Search space hash size: 23990
+Search space hash bucket count: 24593
+Search time: 28.77s
+Total time: 29.31s
+
+20
+dist: 13696 762215 2102 12.06 221.88 58 0
+FD:
+Plan cost: 51
+Initial state h value: 120/56.
+Expanded 54 state(s).
+Reopened 0 state(s).
+Evaluated 57656 state(s).
+Evaluations: 115312
+Generated 59029 state(s).
+Dead ends: 0 state(s).
+Search space hash size: 57656
+Search space hash bucket count: 98317
+Search time: 183.57s
+Total time: 184.76s
+
+25
+dist: 13486 888769 2082 27.15 605.38 61 0
+FD:
+Plan cost: 59
+Initial state h value: 148/64.
+Expanded 60 state(s).
+Reopened 0 state(s).
+Evaluated 94937 state(s).
+Evaluations: 189874
+Generated 96814 state(s).
+Dead ends: 0 state(s).
+Search space hash size: 94937
+Search space hash bucket count: 98317
+Search time: 661.43s
+Total time: 663.54s
 
 

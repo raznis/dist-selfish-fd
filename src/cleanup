@@ -11,3 +11,8 @@ while [[ -e sas_plan.$NUM ]]; do
     rm -f sas_plan.$NUM
     NUM=$((NUM + 1))
 done
+NUM=0
+while [[ -e $NUM ]]; do
+    rm -f $NUM
+    NUM=$((NUM + 1))
+done
