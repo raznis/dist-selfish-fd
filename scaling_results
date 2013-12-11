@@ -180,4 +180,25 @@ Search space hash bucket count: 98317
 Search time: 661.43s
 Total time: 663.54s
 
+30
+dist: 18462 1399926 3069 59.57 1647.31 76 0
+FD:
+Plan cost: 73
+Initial state h value: 176/85.
+Expanded 111 state(s).
+Reopened 0 state(s).
+Evaluated 244843 state(s).
+Evaluations: 489686
+Generated 248890 state(s).
+Dead ends: 0 state(s).
+Search space hash size: 244843
+Search space hash bucket count: 393241
+Search time: 2627.96s
+Total time: 2631.41s
+
+35
+dist: 20224 1536798 2744 78.24 2368.67 80 0
+
+40
+dist: 16463 1253417 3216 81.63 2867.8 76 0
 
