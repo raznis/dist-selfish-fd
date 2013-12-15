@@ -2,6 +2,8 @@
 ./search/downward --search "astar(lmcut())" --agents 1 < output > 1 &
 ./search/downward --search "astar(lmcut())" --agents 2 < output > 2 &
 ./search/downward --search "astar(lmcut())" --agents 3 < output > 3 &
-./search/downward --search "astar(lmcut())" --agents 4 < output > 4
-python parse_results.py 5
+./search/downward --search "astar(lmcut())" --agents 4 < output > 4 &
+./search/downward --search "astar(lmcut())" --agents 5 < output > 5 &
+./search/downward --search "astar(lmcut())" --agents 6 < output > 6
+python parse_results.py 7
 
