@@ -202,3 +202,120 @@ dist: 20224 1536798 2744 78.24 2368.67 80 0
 40
 dist: 16463 1253417 3216 81.63 2867.8 76 0
 
+
+
+
+
+----------------------------
+OPTIMAL SATELLITES - unaltered
+----------------------------
+sat4_2_5_10_7
+brafman1: 1391241 24438428 253541 68.99 273.99 22 0
+FD:
+Plan cost: 22
+Initial state h value: 19.
+Expanded 40343 state(s).
+Reopened 16 state(s).
+Evaluated 574444 state(s).
+Evaluations: 574444
+Generated 2846422 state(s).
+Dead ends: 0 state(s).
+Expanded until last jump: 40300 state(s).
+Reopened until last jump: 16 state(s).
+Evaluated until last jump: 572432 state(s).
+Generated until last jump: 2843450 state(s).
+Search space hash size: 574444
+Search space hash bucket count: 786433
+Search time: 137.41s
+Total time: 137.42s
+
+
+sat5_2_5_10_7:
+brafman1: 2778628 48834420 679822 131.06 648.04 22 0
+FD:
+Plan cost: 22
+Initial state h value: 18.
+Expanded 272817 state(s).
+Reopened 34 state(s).
+Evaluated 5174920 state(s).
+Evaluations: 5174920
+Generated 23886437 state(s).
+Dead ends: 0 state(s).
+Expanded until last jump: 271532 state(s).
+Reopened until last jump: 34 state(s).
+Evaluated until last jump: 5104730 state(s).
+Generated until last jump: 23774272 state(s).
+Search space hash size: 5174920
+Search space hash bucket count: 6291469
+Search time: 1480.34s
+Total time: 1480.35s
+
+
+sat6_2_5_10_7:
+brafman1: 8310150 146626276 2979605 443.22 2640.6 23 0
+FD: 
+
+sat7_2_5_10_7:
+brafman1: 14565665 258465643 6721679 887.15 6177.65 23 0
+
+
+----------------------------
+OPTIMAL SATELLITES - altered
+----------------------------
+sat4_2_5_10_7-a:
+brafman1: 390626 6845948 46883 15.84 62.99 20 0
+FD:
+Plan cost: 20
+Initial state h value: 17.
+Expanded 23935 state(s).
+Reopened 8 state(s).
+Evaluated 408637 state(s).
+Evaluations: 408637
+Generated 1689806 state(s).
+Dead ends: 0 state(s).
+Expanded until last jump: 23882 state(s).
+Reopened until last jump: 8 state(s).
+Evaluated until last jump: 406639 state(s).
+Generated until last jump: 1686117 state(s).
+Search space hash size: 408637
+Search space hash bucket count: 786433
+Search time: 87.21s
+Total time: 87.22s
+
+
+sat5_2_5_10_7-a:
+brafman1: 762366 13360416 144808 31.51 155.71 20 0
+FD:
+Plan cost: 20
+Initial state h value: 16.
+Expanded 164654 state(s).
+Reopened 13 state(s).
+Evaluated 3480893 state(s).
+Evaluations: 3480893
+Generated 14417834 state(s).
+Dead ends: 0 state(s).
+Expanded until last jump: 164290 state(s).
+Reopened until last jump: 13 state(s).
+Evaluated until last jump: 3461273 state(s).
+Generated until last jump: 14386165 state(s).
+Search space hash size: 3480893
+Search space hash bucket count: 6291469
+Search time: 908s
+Total time: 908.02s
+
+
+sat6_2_5_10_7-a:
+brafman1: 2253878 39636900 627643 106.3 626.98 21 0
+FD: 
+
+sat7_2_5_10_7-a:
+brafman1: 2136066 37614425 662668 103.1 584.38 20 0
+
+sat8_2_5_11_8-a
+brafman1: 1873519 36530249 476220 116.92 928.52 20 0
+
+sat9_2_5_12_9-a
+brafman1: 2397294 51574183 671693 173.52 1555.84 20 0
+
+sat10_2_5_13_10
+brafman1: 11148465 263361393 3590961 1264.4 12620.02 20 0
