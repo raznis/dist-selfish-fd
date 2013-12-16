@@ -336,3 +336,94 @@ brafman1: 2397294 51574183 671693 173.52 1555.84 20 0
 
 sat10_2_5_13_10
 brafman1: 11148465 263361393 3590961 1264.4 12620.02 20 0
+
+------------------------------
+ROVERS - OPTIMAL
+------------------------------
+rov_3_3_3_2_3:
+
+FD:
+Plan cost: 18
+Initial state h value: 14.
+Expanded 19588 state(s).
+Reopened 0 state(s).
+Evaluated 92389 state(s).
+Evaluations: 92389
+Generated 323955 state(s).
+Dead ends: 0 state(s).
+Expanded until last jump: 19582 state(s).
+Reopened until last jump: 0 state(s).
+Evaluated until last jump: 92331 state(s).
+Generated until last jump: 323863 state(s).
+Search space hash size: 92389
+Search space hash bucket count: 98317
+Search time: 2.76s
+Total time: 2.76s
+
+
+
+rov_4_4_4_2_4:
+brafman1: 221623 1522142 33531 2.97 11.66 17 0
+FD:
+Plan cost: 17
+Initial state h value: 14.
+Expanded 11541 state(s).
+Reopened 0 state(s).
+Evaluated 101313 state(s).
+Evaluations: 101313
+Generated 267100 state(s).
+Dead ends: 0 state(s).
+Expanded until last jump: 11533 state(s).
+Reopened until last jump: 0 state(s).
+Evaluated until last jump: 101221 state(s).
+Generated until last jump: 266918 state(s).
+Search space hash size: 101313
+Search space hash bucket count: 196613
+Search time: 4.43s
+Total time: 4.43s
+
+
+rov_5_5_5_2_4:
+brafman1: 21796998 106178015 16939378 488.52 2358.43 25 0
+FD:
+Plan cost: 25
+Initial state h value: 19.
+Expanded 1819092 state(s).
+Reopened 0 state(s).
+Evaluated 12424758 state(s).
+Evaluations: 12424758
+Generated 38639471 state(s).
+Dead ends: 0 state(s).
+Expanded until last jump: 1819065 state(s).
+Reopened until last jump: 0 state(s).
+Evaluated until last jump: 12424485 state(s).
+Generated until last jump: 38638880 state(s).
+Search space hash size: 12424758
+Search space hash bucket count: 12582917
+Search time: 857.18s
+Total time: 857.18s
+
+
+rov_5_4_4_2_4:
+260922 1395340 165399 3.74 18.22 17 0
+FD:
+Plan cost: 17
+Initial state h value: 15.
+Expanded 4561 state(s).
+Reopened 0 state(s).
+Evaluated 54433 state(s).
+Evaluations: 54433
+Generated 101786 state(s).
+Dead ends: 0 state(s).
+Expanded until last jump: 4556 state(s).
+Reopened until last jump: 0 state(s).
+Evaluated until last jump: 54366 state(s).
+Generated until last jump: 101686 state(s).
+Search space hash size: 54433
+Search space hash bucket count: 98317
+Search time: 2.45s
+Total time: 2.45s
+
+
+
+
