@@ -307,6 +307,23 @@ Total time: 908.02s
 sat6_2_5_10_7-a:
 brafman1: 2253878 39636900 627643 106.3 626.98 21 0
 FD: 
+Plan cost: 21
+Initial state h value: 17.
+Expanded 573273 state(s).
+Reopened 46 state(s).
+Evaluated 14376438 state(s).
+Evaluations: 14376438
+Generated 59965986 state(s).
+Dead ends: 0 state(s).
+Expanded until last jump: 572590 state(s).
+Reopened until last jump: 46 state(s).
+Evaluated until last jump: 14331891 state(s).
+Generated until last jump: 59894714 state(s).
+Search space hash size: 14376438
+Search space hash bucket count: 25165843
+Search time: 4645.87s
+Total time: 4645.89s
+
 
 sat7_2_5_10_7-a:
 brafman1: 2136066 37614425 662668 103.1 584.38 20 0
