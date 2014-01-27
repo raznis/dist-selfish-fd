@@ -88,6 +88,8 @@ public:
 	}
 
 	bool is_applicable(const State &state) const {
+		if(agent != g_agent_id)
+			return is_applicable_public(state);
 		for (int i = 0; i < prevail.size(); i++)
 			if (!prevail[i].is_applicable(state))
 				return false;
@@ -100,11 +102,11 @@ public:
 	//Are all public preconditions satisfied
 	bool is_applicable_public(const State &state) const {
 		for (int i = 0; i < prevail.size(); i++)
-			if (g_variable_agent[prevail[i].var] == 0
+			if (g_variable_agent[prevail[i].var] == -1
 					&& !prevail[i].is_applicable(state))
 				return false;
 		for (int i = 0; i < pre_post.size(); i++)
-			if (g_variable_agent[pre_post[i].var] == 0
+			if (g_variable_agent[pre_post[i].var] == -1
 					&& !pre_post[i].is_applicable(state))
 				return false;
 		return true;
@@ -128,6 +130,7 @@ public:
 	void set_cost(int new_cost) {
 		cost = new_cost;
 	}
+
 
 	bool uses_variable(int var) const;
 	bool uses_public_variable() const;
